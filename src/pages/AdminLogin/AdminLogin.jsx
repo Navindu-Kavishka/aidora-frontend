@@ -15,6 +15,7 @@ import { createTheme, responsiveFontSizes } from '@mui/material/styles';
 let theme = createTheme();
 theme = responsiveFontSizes(theme);
 
+
 export default function AdminLogin() {
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -37,81 +38,81 @@ export default function AdminLogin() {
         alignItems: "center",
       }}
     >
-    <Container component="main" maxWidth="sm" sx={{display:"flex" ,alignItems:"center"}} >
-      <Box
-        sx={{
-          boxShadow: 3,
-          borderRadius: 2,
-          px: 4,
-          py: 6,
-          marginTop: 8,
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          backgroundColor:"#ECEEE8",
-        }}
-      >
-        <Avatar
-          alt="Remy Sharp"
-          src={logo}
-          sx={{ width: 100, height: 100 }}
-        />
+      <Container component="main" maxWidth="sm" sx={{ display: "flex", alignItems: "center" }} >
+        <Box
+          sx={{
+            boxShadow: 3,
+            borderRadius: 2,
+            px: 4,
+            py: 6,
+            marginTop: 8,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            backgroundColor: "#ECEEE8",
+          }}
+        >
+          <Avatar
+            alt="Remy Sharp"
+            src={logo}
+            sx={{ width: 100, height: 100 }}
+          />
 
-        <br />
-        
-        <ThemeProvider theme={theme}>
-        <Typography component="h1" variant="h5" style={{fontWeight:"bolder",color:"#25934C", fontSize:"26px"}}>
-          Admin Login
-        </Typography>
-        </ThemeProvider>
+          <br />
 
-        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-          <TextField
-            margin="normal"
-            style={{backgroundColor:"white",}}
-            required
-            fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
-            autoFocus
-          />
-          <TextField
-            margin="normal"
-            style={{backgroundColor:"white",}}
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-          />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            style={{backgroundColor:"#43A273", fontWeight:"bolder"}}
-            sx={{ mt: 3, mb: 2 }}
-          >
-            Log In
-          </Button>
-          <Grid container>
-            
-              <Link href="#" variant="body2" style={{color:"#43A273"}}>
+          <ThemeProvider theme={theme}>
+            <Typography component="h1" variant="h5" style={{ fontWeight: "bolder", color: "#25934C", fontSize: "26px" }}>
+              Admin Login
+            </Typography>
+          </ThemeProvider>
+
+          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+            <TextField
+              margin="normal"
+              style={{ backgroundColor: "white", }}
+              required
+              fullWidth
+              id="email"
+              label="Email Address"
+              name="email"
+              autoComplete="email"
+              autoFocus
+            />
+            <TextField
+              margin="normal"
+              style={{ backgroundColor: "white", }}
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+            />
+            <FormControlLabel
+              control={<Checkbox value="remember" color="primary" />}
+              label="Remember me"
+            />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              style={{ backgroundColor: "#43A273", fontWeight: "bolder" }}
+              sx={{ mt: 3, mb: 2 }}
+            >
+              Log In
+            </Button>
+            <Grid container>
+
+              <Link href="#" variant="body2" style={{ color: "#43A273" }}>
                 Forgot password?
               </Link>
-            
-            
-          </Grid>
+
+
+            </Grid>
+          </Box>
         </Box>
-      </Box>
-    </Container>
+      </Container>
     </div>
   );
 }
