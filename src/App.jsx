@@ -7,6 +7,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import FundLogin from './pages/FundLogin/FundLogin'
 import FundRegister from './pages/FundRegister/FundRegister'
 import SideBar from './layouts/SideBar/SideBar'
+import FundDashboard from './pages/FundDashboard/FundDashboard'
 
 
 function App() {
@@ -19,6 +20,8 @@ function App() {
       <Route path="/login" element={<FundLogin/>}></Route>
       <Route path="/register" element={<FundRegister/>}></Route>
       <Route path="/sidebar" element={<SideBar/>}></Route>
+      <Route path="/dashboard" element={<FundDashboard/>}></Route>
+    
       </Routes>
       </BrowserRouter>
     

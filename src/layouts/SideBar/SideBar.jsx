@@ -2,6 +2,7 @@ import { Margin } from '@mui/icons-material';
 import React from 'react';
 
 const SideBar = () => {
+    
   return (
     <header>
       {/* Sidebar */}
