@@ -6,9 +6,12 @@ const FundRegister = () => {
     const navigate = useNavigate();
 
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <header style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '20px 0', backgroundColor: 'white' }}>
-                <img src="src/aidora img.png" alt="Logo" style={{ maxWidth: '200px', height: 'auto' }} />
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' ,  }}>
+            
+            <header style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '20px 0', backgroundColor: 'white', '@media (max-width: 768px)': { padding: '10px 0' },
+                '@media (max-width: 576px)': { padding: '5px 0' }  }}>
+                <img src="src/aidora img.png" alt="Logo" style={{ maxWidth: '200px', height: 'auto', '@media (max-width: 768px)': { padding: '10px 0' },
+                '@media (max-width: 576px)': { padding: '5px 0' }  }} />
             </header>
             <div style={{ display: 'flex', width: '100%', height: 'auto', maxHeight: '100%', boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)', backgroundColor: '#ffffff' }}>
                 <div style={{ flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: 'white' }}>
