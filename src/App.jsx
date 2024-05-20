@@ -5,6 +5,7 @@ import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import FundLogin from './pages/FundLogin/FundLogin'
+import FundRegister from './pages/FundRegister/FundRegister'
 
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
       <BrowserRouter>
     <Routes>
       <Route path="/login" element={<FundLogin/>}></Route>
+      <Route path="/register" element={<FundRegister/>}></Route>
       </Routes>
       </BrowserRouter>
     
