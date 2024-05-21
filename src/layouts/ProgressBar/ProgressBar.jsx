@@ -3,7 +3,7 @@ import $ from 'jquery';
 
 const ProgressBar = () => {
   const [currentStep, setCurrentStep] = useState(1);
-  const steps = ['Step One', 'Step Two', 'Step Three', 'Step Four']; // Total number of steps
+  const steps = 4; // Total number of steps
   const fieldsetsRef = useRef([]);
 
   useEffect(() => {
@@ -132,7 +132,7 @@ const ProgressBar = () => {
                         className="previous-step"
                         value="Previous Step"
                         onClick={previousStep}
-                        style={{ width: '120px', fontWeight: 'bold', color: 'white', border: 'none', borderRadius: '0px', cursor: 'pointer', padding: '15px 5px', margin: '-30px 5px 10px 0px', float: 'right', background: '#616161' }}
+                        style={{ width: '120px', fontWeight: 'bold', color: 'white', border: 'none', borderRadius: '0px', cursor: 'pointer', padding: '20px 5px', margin: '-30px 5px 10px 0px', float: 'right', background: '#616161' }}
                       />
                     )}
                   </fieldset>
