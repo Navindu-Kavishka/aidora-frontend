@@ -9,8 +9,16 @@ function CreateProject() {
   <nav style={{ width:'100%', zIndex: 2 }} id="main-navbar" className="navbar navbar-expand-lg navbar-light bg-white fixed-top">
    {/* Container wrapper */}
    <div className="container-fluid d-flex justify-content-center align-items-center">
+     {/* Logo */}
+     <a href="#">
+            <img
+              src="src/aidora img.png" // Replace with the path to your logo
+              alt="Logo"
+              style={{ height: '60px',width:'60px', marginRight: '10px' ,marginLeft:'10px'}} // Adjust the height and margin as needed
+            />
+          </a>
           {/* Centered text */}
-          <h1 className="navbar-brand mb-0" style={{marginLeft:'620px',fontSize:'24px',fontWeight:'bold'}}>Create Projects</h1>
+          <h1 className="navbar-brand mb-0" style={{marginLeft:'560px',fontSize:'24px',fontWeight:'bold'}}>Create Projects</h1>
       <ul className="navbar-nav ms-auto d-flex flex-row">
         {/* Notification dropdown */}
         {/* Avatar */}

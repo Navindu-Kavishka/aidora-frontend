@@ -1,7 +1,13 @@
 import React from 'react';
 import SideBar from '../../layouts/SideBar/SideBar';
+import { useNavigate } from 'react-router-dom';
 
 const FundDashboard = () => {
+    const navigate = useNavigate();
+
+    const handleButtonClick = () => {
+      navigate('/create'); // Navigate to the next page
+    };
     return (
         <div style={{ height: '100%' }}>
             {/* Sidebar */}
@@ -60,7 +66,7 @@ const FundDashboard = () => {
                     </div>
                     <div className="row mt-3">
                     <div className="col d-flex align-items-center justify-content-center" style={{ marginLeft: '30px',marginTop:'20px'}}>
-    <button className="btn btn-success" style={{height:'160px',width:'250px',fontSize: '60px'}}>+</button>
+    <button onClick={handleButtonClick} className="btn btn-success" style={{height:'160px',width:'250px',fontSize: '60px'}}>+</button>
 </div>
 
                     </div>

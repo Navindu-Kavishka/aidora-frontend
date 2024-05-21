@@ -3,7 +3,7 @@ import $ from 'jquery';
 
 const ProgressBar = () => {
   const [currentStep, setCurrentStep] = useState(1);
-  const steps = 4; // Total number of steps
+  const steps = ['Step One', 'Step Two', 'Step Three', 'Step Four']; // Total number of steps
   const fieldsetsRef = useRef([]);
 
   useEffect(() => {
