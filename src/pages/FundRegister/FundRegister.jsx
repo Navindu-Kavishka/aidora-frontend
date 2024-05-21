@@ -112,7 +112,8 @@ const FundRegister = () => {
         style={{ width: '85%', padding: '10px', border: '1px solid #ccc', borderRadius: '5px', marginLeft: '10px' }} 
     />
 </div>
-<Button onClick={() => Navigate(-1)}
+<Button onClick={() => navigate(-1)}
+ className="register-button"
  style={{ 
     width: '85%', 
     padding: '10px', 
