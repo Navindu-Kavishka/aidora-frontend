@@ -8,6 +8,7 @@ import FundLogin from './pages/FundLogin/FundLogin'
 import FundRegister from './pages/FundRegister/FundRegister'
 import SideBar from './layouts/SideBar/SideBar'
 import FundDashboard from './pages/FundDashboard/FundDashboard'
+import CreateProject from './pages/CreateProject/CreateProject'
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
       <Route path="/register" element={<FundRegister/>}></Route>
       <Route path="/sidebar" element={<SideBar/>}></Route>
       <Route path="/dashboard" element={<FundDashboard/>}></Route>
+      <Route path="/create" element={<CreateProject/>}></Route>
     
       </Routes>
       </BrowserRouter>
