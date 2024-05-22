@@ -7,6 +7,7 @@ import FundRegister from './pages/FundRegister/FundRegister'
 import SideBar from './layouts/SideBar/SideBar'
 import FundDashboard from './pages/FundDashboard/FundDashboard'
 import CreateProject from './pages/CreateProject/CreateProject'
+import EditProfile from './pages/EditProfile/EditProfile'
 
 
 
@@ -22,6 +23,7 @@ function App() {
       <Route path="/sidebar" element={<SideBar/>}></Route>
       <Route path="/dashboard" element={<FundDashboard/>}></Route>
       <Route path="/create" element={<CreateProject/>}></Route>
+      <Route path="/edit" element={<EditProfile/>}></Route>
 
 
       </Routes>
