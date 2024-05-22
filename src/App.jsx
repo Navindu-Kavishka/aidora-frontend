@@ -1,6 +1,4 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
@@ -9,6 +7,7 @@ import FundRegister from './pages/FundRegister/FundRegister'
 import SideBar from './layouts/SideBar/SideBar'
 import FundDashboard from './pages/FundDashboard/FundDashboard'
 import CreateProject from './pages/CreateProject/CreateProject'
+
 
 
 function App() {
@@ -23,7 +22,8 @@ function App() {
       <Route path="/sidebar" element={<SideBar/>}></Route>
       <Route path="/dashboard" element={<FundDashboard/>}></Route>
       <Route path="/create" element={<CreateProject/>}></Route>
-    
+
+
       </Routes>
       </BrowserRouter>
     

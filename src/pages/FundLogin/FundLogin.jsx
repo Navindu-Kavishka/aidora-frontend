@@ -132,7 +132,7 @@ const FundLogin = () => {
                           data-mdb-ripple-init
                           className="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3"
                           type="button"
-                          style={{ fontSize: '16px', alignSelf: 'center', width: '320px',...gradientStyle, ...cardStyle }}
+                          style={{ fontSize: '16px', alignSelf: 'center', width: '320px',backgroundColor:'#037149' }}
                         >
                           <Link to="/dashboard" style={{ color: 'white', textDecoration: 'none'}}>Log In</Link>
                         </button>
@@ -160,7 +160,7 @@ const FundLogin = () => {
                     </form>
                   </div>
                 </div>
-                <div className="col-lg-6 d-flex align-items-center" style={{ ...gradientStyle, ...cardStyle }}>
+                <div className="col-lg-6 d-flex align-items-center" style={{backgroundColor:'#037149'}}>
                   <div className="text-white px-3 py-4 p-md-5 mx-md-4" style={backgroundImageStyle}>
                     <h4 className="mb-4" style={{ fontSize: '24px', fontFamily: 'Arial, sans-serif' }}>
                       We are more than just a company
