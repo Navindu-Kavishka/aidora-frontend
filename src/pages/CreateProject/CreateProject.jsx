@@ -14,7 +14,7 @@ function CreateProject() {
             <img
               src="src/aidora img.png" // Replace with the path to your logo
               alt="Logo"
-              style={{ height: '60px', width: '60px', marginRight: '10px', marginLeft: '10px' }} // Adjust the height and margin as needed
+              style={{ height: '80px', width: '80px', marginRight: '10px', marginLeft: '30px' }} // Adjust the height and margin as needed
             />
           </a>
           {/* Centered text */}
@@ -35,10 +35,10 @@ function CreateProject() {
                 <img
                   src="src/b.jpg"
                   className="rounded-circle"
-                  height="40px"
+                  height="50px"
                   alt="Avatar"
                   loading="lazy"
-                  width="40px"
+                  width="50px"
                 />
               </a>
             </li>
