@@ -18,8 +18,9 @@ function CreateProject() {
             />
           </a>
           {/* Centered text */}
-          <h1 className="navbar-brand mb-0 mx-auto text-center" style={{ fontSize: '24px', fontWeight: 'bold' }}>Create Projects</h1>
-          <ul className="navbar-nav ms-auto d-flex flex-row">
+          <h1 className="navbar-brand mb-0 mx-auto text-center" style={{ fontSize: '28px', fontWeight: 'bold' }}>Create Projects</h1>
+<ul className="navbar-nav ms-auto d-flex flex-row" style={{ marginBottom: '0' }}>
+
             {/* Notification dropdown */}
             {/* Avatar */}
             <li className="nav-item dropdown">
