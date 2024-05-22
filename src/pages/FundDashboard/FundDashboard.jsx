@@ -57,16 +57,16 @@ const FundDashboard = () => {
                             <h3>My Projects</h3>
                         </div>
                     </div>
-                    <div className="row mt-3">
+                    <div className="row mt-3" >
                         <div className="col" style={{marginLeft:'30px'}}>
-                            <button className="btn btn-success">Ongoing Projects</button>
-                            <button className="btn btn-success mx-2">Completed Projects</button>
-                            <button className="btn btn-success">Cancaled Projects</button>
+                            <button className="btn btn-success" style={{backgroundColor:'#037149'}}>Ongoing Projects</button>
+                            <button className="btn btn-success mx-2" style={{backgroundColor:'#037149'}}>Completed Projects</button>
+                            <button className="btn btn-success" style={{backgroundColor:'#037149'}}>Cancaled Projects</button>
                         </div>
                     </div>
                     <div className="row mt-3">
                     <div className="col d-flex align-items-center justify-content-center" style={{ marginLeft: '30px',marginTop:'20px'}}>
-    <button onClick={handleButtonClick} className="btn btn-success" style={{height:'160px',width:'250px',fontSize: '60px'}}>+</button>
+    <button onClick={handleButtonClick} className="btn btn-success" style={{height:'160px',width:'250px',fontSize: '60px',backgroundColor:'#037149'}}>+</button>
 </div>
 
                     </div>
@@ -80,7 +80,7 @@ const FundDashboard = () => {
                 <p className="card-text">Status : Inpection Pending
 Project No. 123556
 Site Location : 15A, ABC Street, SomeCity</p>
-                <button className="btn btn-success">View Project</button>
+                <button className="btn btn-success" style={{backgroundColor:'#037149'}}>View Project</button>
             </div>
         </div>
     </div>
@@ -94,7 +94,7 @@ Site Location : 15A, ABC Street, SomeCity</p>
                 <p className="card-text">Status : Inpection Pending
 Project No. 123556
 Site Location : 15A, ABC Street, SomeCity</p>
-                <button className="btn btn-success">View Project</button>
+                <button className="btn btn-success" style={{backgroundColor:'#037149'}}>View Project</button>
             </div>
         </div>
     </div>
@@ -108,7 +108,7 @@ Site Location : 15A, ABC Street, SomeCity</p>
                 <p className="card-text">Status : Inpection Pending
 Project No. 123556
 Site Location : 15A, ABC Street, SomeCity</p>
-                <button className="btn btn-success">View Project</button>
+                <button className="btn btn-success" style={{backgroundColor:'#037149'}}>View Project</button>
             </div>
         </div>
     </div>

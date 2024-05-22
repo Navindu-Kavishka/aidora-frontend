@@ -35,7 +35,7 @@ const SideBar = () => {
                
               <i className="fas fa-tachometer-alt fa-fw me-3" style={{ marginLeft: '5px' }}></i><span>My Projects</span>
             </a>
-            <a href="#" className="list-group-item list-group-item-action py-2 ripple active" style={{ marginTop: '15px',backgroundColor:'green' }}>
+            <a href="#" className="list-group-item list-group-item-action py-2 ripple active" style={{ marginTop: '15px',backgroundColor:'#037149' }}>
               <i className="fas fa-chart-area fa-fw me-3"></i><span>Inquiries</span>
             </a>
             <a href="#" className="list-group-item list-group-item-action py-2 ripple" style={{ marginTop: '15px' }}>

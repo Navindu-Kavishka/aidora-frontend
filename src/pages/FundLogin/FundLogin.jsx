@@ -154,13 +154,13 @@ const FundLogin = () => {
                           data-mdb-ripple-init
                           className="btn btn-outline-success"
                         >
-                          <Link to="/register" style={{ textDecoration: 'none', color: '#198754' }}>Sign-Up</Link>
+                          <Link to="/register" style={{ textDecoration: 'none', color: 'black' }}>Sign-Up</Link>
                         </button>
                       </div>
                     </form>
                   </div>
                 </div>
-                <div className="col-lg-6 d-flex align-items-center" style={{backgroundColor:'#037149'}}>
+                <div className="col-lg-6 d-flex align-items-center" >
                   <div className="text-white px-3 py-4 p-md-5 mx-md-4" style={backgroundImageStyle}>
                     <h4 className="mb-4" style={{ fontSize: '24px', fontFamily: 'Arial, sans-serif' }}>
                       We are more than just a company
