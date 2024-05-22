@@ -60,11 +60,11 @@ function EditProfile() {
                         <div className="p-3 py-5">
                             <h4 className="text-right">Edit Profile</h4>
                             <div className="row mt-2">
-                                <div className="col-md-6">
+                                <div className="col-md-6"style={{marginTop:'1rem'}} >
                                     <label className="labels">First Name</label>
                                     <input type="text" className="form-control" placeholder="First Name" style={{ boxShadow: 'none', borderColor: '#BA68C8' }} />
                                 </div>
-                                <div className="col-md-6">
+                                <div className="col-md-6" style={{marginTop:'1rem'}}>
                                     <label className="labels">Last Name</label>
                                     <input type="text" className="form-control" placeholder="Last Name" style={{ boxShadow: 'none', borderColor: '#BA68C8' }} />
                                 </div>
