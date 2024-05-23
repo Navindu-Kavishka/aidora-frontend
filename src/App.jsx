@@ -8,6 +8,8 @@ import SideBar from './layouts/SideBar/SideBar'
 import FundDashboard from './pages/FundDashboard/FundDashboard'
 import CreateProject from './pages/CreateProject/CreateProject'
 import EditProfile from './pages/EditProfile/EditProfile'
+import Navigation from './layouts/Navigation/Navigation'
+
 
 
 
@@ -24,7 +26,7 @@ function App() {
       <Route path="/dashboard" element={<FundDashboard/>}></Route>
       <Route path="/create" element={<CreateProject/>}></Route>
       <Route path="/edit" element={<EditProfile/>}></Route>
-
+      <Route path="/navigation" element={<Navigation/>}></Route>
 
       </Routes>
       </BrowserRouter>
