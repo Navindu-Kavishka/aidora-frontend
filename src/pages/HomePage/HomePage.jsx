@@ -1,14 +1,22 @@
 import React from 'react'
 import Footer from '../../components/Footer/Footer'
-import { Navbar } from 'react-bootstrap';
+import Navbar from '../../components/Navbar/Navbar'
+
 
 
 function HomePage() {
   return (
 
+    
     <div>
+<div>
+    <Navbar/>    </div>
+
+    
+
+<div>
     <Footer/>
-    <Navbar/>
+                 </div>
     </div>
   )
 }
