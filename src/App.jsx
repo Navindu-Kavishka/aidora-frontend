@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter,Route,Routes} from 'react-router-dom'; 
 import OngoingProject from './pages/OngoingProject';
 import CompletedProject from './pages/CompletedProject';
+import CanceledProject from './pages/CanceledProject';
 
 const projects = [
   {

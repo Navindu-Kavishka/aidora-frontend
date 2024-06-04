@@ -30,25 +30,25 @@ const Buttons = ({ selectedCategory, onSelectCategory }) => {
 
   return (
     <div style={containerStyle}>
-      <button 
+      <button
         style={selectedCategory === 'All' ? activeButtonStyle : buttonStyle}
         onClick={() => onSelectCategory('All')}
       >
         All
       </button>
-      <button 
+      <button
         style={selectedCategory === 'Education' ? activeButtonStyle : buttonStyle}
         onClick={() => onSelectCategory('Education')}
       >
         Education
       </button>
-      <button 
+      <button
         style={selectedCategory === 'Welfare' ? activeButtonStyle : buttonStyle}
         onClick={() => onSelectCategory('Welfare')}
       >
         Welfare
       </button>
-      <button 
+      <button
         style={selectedCategory === 'Water & Sanitation' ? activeButtonStyle : buttonStyle}
         onClick={() => onSelectCategory('Water & Sanitation')}
       >
