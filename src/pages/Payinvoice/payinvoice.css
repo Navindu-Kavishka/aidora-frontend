@@ -1,0 +1,127 @@
+.container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+.head{
+  display: flex;
+  justify-content: center;
+  margin-top: 5;
+}
+
+.heade{
+  font-size: 50px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 400px;
+  padding: 70px;
+  width: 70%;
+  margin: 0 auto;
+}
+
+
+  
+  .imageContainer {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 80px;
+    opacity: 0.7;
+  }
+  
+  .image {
+    width: 400px;
+    height: 60px;
+    object-fit: cover;
+    margin: 0 10px;
+  }
+  
+  .form {
+    width: 700px;
+    margin: auto;
+    border: 5px solid #ccc;
+    border-radius: 8px;
+    background-color: #e5f7ec;
+    height: 1100;
+    padding: 20;    
+  }
+  
+  .formRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 22;
+  }
+  
+  .input {
+    width: 80%;
+    padding: 10px;
+    margin-bottom: 30px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+
+  }
+  
+  .splitInput {
+    width: 48%;
+  }
+
+  .b{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .btton {
+    background-color: #1b992c;
+    padding: 10px;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width:400;
+    font-size: 30px;
+    margin-top: 40;
+    height: 70px;
+    font-weight: 700;
+    
+  }
+  
+  .editButton {
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 50;
+    margin-bottom: 33px;
+    margin-right : 33px;
+
+  }
+  
+  .cardElement {
+    base {
+      font-size: 16px;
+      color: #32325d;
+      ::placeholder {
+        color: #aab7c4;
+      }
+    }
+    invalid {
+      color: #fa755a;
+    }
+  }
+  
+  .rightAlign {
+    text-align: right;
+  }
+  
+  
+  

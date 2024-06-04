@@ -20,6 +20,7 @@ import SideBar from "./components/Admin/SideBar/SideBar"
 
 const App = () => {
   return (
+    <>
     <BrowserRouter>
     <SideBar>
     <Routes>
@@ -43,6 +44,22 @@ const App = () => {
     </Routes>
     </SideBar>
     </BrowserRouter>
+
+    <Router>
+    <Routes>
+      
+      <Route path="/PayInvoice" element={<Payinvoice />} />
+      <Route path="/Paypal" element={<Paypal />} />
+      <Route path="/DonationRecipt" element={<DonationRecipt />} />
+      <Route path="/MakeDonation" element={<MakeDonation />} />
+      <Route path="/DonationHome" element={<DonationHome />} />
+      <Route path="/Homemiddle" element={<Homemiddle />} />
+
+
+    </Routes>
+  </Router>
+
+    </>
   );
 };
 export default App
