@@ -1,7 +1,7 @@
 import React from 'react';
-import ProjectList from './ProjectList';
+import { BrowserRouter,Route,Routes} from 'react-router-dom'; 
 import OngoingProject from './pages/OngoingProject';
-import ChatBox from './pages/ChatBox'
+import CompletedProject from './pages/CompletedProject';
 
 const projects = [
   {
@@ -20,12 +20,18 @@ const projects = [
 
 const App = () => {
   return (
-    <div>
-      <OngoingProject/>
-      <ChatBox/>
-      <h1 style={{ textAlign: 'center', padding: '20px' }}>Ongoing Projects</h1>
-      <ProjectList projects={projects} />
-    </div>
+    <BrowserRouter>
+    <Routes>
+    
+      <Route path='/OngoingProject' element={<OngoingProject/>}/>
+      <Route path='/CompletedProject' element={<CompletedProject/>}/>
+      <Route path='/CanceledProject' element={<CanceledProject/>}/>
+     
+     
+    </Routes>
+    </BrowserRouter>
+    
+
   );
 };
 

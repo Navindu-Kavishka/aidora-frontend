@@ -3,7 +3,7 @@ import Buttons from './Buttons';
 import ProjectCard from '../components/ProjectCard';
 import ProjectList from '../components/ProjectList';
 
-const OngoingProject = () => {
+const CompletedProject = () => {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 600);
 
@@ -34,7 +34,7 @@ const OngoingProject = () => {
 
   return (
     <div style={containerStyle}>
-      <h2 style={headingStyle}>Ongoing Projects</h2>
+      <h2 style={headingStyle}>Completed Projects</h2>
       <Buttons 
         selectedCategory={selectedCategory} 
         onSelectCategory={handleSelectCategory} 
@@ -44,4 +44,4 @@ const OngoingProject = () => {
   );
 };
 
-export default OngoingProject;
+export default CompletedProject;
