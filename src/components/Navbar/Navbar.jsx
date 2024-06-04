@@ -66,7 +66,7 @@ export default function App() {
   return (
     <>
       <div style={navbarStyle}>
-        <img src='/src/logo.png' alt='Logo' style={{ width: '80px', padding: '10px' }} />
+        <img src='/src/assets/donorImg/logo.png' alt='Logo' style={{ width: '80px', padding: '10px' }} />
         <button
           onClick={() => setOpenNav(!openNav)}
           style={buttonStyle}

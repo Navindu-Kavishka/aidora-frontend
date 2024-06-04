@@ -6,7 +6,7 @@ function UserLogin() {
       <div style={{ border: 'none', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', height:'50px' }}>
         <div className="row g-0">
           <div className="col-md-6">
-            <img src='/src/loginback.avif' alt="login form" style={{ width: '100%', height: '100%', padding:'50px' }} />
+            <img src='/src/assets/donorImg/loginback.avif' alt="login form" style={{ width: '100%', height: '100%', padding:'50px' }} />
           </div>
           <div className="col-md-6">
             <div style={{ padding: '2rem' }}>
@@ -14,7 +14,7 @@ function UserLogin() {
                 <i className="fas fa-cubes fa-3x me-3" style={{ color: '#ff6219' }}></i>
                 <span className="h1 fw-bold mb-0">
                   <div className="col-md-6">
-                    <img src='/src/logo.png' alt="logo" style={{ width: '100px', height: 'auto' }} />
+                    <img src='/src/assets/donorImg/logo.png' alt="logo" style={{ width: '100px', height: 'auto' }} />
                   </div>
                 </span>
               </div>

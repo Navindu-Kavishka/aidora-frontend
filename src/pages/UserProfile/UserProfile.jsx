@@ -11,7 +11,7 @@ function EditProfile() {
           {/* Logo */}
           <a href="#">
             <img
-              src="src/logo.png" 
+              src="src/assets/donorImg/logo.png" 
               alt="Logo"
               style={{ height: '80px', width: '80px', marginRight: '10px', marginLeft: '30px' }} // Adjust the height and margin as needed
             />
@@ -32,7 +32,7 @@ function EditProfile() {
                 aria-expanded="false"
               >
                 <img
-                  src="src/editprofile.png"
+                  src="src/assets/donorImg/editprofile.png"
                   className="rounded-circle"
                   height="50px"
                   alt="Avatar"

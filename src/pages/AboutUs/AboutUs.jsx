@@ -9,7 +9,7 @@ function AboutUs() {
       <Navbar />
       <div style={{ position: 'relative' }}>
         <img
-          src='src/aboutUs.jpg'
+          src='src/assets/donorImg/aboutUs.jpg'
           alt='Top Centered'
           style={{
             width: '100%',

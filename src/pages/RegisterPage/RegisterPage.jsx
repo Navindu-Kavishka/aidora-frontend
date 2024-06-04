@@ -8,7 +8,7 @@ function RegisterPage() {
         <div className='row justify-content-center'>
           <div className='col-10 col-md-8 col-lg-6'>
           <div className='text-center mb-5'>
-  <img src='/src/logo.png' alt='Logo' style={{ width: '150px', padding: '10px' }} />
+  <img src='/src/assets/donorImg/logo.png' alt='Logo' style={{ width: '150px', padding: '10px' }} />
 </div>
 
             <div className='bg-white p-4 rounded shadow-sm'>
