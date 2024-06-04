@@ -1,17 +1,18 @@
-import React, { useState } from 'react';
-import "./SideBar.css"
+import { useState } from "react";
+import PropTypes from 'prop-types';  // Import PropTypes
+import "./SideBar.css";
 import { RiDashboard3Fill } from "react-icons/ri";
 import { FaHandHoldingDollar } from "react-icons/fa6";
 import { BsBank2 } from "react-icons/bs";
 import { AiFillProject } from "react-icons/ai";
 import { MdPayments } from "react-icons/md";
 import { FaBars } from "react-icons/fa";
+import { FiLogOut } from "react-icons/fi";  // Import logout icon
 import { NavLink } from 'react-router-dom';
 
 const SideBar = ({ children }) => {
-  const [isOpen , setIsOpen] = useState(false);
-  const toggle = () => setIsOpen (!isOpen);
-
+  const [isOpen, setIsOpen] = useState(false);
+  const toggle = () => setIsOpen(!isOpen);
 
   const menuItem = [
     {
@@ -19,7 +20,6 @@ const SideBar = ({ children }) => {
       name: "Dashboard",
       icon: <RiDashboard3Fill />,
     },
-    
     {
       path: "/admindonor",
       name: "Donor",
@@ -39,16 +39,18 @@ const SideBar = ({ children }) => {
       path: "/adminpayment",
       name: "Payments",
       icon: <MdPayments />,
-    }
+    },
   ];
 
   return (
     <div className="container">
-      <div style={{width:isOpen ? "250px" : "50px"}} className="sidebar">
+      <div style={{ width: isOpen ? "250px" : "50px" }} className="sidebar">
         <div className="topSection">
-          <h1 style={{display:isOpen ? "block" : "none"}} className="logo">Aidora Admin</h1>
-          <div style={{marginLeft:isOpen ? "50px" : "0px"}} className="bar">
-            <FaBars  onClick={toggle}/>
+          <h1 style={{ display: isOpen ? "block" : "none" }} className="logo">
+            Aidora Admin
+          </h1>
+          <div style={{ marginLeft: isOpen ? "50px" : "0px" }} className="bars">
+            <FaBars onClick={toggle} />
           </div>
         </div>
         {menuItem.map((item, index) => (
@@ -59,13 +61,35 @@ const SideBar = ({ children }) => {
             activeClassName="active"
           >
             <div className="icon">{item.icon}</div>
-            <div style={{display:isOpen ? "block" : "none"}}  className="linkText">{item.name}</div>
+            <div
+              style={{ display: isOpen ? "block" : "none" }}
+              className="linkText"
+            >
+              {item.name}
+            </div>
           </NavLink>
         ))}
+        <NavLink
+          to="/logout"
+          className="link logout"
+          activeClassName="active"
+        >
+          <div className="icon"><FiLogOut /></div>
+          <div
+            style={{ display: isOpen ? "block" : "none" }}
+            className="linkText"
+          >
+            Logout
+          </div>
+        </NavLink>
       </div>
       <main>{children}</main>
     </div>
   );
+};
+
+SideBar.propTypes = {
+  children: PropTypes.node.isRequired,
 };
 
 export default SideBar;
