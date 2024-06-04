@@ -1,0 +1,64 @@
+*{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+}
+
+.container{
+    display: flex;
+
+}
+
+main{
+    width: 100%;
+    padding: 20px;
+}
+
+.sidebar{
+    background: #25934C;
+    color: #fff;
+    height: 100vh;
+    width: 200px;
+    transition: all 0.5s;
+}
+
+.topSection {
+    display: flex;
+    align-items: center;
+    padding: 20px 15px;
+
+}
+
+.logo{
+    font-style: 30px;
+
+}
+
+.bars{
+    display: flex;
+    font-style: 25px;
+    margin-left: 50px;
+}
+
+.link{
+    display: flex;
+    color: #fff;
+    padding: 15px 20px;
+    gap: 15px;
+    transition: all 0.5s;
+}
+
+.link:hover{
+    background: #1d7747;
+    color: #000;
+    transition: all 0.5s;
+}
+
+.active {
+    background: #fff;
+}
+
+.icon, .linkText{
+    font-style: 20px;
+
+}
