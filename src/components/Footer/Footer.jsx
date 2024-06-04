@@ -33,7 +33,7 @@ function Footer() {
       </div>
       <div style={{ textAlign: 'center', marginTop: '20px', color:'#FFFFFF' }}>
         <p>© 2024 Aidora All Rights Reserved by Group 20</p>
-        <a href="#!" style={{ color: '#333', textDecoration: 'none', color:'#FFFFFF' }}>Privacy Policy</a>
+        <a href="#!" style={{  textDecoration: 'none', color:'#FFFFFF' }}>Privacy Policy</a>
       </div>
     </footer>
   );

@@ -42,7 +42,7 @@ export default function App() {
   const linkStyle = {
     color: 'inherit',
     textDecoration: 'none',
-    padding: '0.5rem 1rem',
+    padding: '5px 10px',
   };
 
   const buttonStyle = {
@@ -79,7 +79,7 @@ export default function App() {
           <a href="#" style={linkStyle}>Fundraiser</a>
           <a href="#" style={linkStyle}>About Us</a>
           <a href="#" style={linkStyle}>Donate</a>
-          <button style={loginButtonStyle}>Log In</button>
+          <button style={loginButtonStyle}><b>Log In</b></button>
         </div>
       </div>
 
