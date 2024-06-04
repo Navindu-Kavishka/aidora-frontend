@@ -1,6 +1,16 @@
+
 import React from 'react';
 import './components/Admin/SideBar/SideBar.css';
 import { BrowserRouter, Route ,Routes } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+import UserLogin from "./pages/UserLogin/UserLogin";
+import HomePage from "./pages/HomePage/HomePage"
+import RegisterPage from './pages/RegisterPage/RegisterPage';
+import UserProfile from './pages/UserProfile/UserProfile';
+import AboutUs from './pages/AboutUs/AboutUs';
+
+
 import AdminDashboard from "./pages/AdminDashboard/AdminDashboard";
 import AdminDonor from "./pages/AdminDonor/AdminDonor";
 import AdminFundraiser from "./pages/AdminFundRaiser/AdminFundRaiser";
@@ -13,6 +23,15 @@ const App = () => {
     <BrowserRouter>
     <SideBar>
     <Routes>
+    
+      <Route path='/login' element={<UserLogin/>}/>
+      <Route path='/home' element={<HomePage/>}/>
+      <Route path='/register' element={<RegisterPage/>}/>
+      <Route path='/userprofile' element={<UserProfile/>}/>
+      <Route path='/AboutUs' element={<AboutUs/>}/>
+    
+    
+    
       <Route path='/' element={<AdminDashboard/>}/>
       <Route path='/admindashboard' element={<AdminDashboard/>}/>
       <Route path='/admindonor' element={<AdminDonor/>}/>
@@ -27,3 +46,4 @@ const App = () => {
   );
 };
 export default App
+
