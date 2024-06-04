@@ -1,46 +1,46 @@
-*{
+* {
     margin: 0;
     padding: 0;
     text-decoration: none;
 }
 
-.container{
+.container {
     display: flex;
-
 }
 
-main{
+main {
     width: 100%;
     padding: 20px;
 }
 
-.sidebar{
+.sidebar {
     background: #25934C;
     color: #fff;
     height: 100vh;
     width: 200px;
     transition: all 0.5s;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;  /* Add this line */
 }
 
 .topSection {
     display: flex;
     align-items: center;
     padding: 20px 15px;
-
 }
 
-.logo{
-    font-style: 30px;
-
+.logo {
+    font-size: 30px;
 }
 
-.bars{
+.bars {
     display: flex;
-    font-style: 25px;
+    font-size: 25px;
     margin-left: 50px;
 }
 
-.link{
+.link {
     display: flex;
     color: #fff;
     padding: 15px 20px;
@@ -48,17 +48,21 @@ main{
     transition: all 0.5s;
 }
 
-.link:hover{
+.link:hover {
     background: #1d7747;
     color: #000;
     transition: all 0.5s;
 }
 
 .active {
-    background: #fff;
+    background: #3df090;
 }
 
-.icon, .linkText{
-    font-style: 20px;
+.icon, .linkText {
+    font-size: 20px;
+}
 
+.logout {
+    margin-top: auto;  /* Add this line to push it to the bottom */
+    padding-bottom: 20px;  /* Optional: add some padding to the bottom */
 }
