@@ -3,21 +3,9 @@ import { BrowserRouter,Route,Routes} from 'react-router-dom';
 import OngoingProject from './pages/OngoingProject';
 import CompletedProject from './pages/CompletedProject';
 import CanceledProject from './pages/CanceledProject';
+import ChatBox from './components/ChatBox';
 
-const projects = [
-  {
-    image: 'https://via.placeholder.com/300x200', // Replace with actual image URLs
-    title: 'PURE WATER PROJECT',
-  },
-  {
-    image: 'https://via.placeholder.com/300x200', // Replace with actual image URLs
-    title: 'WATER SUBSIDIZED PROJECT',
-  },
-  {
-    image: 'https://via.placeholder.com/300x200', // Replace with actual image URLs
-    title: 'PURE WATER PROJECT',
-  },
-];
+
 
 const App = () => {
   return (
@@ -27,6 +15,7 @@ const App = () => {
       <Route path='/OngoingProject' element={<OngoingProject/>}/>
       <Route path='/CompletedProject' element={<CompletedProject/>}/>
       <Route path='/CanceledProject' element={<CanceledProject/>}/>
+      <Route path='/ChatBox' element={<ChatBox/>}/>
      
      
     </Routes>
