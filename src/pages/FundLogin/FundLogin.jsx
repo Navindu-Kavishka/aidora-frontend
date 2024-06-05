@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-const UserLogin = () => {
+const FundLogin = () => {
   const [buttonWidth, setButtonWidth] = useState('320px');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -63,7 +63,7 @@ const UserLogin = () => {
   };
 
   const backgroundImageStyle = {
-    backgroundImage: 'url("/src/assets/donorImg/loginback.avif")',
+    backgroundImage: 'url("https://th.bing.com/th/id/OIP.6_y0yylIRn1rLisUmqtGcQHaLG?w=500&h=749&rs=1&pid=ImgDetMain.jpeg")',
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     height: '100vh',
@@ -120,14 +120,14 @@ const UserLogin = () => {
                   <div style={cardBodyStyle}>
                     <div className="text-center">
                       <img
-                        src="src/assets/donorImg/logo.png"
+                        src="src/assets/FundraiserImg/aidora img.png"
                         style={{ width: '185px', margin: '0 auto', alignSelf: 'center', marginBottom: '2rem' }}
                         alt="logo"
                       />
-                      <h4 className="mt-1 mb-5 pb-1" style={{ fontSize: '26px', fontFamily: 'Arial, sans-serif', fontWeight: 'bold' }}></h4>
+                      <h4 className="mt-1 mb-5 pb-1" style={{ fontSize: '26px', fontFamily: 'Arial, sans-serif', fontWeight: 'bold' }}>We are the Aidora Team</h4>
                     </div>
                     <form onSubmit={handleSubmit}>
-                      <p style={{ marginBottom: '1rem', fontSize: '24px', fontFamily: 'Arial, sans-serif', marginLeft: '10px', fontWeight: 'bold' }}>User Login</p>
+                      <p style={{ marginBottom: '1rem', fontSize: '24px', fontFamily: 'Arial, sans-serif', marginLeft: '10px', fontWeight: 'bold' }}>Fundraiser Login</p>
                       <div className="form-outline mb-4">
                         <input
                           type="email"
@@ -179,7 +179,7 @@ const UserLogin = () => {
                 <div className="col-lg-6 d-flex align-items-center">
                   <div className="text-white px-3 py-4 p-md-5 mx-md-4" style={backgroundImageStyle}>
                     <h4 className="mb-4" style={{ fontSize: '24px', fontFamily: 'Arial, sans-serif' }}>
-                     
+                      We are more than just a company
                     </h4>
                   </div>
                 </div>
@@ -192,4 +192,4 @@ const UserLogin = () => {
   );
 };
 
-export default UserLogin;
+export default FundLogin;
