@@ -32,7 +32,8 @@ import FundRegister from './pages/FundRegister/FundRegister'
 import FundDashboard from './pages/FundDashboard/FundDashboard'
 import CreateProject from './pages/CreateProject/CreateProject'
 import EditProfile from './pages/EditProfile/EditProfile'
-import Navigation from './layouts/Navigation/Navigation'
+import AdminLogin from './pages/AdminLogin/AdminLogin';
+
 
 
 
@@ -50,35 +51,21 @@ const App = () => {
         <Route path='/userprofile' element={<UserProfile />} />
         <Route path='/aboutus' element={<AboutUs />} />
         
-        {/* Admin routes with SideBar layout */}
+        
+        <Route path='adminlogin' element={<AdminLogin />} />
         <Route path='/admin/*' element={<SideBar />}>
+        
           <Route index element={<AdminDashboard />} />
           <Route path='admindashboard' element={<AdminDashboard />} />
           <Route path='admindonor' element={<AdminDonor />} />
           <Route path='adminfundraiser' element={<AdminFundraiser />} />
           <Route path='adminproject' element={<AdminProject />} />
           <Route path='adminpayment' element={<AdminPayment />} />
+          
         </Route>
-      </Routes>
-   
-    <Routes>
-    
-      <Route path='/login' element={<UserLogin/>}/>
-      <Route path='/home' element={<HomePage/>}/>
-      <Route path='/register' element={<RegisterPage/>}/>
-      <Route path='/userprofile' element={<UserProfile/>}/>
-      <Route path='/AboutUs' element={<AboutUs/>}/>
+      
     
     
-    
-      <Route path='/' element={<AdminDashboard/>}/>
-      <Route path='/admindashboard' element={<AdminDashboard/>}/>
-      <Route path='/admindonor' element={<AdminDonor/>}/>
-      <Route path='/adminfundraiser' element={<AdminFundraiser/>}/>
-      <Route path='/adminproject' element={<AdminProject/>}/>
-      <Route path='/adminpayment' element={<AdminPayment/>}/>
-
-
       <Route path='/OngoingProject' element={<OngoingProject/>}/>
       <Route path='/CompletedProject' element={<CompletedProject/>}/>
       <Route path='/CanceledProject' element={<CanceledProject/>}/>
@@ -106,7 +93,7 @@ const App = () => {
 
   );
 };
-export default App
-
-
 export default App;
+
+
+
