@@ -3,6 +3,11 @@ import { Link } from 'react-router-dom';
 
 const FundLogin = () => {
   const [buttonWidth, setButtonWidth] = useState('320px');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [emailError, setEmailError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+  const [formError, setFormError] = useState('');
 
   useEffect(() => {
     const updateButtonWidth = () => {
@@ -21,10 +26,40 @@ const FundLogin = () => {
     return () => window.removeEventListener('resize', updateButtonWidth);
   }, []);
 
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
+    if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(e.target.value)) {
+      setEmailError('Invalid email format');
+    } else {
+      setEmailError('');
+    }
+  };
+
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+    if (e.target.value.length < 6) {
+      setPasswordError('Password must be at least 6 characters');
+    } else {
+      setPasswordError('');
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!email || !password) {
+      setFormError('All fields are mandatory');
+    } else if (emailError || passwordError) {
+      setFormError('Please fix the errors before submitting');
+    } else {
+      setFormError('');
+      // Proceed with form submission logic
+      // You can send the form data to the server here
+    }
+  };
+
   const cardStyle = {
     borderTopRightRadius: '0.3rem',
     borderBottomRightRadius: '0.3rem',
-    
   };
 
   const backgroundImageStyle = {
@@ -68,6 +103,7 @@ const FundLogin = () => {
   const labelStyle = {
     marginTop: '-1rem',
   };
+
   const forgotPasswordStyle = {
     textAlign: 'center',
     marginTop: '1rem',
@@ -84,83 +120,63 @@ const FundLogin = () => {
                   <div style={cardBodyStyle}>
                     <div className="text-center">
                       <img
-                        src="src/aidora img.png"
+                        src="src/assets/FundraiserImg/aidora img.png"
                         style={{ width: '185px', margin: '0 auto', alignSelf: 'center', marginBottom: '2rem' }}
                         alt="logo"
                       />
                       <h4 className="mt-1 mb-5 pb-1" style={{ fontSize: '26px', fontFamily: 'Arial, sans-serif', fontWeight: 'bold' }}>We are the Aidora Team</h4>
                     </div>
-                    <form>
+                    <form onSubmit={handleSubmit}>
                       <p style={{ marginBottom: '1rem', fontSize: '24px', fontFamily: 'Arial, sans-serif', marginLeft: '10px', fontWeight: 'bold' }}>Fundraiser Login</p>
-                      <div
-                        data-mdb-input-init
-                        className="form-outline mb-4"
-                      >
-                        <input style={formOutlineStyle}
+                      <div className="form-outline mb-4">
+                        <input
                           type="email"
                           id="form2Example11"
                           className="form-control"
                           placeholder="Phone number or email address"
+                          value={email}
+                          onChange={handleEmailChange}
+                          style={formOutlineStyle}
                         />
-                        <label
-                          className="form-label"
-                          htmlFor="form2Example11"
-                        >
-
-                        </label>
+                        {emailError && <div style={{ color: 'red' }}>{emailError}</div>}
                       </div>
-                      <div
-                        data-mdb-input-init
-                        className="form-outline mb-4"
-                      >
-                        <input style={labelStyle}
+                      <div className="form-outline mb-4">
+                        <input
                           type="password"
                           id="form2Example22"
                           className="form-control"
                           placeholder="Password"
+                          value={password}
+                          onChange={handlePasswordChange}
+                          style={labelStyle}
                         />
-                        <label
-                          className="form-label"
-                          htmlFor="form2Example22"
-                        >
-
-                        </label>
+                        {passwordError && <div style={{ color: 'red' }}>{passwordError}</div>}
                       </div>
                       <div className="text-center pt-1 mb-5 pb-1">
+                        {formError && <div style={{ color: 'red', marginBottom: '1rem' }}>{formError}</div>}
                         <button
                           data-mdb-button-init
                           data-mdb-ripple-init
                           className="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3"
-                          type="button"
-                          style={{ fontSize: '16px', alignSelf: 'center', width: '320px',backgroundColor:'#037149' }}
+                          type="submit"
+                          style={{ fontSize: '16px', alignSelf: 'center', width: buttonWidth, backgroundColor: '#037149' }}
                         >
-                          <Link to="/dashboard" style={{ color: 'white', textDecoration: 'none'}}>Log In</Link>
+                          Log In
                         </button>
                         <div style={forgotPasswordStyle}>
-                          <a
-                            className="text-muted"
-                            href="#!"
-                          >
-                            Forgot password?
-                          </a></div>
+                          <a className="text-muted" href="#!">Forgot password?</a>
+                        </div>
                       </div>
                       <div className="d-flex align-items-center justify-content-center pb-4">
-                        <p className="mb-0 me-2">
-                          Don't have an account?
-                        </p>
-                        <button
-                          type="button"
-                          data-mdb-button-init
-                          data-mdb-ripple-init
-                          className="btn btn-outline-success"
-                        >
+                        <p className="mb-0 me-2">Don't have an account?</p>
+                        <button type="button" className="btn btn-outline-success">
                           <Link to="/register" style={{ textDecoration: 'none', color: 'black' }}>Sign-Up</Link>
                         </button>
                       </div>
                     </form>
                   </div>
                 </div>
-                <div className="col-lg-6 d-flex align-items-center" >
+                <div className="col-lg-6 d-flex align-items-center">
                   <div className="text-white px-3 py-4 p-md-5 mx-md-4" style={backgroundImageStyle}>
                     <h4 className="mb-4" style={{ fontSize: '24px', fontFamily: 'Arial, sans-serif' }}>
                       We are more than just a company

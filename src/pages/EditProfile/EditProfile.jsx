@@ -11,7 +11,7 @@ function EditProfile() {
           {/* Logo */}
           <a href="#">
             <img
-              src="src/aidora img.png" // Replace with the path to your logo
+              src="src/assets/FundraiserImg/aidora img.png" 
               alt="Logo"
               style={{ height: '80px', width: '80px', marginRight: '10px', marginLeft: '30px' }} // Adjust the height and margin as needed
             />
@@ -32,7 +32,7 @@ function EditProfile() {
                 aria-expanded="false"
               >
                 <img
-                  src="src/b.jpg"
+                  src="src/assets/FundraiserImg/b.jpg"
                   className="rounded-circle"
                   height="50px"
                   alt="Avatar"

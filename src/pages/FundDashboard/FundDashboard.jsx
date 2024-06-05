@@ -34,7 +34,7 @@ const FundDashboard = () => {
                                     aria-expanded="false"
                                 >
                                     <img
-                                        src="src/b.jpg"
+                                        src="src/assets/FundraiserImg/b.jpg"
                                         className="rounded-circle"
                                         height="40px"
                                         alt="Avatar"
@@ -74,7 +74,7 @@ const FundDashboard = () => {
     <div className="col" style={{ marginLeft: '30px' }}>
         <div className="card">
         <div className="card h-100">
-            <img src="src/J.jpg" className="card-img-top" alt="Card 1" />
+            <img src="src/assets/FundraiserImg/J.jpg" className="card-img-top" alt="Card 1" />
             <div className="card-body text-center">
                 
                 <p className="card-text">Status : Inpection Pending
@@ -88,7 +88,7 @@ Site Location : 15A, ABC Street, SomeCity</p>
     <div className="col">
         <div className="card">
         <div className="card h-100">
-            <img src="src/J.jpg" className="card-img-top" alt="Card 2" />
+            <img src="src/assets/FundraiserImg/J.jpg" className="card-img-top" alt="Card 2" />
             <div className="card-body text-center">
                 
                 <p className="card-text">Status : Inpection Pending
@@ -102,7 +102,7 @@ Site Location : 15A, ABC Street, SomeCity</p>
     <div className="col">
         <div className="card">
         <div className="card h-100">
-            <img src="src/OIP (1).jpg" className="card-img-top" alt="Card 3" />
+            <img src="src/assets/FundraiserImg/OIP (1).jpg" className="card-img-top" alt="Card 3" />
             <div className="card-body text-center">
                 
                 <p className="card-text">Status : Inpection Pending

@@ -26,7 +26,7 @@ const SideBar = () => {
         <div className="position-sticky" style={{ top: 0,  overflowX: 'hidden', overflowY: 'auto' }}>
           <div className="list-group list-group-flush mx-3 mt-4">
             {/* Main Navigation Items */}
-            <img src="src/aidora img.png" alt="Logo" style={{ marginRight: '20px' ,height:'100px',width:'100px', marginBottom: '10px',marginLeft:'45px' }} /> 
+            <img src="src/assets/FundraiserImg/aidora img.png" alt="Logo" style={{ marginRight: '20px' ,height:'100px',width:'100px', marginBottom: '10px',marginLeft:'45px' }} /> 
             <a
               href="#"
               className="list-group-item list-group-item-action py-2 ripple"

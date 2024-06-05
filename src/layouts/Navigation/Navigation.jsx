@@ -1,134 +1,124 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Navbar, Nav, Container, Offcanvas } from 'react-bootstrap';
 
-const Navbar = () => {
-  const [isCollapsed, setIsCollapsed] = useState(true);
+const ResponsiveNavbarSidebar = () => {
+  const [showSidebar, setShowSidebar] = useState(window.innerWidth > 480);
+  const [showOffcanvas, setShowOffcanvas] = useState(false);
 
-  const toggleNavbar = () => {
-    setIsCollapsed(!isCollapsed);
+  const handleResize = () => {
+    if (window.innerWidth > 480) {
+      setShowSidebar(true);
+      setShowOffcanvas(false);
+    } else {
+      setShowSidebar(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  const handleButtonClick = () => {
+    // Implement your button click functionality here
   };
 
   return (
-    <nav style={styles.navbar}>
-      <div style={styles.container}>
-        <button
-          style={styles.toggler}
-          type="button"
-          aria-controls="navbarSupportedContent"
-          aria-expanded={!isCollapsed}
-          aria-label="Toggle navigation"
-          onClick={toggleNavbar}
-        >
-          <i className="fas fa-bars" style={styles.icon}></i>
-        </button>
-
-        <div
-          className={`collapse navbar-collapse ${!isCollapsed ? 'show' : ''}`}
-          id="navbarSupportedContent"
-        >
-          <a style={styles.brand} href="#">
-            <img
-              src="https://mdbcdn.b-cdn.net/img/logo/mdb-transaprent-noshadows.webp"
-              height="15"
-              alt="MDB Logo"
-              loading="lazy"
-            />
-          </a>
-         
+    <div>
+      {showSidebar ? (
+        <div className="sidebar bg-light p-3" style={{ height: '100vh', overflowY: 'auto' }}>
+          <div className="text-center mb-4">
+            <img src="src/assets/FundraiserImg/aidora img.png" alt="Logo" style={{ height: '100px', width: '100px' }} />
+          </div>
+          <Nav defaultActiveKey="/" className="flex-column">
+            <Nav.Link href="/projects">My Projects</Nav.Link>
+            <Nav.Link href="/inquiries">Inquiries</Nav.Link>
+            <Nav.Link href="/transactions">Summary</Nav.Link>
+            <Nav.Link href="/transactions">Reports</Nav.Link>
+            <Nav.Link href="/ratings">Profile</Nav.Link>
+            
+          </Nav>
         </div>
-
-        <div style={styles.rightElements}>
-          <a style={styles.icon} href="#">
-            <i className="fas fa-shopping-cart"></i>
-          </a>
-
-        
-
-         
-            <a
-              className="dropdown-toggle d-flex align-items-center hidden-arrow"
-              href="#"
-              role="button"
-              id="navbarDropdownMenuAvatar"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
+      ) : (
+        <Navbar bg="light" expand="lg">
+          <Container fluid>
+            <Navbar.Brand href="#">FundRaiser Dashboard</Navbar.Brand>
+            <Navbar.Toggle aria-controls="offcanvasNavbar" onClick={() => setShowOffcanvas(true)} />
+            <Navbar.Offcanvas
+              id="offcanvasNavbar"
+              aria-labelledby="offcanvasNavbarLabel"
+              placement="end"
+              show={showOffcanvas}
+              onHide={() => setShowOffcanvas(false)}
             >
-              <img
-                src="/src/b.jpg"
-                style={styles.avatar}
-                alt="Avatar"
-                loading="lazy"
-              />
-            </a>
-           
-          
-        </div>
-      </div>
-    </nav>
+              <Offcanvas.Header closeButton>
+                <Offcanvas.Title id="offcanvasNavbarLabel">Sidebar</Offcanvas.Title>
+              </Offcanvas.Header>
+              <Offcanvas.Body>
+                <Nav className="justify-content-end flex-grow-1 pe-3">
+                <Nav.Link href="/projects">My Projects</Nav.Link>
+            <Nav.Link href="/inquiries">Inquiries</Nav.Link>
+            <Nav.Link href="/transactions">Summary</Nav.Link>
+            <Nav.Link href="/transactions">Reports</Nav.Link>
+            <Nav.Link href="/ratings">Profile</Nav.Link>
+                </Nav>
+              </Offcanvas.Body>
+            </Navbar.Offcanvas>
+          </Container>
+        </Navbar>
+      )}
+      <main className={showSidebar ? 'ml-auto' : ''} style={{ marginLeft: showSidebar ? '200px' : '0' }}>
+        <Container fluid>
+          <h1>My Projects</h1>
+          <div style={{ paddingLeft: showSidebar ? '200px' : '0', paddingTop: 0 }}>
+            <div className="container mt-5">
+              <div className="row mt-3">
+                <div className="col" style={{ marginLeft: '30px' }}>
+                  <button className="btn btn-success" style={{ backgroundColor: '#037149' }}>Ongoing Projects</button>
+                  <button className="btn btn-success mx-2" style={{ backgroundColor: '#037149' }}>Completed Projects</button>
+                  <button className="btn btn-success" style={{ backgroundColor: '#037149' }}>Cancelled Projects</button>
+                </div>
+              </div>
+              <div className="row mt-3">
+                <div className="col d-flex align-items-center justify-content-center" style={{ marginLeft: '30px', marginTop: '20px' }}>
+                  <button onClick={handleButtonClick} className="btn btn-success" style={{ height: '160px', width: '250px', fontSize: '60px', backgroundColor: '#037149' }}>+</button>
+                </div>
+              </div>
+              <div className="row mt-3" style={{ marginRight: '30px' }}>
+                <div className="col" style={{ marginLeft: '30px' }}>
+                  <div className="card h-100">
+                    <img src="src/J.jpg" className="card-img-top" alt="Card 1" />
+                    <div className="card-body text-center">
+                      <p className="card-text">Status: Inspection Pending<br />Project No. 123556<br />Site Location: 15A, ABC Street, SomeCity</p>
+                      <button className="btn btn-success" style={{ backgroundColor: '#037149' }}>View Project</button>
+                    </div>
+                  </div>
+                </div>
+                <div className="col">
+                  <div className="card h-100">
+                    <img src="src/J.jpg" className="card-img-top" alt="Card 2" />
+                    <div className="card-body text-center">
+                      <p className="card-text">Status: Inspection Pending<br />Project No. 123556<br />Site Location: 15A, ABC Street, SomeCity</p>
+                      <button className="btn btn-success" style={{ backgroundColor: '#037149' }}>View Project</button>
+                    </div>
+                  </div>
+                </div>
+                <div className="col">
+                  <div className="card h-100">
+                    <img src="src/OIP (1).jpg" className="card-img-top" alt="Card 3" />
+                    <div className="card-body text-center">
+                      <p className="card-text">Status: Inspection Pending<br />Project No. 123556<br />Site Location: 15A, ABC Street, SomeCity</p>
+                      <button className="btn btn-success" style={{ backgroundColor: '#037149' }}>View Project</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Container>
+      </main>
+    </div>
   );
 };
 
-const styles = {
-  navbar: {
-    display: 'flex',
-    flexDirection: 'column',
-    backgroundColor: '#28a745', 
-    height:'50px'// Green background color
-  },
-  container: {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: '0.5rem 1rem',
-  },
-  toggler: {
-    border: 'none',
-    background: 'none',
-    color: '#fff', // White color for the icon
-  },
-  brand: {
-    display: 'flex',
-    alignItems: 'center',
-    marginTop: '0.5rem',
-    marginBottom: '0.5rem',
-  },
-  navList: {
-    display: 'flex',
-    listStyle: 'none',
-    padding: 0,
-    margin: 0,
-  },
-  navItem: {
-    marginRight: '1rem',
-  },
-  navLink: {
-    color: '#fff', // White color for the text
-    textDecoration: 'none',
-  },
-  rightElements: {
-    display: 'flex',
-    alignItems: 'center',
-  },
-  icon: {
-    color: '#fff', // White color for the icons
-    textDecoration: 'none',
-    marginRight: '1rem',
-  },
-  badge: {
-    backgroundColor: 'red',
-    borderRadius: '50%',
-    padding: '0.25rem 0.5rem',
-    color: '#fff',
-    position: 'relative',
-    top: '-10px',
-    left: '-10px',
-  },
-  avatar: {
-    borderRadius: '50%', // Make the image circular
-    height: '40px',
-    width: '40px',
-    objectFit: 'cover', 
-    marginBottom:'1rem'
-  },
-};
-
-export default Navbar;
+export default ResponsiveNavbarSidebar;
