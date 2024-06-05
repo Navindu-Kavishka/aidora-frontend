@@ -11,6 +11,7 @@ const FundRegister = () => {
         email: '',
         companyName: '',
         address: '',
+        countryCode: '+94', // Default to Sri Lanka country code
         number: '',
         password: '',
         confirmPassword: '',
@@ -20,15 +21,21 @@ const FundRegister = () => {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+    };
 
-        // Validation for firstname and lastname to accept only letters
-        if ((name === 'firstname' || name === 'lastname') && !/^[A-Za-z]*$/.test(value)) {
-            setErrors({ ...errors, [name]: 'Only letters are allowed' });
-        } else {
-            setErrors({ ...errors, [name]: '' });
+    const handleKeyPress = (e) => {
+        const { name } = e.target;
+
+        // Allow only letters for firstname, lastname, and companyName
+        if ((name === 'firstname' || name === 'lastname' || name === 'companyName') && !/^[A-Za-z]*$/.test(e.key)) {
+            e.preventDefault();
         }
 
-        setFormData({ ...formData, [name]: value });
+        // Allow only numbers for phone number
+        if (name === 'number' && !/^\d*$/.test(e.key)) {
+            e.preventDefault();
+        }
     };
 
     const validateForm = () => {
@@ -49,12 +56,16 @@ const FundRegister = () => {
         } else if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(formData.email)) {
             newErrors.email = 'Invalid email format';
         }
-        if (!formData.companyName) newErrors.companyName = 'Company name is required';
+        if (!formData.companyName) {
+            newErrors.companyName = 'Company name is required';
+        } else if (!/^[A-Za-z]+$/.test(formData.companyName)) {
+            newErrors.companyName = 'Only letters are allowed';
+        }
         if (!formData.address) newErrors.address = 'Address is required';
         if (!formData.number) {
             newErrors.number = 'Phone number is required';
-        } else if (!/^\d{10}$/.test(formData.number)) {
-            newErrors.number = 'Phone number must be 10 digits';
+        } else if (!/^\d{9}$/.test(formData.number)) { // Ensure exactly 9 digits
+            newErrors.number = 'Phone number must be exactly 9 digits';
         }
         if (!formData.password) {
             newErrors.password = 'Password is required';
@@ -72,9 +83,7 @@ const FundRegister = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (validateForm()) {
-            
-            console.log('Form Data:', formData);
-            
+            // Navigate to the login page if form is valid
             navigate('/login');
         }
     };
@@ -89,10 +98,6 @@ const FundRegister = () => {
                     <form className="w-100" onSubmit={handleSubmit}>
                         <h2 className="mb-4 text-center">Fundraiser Registration</h2>
                         <div className="mb-3 text-left" style={{ fontWeight: 'bold' }}>
-                            
-                            {errors.userno && <div style={{ color: 'red' }}>{errors.userno}</div>}
-                        </div>
-                        <div className="mb-3 text-left" style={{ fontWeight: 'bold' }}>
                             <label htmlFor="firstname" className="form-label">First Name:</label>
                             <input
                                 type="text"
@@ -103,6 +108,7 @@ const FundRegister = () => {
                                 className="form-control"
                                 value={formData.firstname}
                                 onChange={handleChange}
+                                onKeyPress={handleKeyPress}
                             />
                             {errors.firstname && <div style={{ color: 'red' }}>{errors.firstname}</div>}
                         </div>
@@ -117,6 +123,7 @@ const FundRegister = () => {
                                 className="form-control"
                                 value={formData.lastname}
                                 onChange={handleChange}
+                                onKeyPress={handleKeyPress}
                             />
                             {errors.lastname && <div style={{ color: 'red' }}>{errors.lastname}</div>}
                         </div>
@@ -145,6 +152,7 @@ const FundRegister = () => {
                                 className="form-control"
                                 value={formData.companyName}
                                 onChange={handleChange}
+                                onKeyPress={handleKeyPress}
                             />
                             {errors.companyName && <div style={{ color: 'red' }}>{errors.companyName}</div>}
                         </div>
@@ -163,17 +171,35 @@ const FundRegister = () => {
                             {errors.address && <div style={{ color: 'red' }}>{errors.address}</div>}
                         </div>
                         <div className="mb-3 text-left" style={{ fontWeight: 'bold' }}>
-                            <label htmlFor="number" className="form-label">Phone Number:</label>
-                            <input
-                                type="text"
-                                id="number"
-                                name="number"
-                                placeholder="Enter your phone number"
-                                required
-                                className="form-control"
-                                value={formData.number}
-                                onChange={handleChange}
-                            />
+                            <label htmlFor="phone" className="form-label">Phone Number:</label>
+                            <div className="d-flex">
+                                <select
+                                    id="countryCode"
+                                    name="countryCode"
+                                    required
+                                    className="form-control"
+                                    value={formData.countryCode}
+                                    onChange={handleChange}
+                                    style={{ maxWidth: '100px', marginRight: '10px' }}
+                                >
+                                    <option value="+94">+94</option>
+                                    <option value="+1">+1</option>
+                                    <option value="+44">+44</option>
+                                
+                                </select>
+                                <input
+                                    type="text"
+                                    id="number"
+                                    name="number"
+                                    placeholder="Enter your phone number"
+                                    required
+                                    className="form-control"
+                                    value={formData.number}
+                                    onChange={handleChange}
+                                    onKeyPress={handleKeyPress}
+                                    maxLength="9"
+                                />
+                            </div>
                             {errors.number && <div style={{ color: 'red' }}>{errors.number}</div>}
                         </div>
                         <div className="mb-3 text-left" style={{ fontWeight: 'bold' }}>
