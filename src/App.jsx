@@ -1,27 +1,60 @@
+
+
+
+import './components/Admin/SideBar/SideBar.css';
+import { BrowserRouter, Route ,Routes } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+import UserLogin from "./pages/UserLogin/UserLogin";
+import HomePage from "./pages/HomePage/HomePage"
+import RegisterPage from './pages/RegisterPage/RegisterPage';
+import UserProfile from './pages/UserProfile/UserProfile';
+import AboutUs from './pages/AboutUs/AboutUs';
+
+
+import AdminDashboard from "./pages/AdminDashboard/AdminDashboard";
+import AdminDonor from "./pages/AdminDonor/AdminDonor";
+import AdminFundraiser from "./pages/AdminFundRaiser/AdminFundRaiser";
+import AdminProject from "./pages/AdminProject/AdminProject";
+import AdminPayment from "./pages/AdminPayment/AdminPayment";
+import SideBar from "./components/Admin/SideBar/SideBar"
+
 import React from 'react';
 import { BrowserRouter,Route,Routes} from 'react-router-dom'; 
 import OngoingProject from './pages/OngoingProject';
 import CompletedProject from './pages/CompletedProject';
 import CanceledProject from './pages/CanceledProject';
 
-const projects = [
-  {
-    image: 'https://via.placeholder.com/300x200', // Replace with actual image URLs
-    title: 'PURE WATER PROJECT',
-  },
-  {
-    image: 'https://via.placeholder.com/300x200', // Replace with actual image URLs
-    title: 'WATER SUBSIDIZED PROJECT',
-  },
-  {
-    image: 'https://via.placeholder.com/300x200', // Replace with actual image URLs
-    title: 'PURE WATER PROJECT',
-  },
-];
 
 const App = () => {
   return (
+    <>
     <BrowserRouter>
+    <SideBar>
+    <Routes>
+    
+      <Route path='/login' element={<UserLogin/>}/>
+      <Route path='/home' element={<HomePage/>}/>
+      <Route path='/register' element={<RegisterPage/>}/>
+      <Route path='/userprofile' element={<UserProfile/>}/>
+      <Route path='/AboutUs' element={<AboutUs/>}/>
+    
+    
+    
+      <Route path='/' element={<AdminDashboard/>}/>
+      <Route path='/admindashboard' element={<AdminDashboard/>}/>
+      <Route path='/admindonor' element={<AdminDonor/>}/>
+      <Route path='/adminfundraiser' element={<AdminFundraiser/>}/>
+      <Route path='/adminproject' element={<AdminProject/>}/>
+      <Route path='/adminpayment' element={<AdminPayment/>}/>
+
+      
+    </Routes>
+    </SideBar>
+    </BrowserRouter>
+
+
+<BrowserRouter>
     <Routes>
     
       <Route path='/OngoingProject' element={<OngoingProject/>}/>
@@ -31,9 +64,10 @@ const App = () => {
      
     </Routes>
     </BrowserRouter>
-    
+</>
 
   );
 };
+export default App
 
-export default App;
+
