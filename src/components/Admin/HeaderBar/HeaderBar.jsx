@@ -1,39 +1,35 @@
-import React from "react";
-import { Navbar, Nav } from "react-bootstrap";
-// import "./myStyles.css";
 
+import styled from 'styled-components';
+import profilePic from '../../../assets/Img/aidora.png'; 
 
-const style = {
-  backgroundColor: "rgb(230, 52, 52)",
-  height: "100",
-  width:'100%',
-  padding: 13,
-  marginTop: -10,
-  paddingRight: 0,
-  marginLeft: -10,
-  marginRight: -10,
-  textAlign: "center",
-  fontFamily: "Georgia",
-  fontSize: 20,
+const HeaderContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #25934C;
+  color: white;
+`;
 
+const Title = styled.h1`
+  margin: 0;
+  font-size: 24px;
+`;
+
+const ProfilePic = styled.img`
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+`;
+
+const Header = () => {
+  return (
+    <HeaderContainer>
+      <Title>Aidora</Title>
+      <ProfilePic src={profilePic} alt="Admin Profile" />
+    </HeaderContainer>
+  );
 };
 
-class HeaderBar extends React.Component {
-  render() {
-    return (
-      <div className="topnav" style={style}>
-        <Navbar
-          fixed="top"
-          expand="lg"
-          bg="dark"
-          variant="dark"
-          className="topnav"
-        >
-          <Navbar.Brand href="">V-Canteen</Navbar.Brand>
-        </Navbar>
-      </div>
-    );
-  }
-}
-
-export default HeaderBar;
+export default Header;
