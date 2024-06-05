@@ -30,7 +30,7 @@ const App = () => {
   return (
     <>
     <BrowserRouter>
-    <SideBar>
+    
     <Routes>
     
       <Route path='/login' element={<UserLogin/>}/>
@@ -50,7 +50,7 @@ const App = () => {
 
       
     </Routes>
-    </SideBar>
+    
     </BrowserRouter>
 
 
