@@ -23,6 +23,8 @@ import SideBar from "./components/Admin/SideBar/SideBar"
 import OngoingProject from './pages/OngoingProject';
 import CompletedProject from './pages/CompletedProject';
 import CanceledProject from './pages/CanceledProject';
+import ChatBox from './components/ChatBox';
+
 
 
 
@@ -62,6 +64,7 @@ const App = () => {
       <Route path='/OngoingProject' element={<OngoingProject/>}/>
       <Route path='/CompletedProject' element={<CompletedProject/>}/>
       <Route path='/CanceledProject' element={<CanceledProject/>}/>
+      <Route path='/ChatBox' element={<ChatBox/>}/>
      
 
 
