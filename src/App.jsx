@@ -28,7 +28,6 @@ import CanceledProject from './pages/CanceledProject';
 
 import FundLogin from './pages/FundLogin/FundLogin'
 import FundRegister from './pages/FundRegister/FundRegister'
-import SideBar from './layouts/SideBar/SideBar'
 import FundDashboard from './pages/FundDashboard/FundDashboard'
 import CreateProject from './pages/CreateProject/CreateProject'
 import EditProfile from './pages/EditProfile/EditProfile'
@@ -41,7 +40,7 @@ const App = () => {
   return (
     <>
     <BrowserRouter>
-    <SideBar>
+   
     <Routes>
     
       <Route path='/login' element={<UserLogin/>}/>
@@ -67,17 +66,16 @@ const App = () => {
 
 
 
-      <Route path="/login" element={<FundLogin/>}></Route>
-      <Route path="/register" element={<FundRegister/>}></Route>
-      <Route path="/sidebar" element={<SideBar/>}></Route>
-      <Route path="/dashboard" element={<FundDashboard/>}></Route>
-      <Route path="/create" element={<CreateProject/>}></Route>
-      <Route path="/edit" element={<EditProfile/>}></Route>
-      <Route path="/navigation" element={<Navigation/>}></Route>
+      <Route path="/frlogin" element={<FundLogin/>}></Route>
+      <Route path="/frregister" element={<FundRegister/>}></Route>
+      <Route path="/frdashboard" element={<FundDashboard/>}></Route>
+      <Route path="/frcreate" element={<CreateProject/>}></Route>
+      <Route path="/fredit" element={<EditProfile/>}></Route>
+      
 
       
     </Routes>
-    </SideBar>
+    
     </BrowserRouter>
 
 
