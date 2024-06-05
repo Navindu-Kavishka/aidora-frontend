@@ -19,11 +19,22 @@ import AdminProject from "./pages/AdminProject/AdminProject";
 import AdminPayment from "./pages/AdminPayment/AdminPayment";
 import SideBar from "./components/Admin/SideBar/SideBar"
 
-import React from 'react';
-import { BrowserRouter,Route,Routes} from 'react-router-dom'; 
+
 import OngoingProject from './pages/OngoingProject';
 import CompletedProject from './pages/CompletedProject';
 import CanceledProject from './pages/CanceledProject';
+
+
+
+import FundLogin from './pages/FundLogin/FundLogin'
+import FundRegister from './pages/FundRegister/FundRegister'
+import SideBar from './layouts/SideBar/SideBar'
+import FundDashboard from './pages/FundDashboard/FundDashboard'
+import CreateProject from './pages/CreateProject/CreateProject'
+import EditProfile from './pages/EditProfile/EditProfile'
+import Navigation from './layouts/Navigation/Navigation'
+
+
 
 
 const App = () => {
@@ -48,22 +59,28 @@ const App = () => {
       <Route path='/adminproject' element={<AdminProject/>}/>
       <Route path='/adminpayment' element={<AdminPayment/>}/>
 
+
+      <Route path='/OngoingProject' element={<OngoingProject/>}/>
+      <Route path='/CompletedProject' element={<CompletedProject/>}/>
+      <Route path='/CanceledProject' element={<CanceledProject/>}/>
+     
+
+
+
+      <Route path="/login" element={<FundLogin/>}></Route>
+      <Route path="/register" element={<FundRegister/>}></Route>
+      <Route path="/sidebar" element={<SideBar/>}></Route>
+      <Route path="/dashboard" element={<FundDashboard/>}></Route>
+      <Route path="/create" element={<CreateProject/>}></Route>
+      <Route path="/edit" element={<EditProfile/>}></Route>
+      <Route path="/navigation" element={<Navigation/>}></Route>
+
       
     </Routes>
     </SideBar>
     </BrowserRouter>
 
 
-<BrowserRouter>
-    <Routes>
-    
-      <Route path='/OngoingProject' element={<OngoingProject/>}/>
-      <Route path='/CompletedProject' element={<CompletedProject/>}/>
-      <Route path='/CanceledProject' element={<CanceledProject/>}/>
-     
-     
-    </Routes>
-    </BrowserRouter>
 </>
 
   );
