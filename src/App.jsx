@@ -1,9 +1,10 @@
 
 
 import './components/Admin/SideBar/SideBar.css';
-import { BrowserRouter, Route ,Routes } from 'react-router-dom';
+import { BrowserRouter, Route ,Router,Routes } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+// Importing pages
 import UserLogin from "./pages/UserLogin/UserLogin";
 import HomePage from "./pages/HomePage/HomePage"
 import RegisterPage from './pages/RegisterPage/RegisterPage';
@@ -17,6 +18,18 @@ import AdminFundraiser from "./pages/AdminFundRaiser/AdminFundRaiser";
 import AdminProject from "./pages/AdminProject/AdminProject";
 import AdminPayment from "./pages/AdminPayment/AdminPayment";
 import SideBar from "./components/Admin/SideBar/SideBar"
+
+
+
+import Payinvoice from './pages/Payinvoice/payinvoice';
+import Paypal from './pages/Paypal/paypal';
+import DonationRecipt from './pages/DonationRecipt/dRecipt';
+import MakeDonation from './pages/MakeDonation/mDonation';
+import DonationHome from './pages/DonationHome/CharityPage';
+import Homemiddle from './pages/Homemiddle/ProgressBar';
+
+
+
 
 const App = () => {
   return (
