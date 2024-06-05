@@ -1,5 +1,6 @@
 
 
+
 import './components/Admin/SideBar/SideBar.css';
 import { BrowserRouter, Route ,Routes } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -18,8 +19,16 @@ import AdminProject from "./pages/AdminProject/AdminProject";
 import AdminPayment from "./pages/AdminPayment/AdminPayment";
 import SideBar from "./components/Admin/SideBar/SideBar"
 
+import React from 'react';
+import { BrowserRouter,Route,Routes} from 'react-router-dom'; 
+import OngoingProject from './pages/OngoingProject';
+import CompletedProject from './pages/CompletedProject';
+import CanceledProject from './pages/CanceledProject';
+
+
 const App = () => {
   return (
+    <>
     <BrowserRouter>
     <SideBar>
     <Routes>
@@ -43,7 +52,22 @@ const App = () => {
     </Routes>
     </SideBar>
     </BrowserRouter>
+
+
+<BrowserRouter>
+    <Routes>
+    
+      <Route path='/OngoingProject' element={<OngoingProject/>}/>
+      <Route path='/CompletedProject' element={<CompletedProject/>}/>
+      <Route path='/CanceledProject' element={<CanceledProject/>}/>
+     
+     
+    </Routes>
+    </BrowserRouter>
+</>
+
   );
 };
 export default App
+
 
