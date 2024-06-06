@@ -4,25 +4,26 @@ import Form from '../../components/Form/Form';
 
 function CreateProject() {
   return (
-    <div style={{ margin: 0, padding: 0, height: '100%', fontFamily: 'Arial, sans-serif' }}>
-      {/* Navbar */}
-      <nav style={{ width:'100%', zIndex: 2 }} id="main-navbar" className="navbar navbar-expand-lg navbar-light bg-white fixed-top">
-        {/* Container wrapper */}
+    <div className="create-project-page" style={createProjectPageStyle}>
+      
+      <nav className="create-project-navbar navbar navbar-expand-lg navbar-light bg-white fixed-top" style={navbarStyle}>
+      
         <div className="container-fluid d-flex justify-content-between align-items-center">
-          {/* Logo */}
-          <a href="#">
+          
+          <a href="#" className="d-flex align-items-center">
             <img
-              src="src/assets/FundraiserImg/aidora img.png" // Replace with the path to your logo
+              src="src/assets/FundraiserImg/aidora img.png" 
               alt="Logo"
-              style={{ height: '80px', width: '80px', marginRight: '10px', marginLeft: '30px' }} // Adjust the height and margin as needed
+              className="create-project-logo"
+              style={logoStyle} 
             />
           </a>
-          {/* Centered text */}
-          <h1 className="navbar-brand mb-0 mx-auto text-center" style={{ fontSize: '28px', fontWeight: 'bold' }}>Create Projects</h1>
-<ul className="navbar-nav ms-auto d-flex flex-row" style={{ marginBottom: '0' }}>
-
-            {/* Notification dropdown */}
-            {/* Avatar */}
+          
+          <h1 className="navbar-brand mb-0 create-project-title" style={navbarTitleStyle}>
+            Create Projects
+          </h1>
+          <ul className="navbar-nav ms-auto d-flex flex-row create-project-nav-items" style={{ marginBottom: '0' }}>
+          
             <li className="nav-item dropdown">
               <a
                 className="nav-link dropdown-toggle hidden-arrow d-flex align-items-center"
@@ -34,7 +35,7 @@ function CreateProject() {
               >
                 <img
                   src="src/assets/FundraiserImg/b.jpg"
-                  className="rounded-circle"
+                  className="rounded-circle create-project-avatar"
                   height="50px"
                   alt="Avatar"
                   loading="lazy"
@@ -44,15 +45,80 @@ function CreateProject() {
             </li>
           </ul>
         </div>
-        {/* Container wrapper */}
+        
       </nav>
-      {/* Navbar */}
-      <div className="container mt-5 pt-5">
-        <ProgressBar />
-        <Form />
+    
+      
+      
+      <div className="create-project-content" style={contentSectionStyle}>
+        
+        <div style={progressBarContainerStyle}>
+          <ProgressBar />
+        </div>
+
+        <div id="create-project-form-container" style={formContainerStyle}>
+          <Form />
+        </div>
       </div>
     </div>
   );
 }
+
+const createProjectPageStyle = {
+  margin: 0,
+  padding: 0,
+  height: '100vh',
+  fontFamily: 'Arial, sans-serif',
+  display: 'flex',
+  flexDirection: 'column',
+};
+
+const navbarStyle = {
+  width: '100%',
+  zIndex: 2,
+  position: 'relative', 
+};
+
+const logoStyle = {
+  height: '80px',
+  width: '80px',
+  marginRight: '10px',
+  marginLeft: '30px',
+};
+
+const navbarTitleStyle = {
+  fontSize: '28px',
+  fontWeight: 'bold',
+  textAlign: 'center',
+  position: 'absolute', 
+  left: '50%',
+  transform: 'translateX(-50%)', 
+  margin: 0,
+};
+
+const contentSectionStyle = {
+  width: '100%',
+  textAlign: 'center',
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  justifyContent: 'center',
+  flex: 1, 
+};
+
+const progressBarContainerStyle = {
+  width: '100%',
+  maxWidth: '800px',
+  display: 'flex',
+  justifyContent: 'center',
+  padding: '20px 0',
+};
+
+const formContainerStyle = {
+  width: '100%',
+  maxWidth: '800px',
+  textAlign: 'center',
+  
+};
 
 export default CreateProject;

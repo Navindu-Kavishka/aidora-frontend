@@ -11,7 +11,7 @@ const FundRegister = () => {
         email: '',
         companyName: '',
         address: '',
-        countryCode: '+94', // Default to Sri Lanka country code
+        countryCode: '+94', 
         number: '',
         password: '',
         confirmPassword: '',
@@ -64,7 +64,7 @@ const FundRegister = () => {
         if (!formData.address) newErrors.address = 'Address is required';
         if (!formData.number) {
             newErrors.number = 'Phone number is required';
-        } else if (!/^\d{9}$/.test(formData.number)) { // Ensure exactly 9 digits
+        } else if (!/^\d{9}$/.test(formData.number)) { 
             newErrors.number = 'Phone number must be exactly 9 digits';
         }
         if (!formData.password) {
@@ -83,7 +83,7 @@ const FundRegister = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         if (validateForm()) {
-            // Navigate to the login page if form is valid
+           
             navigate('/login');
         }
     };

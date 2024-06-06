@@ -6,24 +6,22 @@ const FundDashboard = () => {
     const navigate = useNavigate();
 
     const handleButtonClick = () => {
-      navigate('/create'); // Navigate to the next page
+      navigate('/frcreate'); 
     };
     return (
         <div style={{ height: '100%' }}>
-            {/* Sidebar */}
+            
             <SideBar />
-            {/* Sidebar */}
-
-            {/* Additional Section */}
+           
+            
             <div style={{ height: '100%', marginLeft: '240px', paddingTop: 0, marginTop: 0 }}>
-                {/* Navbar */}
+               
                 <nav style={{ marginLeft: '240px' }} id="main-navbar" className="navbar navbar-expand-lg navbar-light bg-white fixed-top">
-                    {/* Container wrapper */}
+                    
                     <div className="container-fluid">
-                        {/* Right links */}
+                       
                         <ul className="navbar-nav ms-auto d-flex flex-row">
-                            {/* Notification dropdown */}
-                            {/* Avatar */}
+                            
                             <li className="nav-item dropdown">
                                 <a
                                     className="nav-link dropdown-toggle hidden-arrow d-flex align-items-center"
@@ -46,23 +44,25 @@ const FundDashboard = () => {
                             </li>
                         </ul>
                     </div>
-                    {/* Container wrapper */}
+                  
                 </nav>
-                {/* Navbar */}
-
-                {/* Additional Section Content */}
+               
                 <div style={{ height: '100%', marginLeft: '240px', padding: 0, margin: 0 }} className="container mt-5">
-                    <div className="row" >
-                        <div className="col" style={{marginTop:'50px',marginLeft:'30px'}}>
-                            <h3>My Projects</h3>
-                        </div>
-                    </div>
-                    <div className="row mt-3" >
-                        <div className="col" style={{marginLeft:'30px'}}>
-                            <button className="btn btn-success" style={{backgroundColor:'#037149'}}>Ongoing Projects</button>
-                            <button className="btn btn-success mx-2" style={{backgroundColor:'#037149'}}>Completed Projects</button>
-                            <button className="btn btn-success" style={{backgroundColor:'#037149'}}>Cancaled Projects</button>
-                        </div>
+                <div className="container">
+    <div className="row">
+        <div className="col" id="header" style={{ marginTop: '40px', marginLeft: '30px' }}>
+            <h3 style={{ fontSize: '24px', fontFamily: 'Arial, sans-serif', fontWeight: 'bold' }}>My Projects</h3>
+        </div>
+    </div>
+    <div className="row mt-3" id="buttonSection" style={{ marginLeft: '30px', marginTop: '20px' }}>
+        <div className="col" style={{marginTop:'60px',marginLeft:'0px'}}>
+            <button className="btn btn-success" style={{ backgroundColor: '#037149', marginRight: '10px', whiteSpace: 'nowrap'}}>Ongoing Projects</button>
+            <button className="btn btn-success mx-2" style={{ backgroundColor: '#037149', marginRight: '10px', whiteSpace: 'nowrap' }}>Completed Projects</button>
+            <button className="btn btn-success" style={{ backgroundColor: '#037149', whiteSpace: 'nowrap' }}>Cancelled Projects</button>
+        </div>
+    </div>
+</div>
+
                     </div>
                     <div className="row mt-3">
                     <div className="col d-flex align-items-center justify-content-center" style={{ marginLeft: '30px',marginTop:'20px'}}>
@@ -116,10 +116,10 @@ Site Location : 15A, ABC Street, SomeCity</p>
 
                     </div>
                 </div>
-                {/* Additional Section Content */}
-            </div>
-            {/* Additional Section */}
-        </div>
+                
+        
+           </div>
+      
     );
 };
 
