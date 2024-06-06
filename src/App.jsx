@@ -1,9 +1,8 @@
 
-
-
 import './components/Admin/SideBar/SideBar.css';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-//import 'bootstrap/dist/css/bootstrap.min.css';
+import { BrowserRouter, Route ,Routes } from 'react-router-dom';
+
+
 
 import UserLogin from "./pages/UserLogin/UserLogin";
 import HomePage from "./pages/HomePage/HomePage"
@@ -27,12 +26,15 @@ import ChatBox from './components/ChatBox';
 
 
 
+
 import FundLogin from './pages/FundLogin/FundLogin'
 import FundRegister from './pages/FundRegister/FundRegister'
 import FundDashboard from './pages/FundDashboard/FundDashboard'
 import CreateProject from './pages/CreateProject/CreateProject'
 import EditProfile from './pages/EditProfile/EditProfile'
+
 import AdminLogin from './pages/AdminLogin/AdminLogin';
+
 
 
 
@@ -41,6 +43,7 @@ import AdminLogin from './pages/AdminLogin/AdminLogin';
 const App = () => {
   return (
     <>
+
     
     
     <BrowserRouter>
