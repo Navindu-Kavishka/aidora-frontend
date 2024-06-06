@@ -18,11 +18,10 @@ function RegisterPage() {
   const [nicError, setNicError] = useState('');
   const [phoneNumberError, setPhoneNumberError] = useState('');
   const [addressError, setAddressError] = useState('');
-
+  
   const handleEmailChange = (e) => {
     const emailValue = e.target.value;
     setEmail(emailValue);
-    // Email validation
     const isValidEmail = /\S+@\S+\.\S+/.test(emailValue);
     if (!isValidEmail) {
       setEmailError('Please enter a valid email address');
@@ -34,7 +33,6 @@ function RegisterPage() {
   const handlePasswordChange = (e) => {
     const passwordValue = e.target.value;
     setPassword(passwordValue);
-    // Password validation
     if (passwordValue.length < 6) {
       setPasswordError('Password must be at least 6 characters long');
     } else {
@@ -45,7 +43,6 @@ function RegisterPage() {
   const handleRepeatPasswordChange = (e) => {
     const repeatPasswordValue = e.target.value;
     setRepeatPassword(repeatPasswordValue);
-    // Repeat password validation
     if (repeatPasswordValue !== password) {
       setRepeatPasswordError('Passwords do not match');
     } else {
@@ -55,32 +52,31 @@ function RegisterPage() {
 
   const handleFirstNameChange = (e) => {
     const firstNameValue = e.target.value;
-    setFirstName(firstNameValue);
-    // First name validation
-    if (!/^[a-zA-Z]*$/.test(firstNameValue)) {
-      setFirstNameError('First name should only contain letters');
-    } else {
+    if (/^[a-zA-Z]*$/.test(firstNameValue)) {
+      setFirstName(firstNameValue);
       setFirstNameError('');
+    } else {
+      setFirstNameError('First name should only contain letters');
     }
   };
-
+  
   const handleLastNameChange = (e) => {
     const lastNameValue = e.target.value;
-    setLastName(lastNameValue);
-    // Last name validation
-    if (!/^[a-zA-Z]*$/.test(lastNameValue)) {
-      setLastNameError('Last name should only contain letters');
-    } else {
+    if (/^[a-zA-Z]*$/.test(lastNameValue)) {
+      setLastName(lastNameValue);
       setLastNameError('');
+    } else {
+      setLastNameError('Last name should only contain letters');
     }
   };
-
+  
   const handleNicChange = (e) => {
     const nicValue = e.target.value;
-    setNic(nicValue);
-    // NIC validation
+    const sanitizedValue = nicValue.replace(/[^0-9vV]/gi, '');
+    setNic(sanitizedValue);
+  
     const nicRegex = /^(\d{9}[vV]|\d{12})$/;
-    if (!nicRegex.test(nicValue)) {
+    if (!nicRegex.test(sanitizedValue)) {
       setNicError('Please enter a valid NIC number (e.g., 123456789v or 123456789012)');
     } else {
       setNicError('');
@@ -88,23 +84,23 @@ function RegisterPage() {
   };
 
   const handlePhoneNumberChange = (e) => {
-    const phoneNumberValue = e.target.value;
-    // Check if the entered value starts with '+94'
+    const phoneNumberValue = e.target.value.replace(/\D/g, '');
     if (phoneNumberValue.startsWith('+94')) {
-      // If yes, remove the country code
       const restNumber = phoneNumberValue.replace('+94', '');
-      // If the length is more than 9, truncate it to 9 digits
       if (restNumber.length > 9) {
         setPhoneNumberRest(restNumber.slice(0, 9));
       } else {
         setPhoneNumberRest(restNumber);
       }
     } else {
-      setPhoneNumberRest(phoneNumberValue);
+      if (phoneNumberValue.length > 9) {
+        setPhoneNumberRest(phoneNumberValue.slice(0, 9));
+      } else {
+        setPhoneNumberRest(phoneNumberValue);
+      }
     }
-    // Phone number validation
     if (!/^\d{9}$/.test(phoneNumberValue)) {
-      setPhoneNumberError('Please enter a valid phone number with 9 digits');
+      setPhoneNumberError('Please enter a valid phone number with exactly 9 digits');
     } else {
       setPhoneNumberError('');
     }
@@ -113,14 +109,44 @@ function RegisterPage() {
   const handleAddressChange = (e) => {
     const addressValue = e.target.value;
     setAddress(addressValue);
-    // Address validation (if needed)
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Check if there are no errors before submitting
-    if (!emailError && !passwordError && !repeatPasswordError && !firstNameError && !lastNameError && !nicError && !phoneNumberError && !addressError) {
-      // Your registration submission logic here
+    
+    if (
+      !firstName ||
+      !lastName ||
+      !nic ||
+      !email ||
+      !password ||
+      !repeatPassword ||
+      !phoneNumberCountryCode ||
+      !phoneNumberRest ||
+      !address
+    ) {
+      setFirstNameError('First name is required');
+      setLastNameError('Last name is required');
+      setNicError('NIC is required');
+      setEmailError('Email is required');
+      setPasswordError('Password is required');
+      setRepeatPasswordError('Repeat password is required');
+      setPhoneNumberError('Phone number is required');
+      setAddressError('Address is required');
+      console.log('Please fill all fields');
+      return;
+    }
+  
+    if (
+      !emailError &&
+      !passwordError &&
+      !repeatPasswordError &&
+      !firstNameError &&
+      !lastNameError &&
+      !nicError &&
+      !phoneNumberError &&
+      !addressError
+    ) {
       console.log('Form submitted');
     } else {
       console.log('Form has errors');
@@ -142,49 +168,110 @@ function RegisterPage() {
               <form onSubmit={handleSubmit} className="row g-3">
                 <div className='mb-4'>
                   <label htmlFor='form1' className='form-label'>First Name</label>
-                  <input className={`form-control form-control-lg ${firstNameError ? 'is-invalid' : ''}`} id='form1' type='text' value={firstName} onChange={handleFirstNameChange}/>
+                  <input
+                    className={`form-control form-control-lg ${firstNameError ? 'is-invalid' : ''}`}
+                    id='form1'
+                    type='text'
+                    value={firstName}
+                    onChange={handleFirstNameChange}
+                    placeholder='Enter your first name'
+                  />
                   {firstNameError && <div className="invalid-feedback">{firstNameError}</div>}
                 </div>
                 <div className='mb-4'>
                   <label htmlFor='form2' className='form-label'>Last Name</label>
-                  <input className={`form-control form-control-lg ${lastNameError ? 'is-invalid' : ''}`} id='form2' type='text' value={lastName} onChange={handleLastNameChange}/>
+                  <input
+                    className={`form-control form-control-lg ${lastNameError ? 'is-invalid' : ''}`}
+                    id='form2'
+                    type='text'
+                    value={lastName}
+                    onChange={handleLastNameChange}
+                    placeholder='Enter your last name'
+                  />
                   {lastNameError && <div className="invalid-feedback">{lastNameError}</div>}
                 </div>
                 <div className='mb-4'>
                   <label htmlFor='form3' className='form-label'>NIC</label>
-                  <input className={`form-control form-control-lg ${nicError ? 'is-invalid' : ''}`} id='form3' type='text' value={nic} onChange={handleNicChange}/>
+                  <input
+                    className={`                form-control form-control-lg ${nicError ? 'is-invalid' : ''}`}
+                    id='form3'
+                    type='text'
+                    value={nic}
+                    onChange={handleNicChange}
+                    placeholder='Enter your NIC number'
+                  />
                   {nicError && <div className="invalid-feedback">{nicError}</div>}
                 </div>
                 <div className='mb-4'>
-                  <label htmlFor='form4' className='form-label'>Your Email</label>
-                  <input className={`form-control form-control-lg ${emailError ? 'is-invalid' : ''}`} id='form4' type='email' value={email} onChange={handleEmailChange}/>
+                  <label htmlFor='form4' className='form-label'>Email</label>
+                  <input
+                    className={`form-control form-control-lg ${emailError ? 'is-invalid' : ''}`}
+                    id='form4'
+                    type='email'
+                    value={email}
+                    onChange={handleEmailChange}
+                    placeholder='Enter your email address'
+                  />
                   {emailError && <div className="invalid-feedback">{emailError}</div>}
                 </div>
                 <div className='mb-4'>
                   <label htmlFor='form5' className='form-label'>Password</label>
-                  <input className={`form-control form-control-lg ${passwordError ? 'is-invalid' : ''}`} id='form5' type='password' value={password} onChange={handlePasswordChange}/>
+                  <input
+                    className={`form-control form-control-lg ${passwordError ? 'is-invalid' : ''}`}
+                    id='form5'
+                    type='password'
+                    value={password}
+                    onChange={handlePasswordChange}
+                    placeholder='Enter your password'
+                  />
                   {passwordError && <div className="invalid-feedback">{passwordError}</div>}
                 </div>
                 <div className='mb-4'>
                   <label htmlFor='form6' className='form-label'>Repeat your password</label>
-                  <input className={`form-control form-control-lg ${repeatPasswordError ? 'is-invalid' : ''}`} id='form6' type='password' value={repeatPassword} onChange={handleRepeatPasswordChange}/>
+                  <input
+                    className={`form-control form-control-lg ${repeatPasswordError ? 'is-invalid' : ''}`}
+                    id='form6'
+                    type='password'
+                    value={repeatPassword}
+                    onChange={handleRepeatPasswordChange}
+                    placeholder='Repeat your password'
+                  />
                   {repeatPasswordError && <div className="invalid-feedback">{repeatPasswordError}</div>}
                 </div>
-                <div className='mb-4'>
-                  <label htmlFor='form7' className='form-label'>Phone Number</label>
+                <div className="mb-4">
+                  <label htmlFor="form7" className="form-label">Phone Number</label>
                   <div className="input-group">
-                    <span className="input-group-text">Country Code</span>
-                    <select className={`form-select form-select-lg ${phoneNumberError ? 'is-invalid' : ''}`} value={phoneNumberCountryCode} onChange={(e) => setPhoneNumberCountryCode(e.target.value)}>
+                    <select
+                      className={`form-select form-select-lg ${phoneNumberError ? "is-invalid" : ""}`}
+                      value={phoneNumberCountryCode}
+                      onChange={(e) => setPhoneNumberCountryCode(e.target.value)}
+                      style={{ maxWidth: "100px" }}
+                    >
                       <option value="+94">+94</option>
                       {/* Add more options if needed */}
                     </select>
-                    <input className={`form-control form-control-lg ${phoneNumberError ? 'is-invalid' : ''}`} id='form7' type='tel' value={phoneNumberRest} onChange={handlePhoneNumberChange}/>
+                    <input
+                      className={`form-control form-control-lg ${phoneNumberError ? "is-invalid" : ""}`}
+                      id="form7"
+                      type="tel"
+                      value={phoneNumberRest}
+                      onChange={handlePhoneNumberChange}
+                      placeholder="Enter your phone number"
+                      style={{ maxWidth: "calc(100% - 80px)" }}
+                    />
                     {phoneNumberError && <div className="invalid-feedback">{phoneNumberError}</div>}
                   </div>
                 </div>
                 <div className='mb-4'>
                   <label htmlFor='form8' className='form-label'>Address</label>
-                  <input className={`form-control form-control-lg ${addressError ? 'is-invalid' : ''}`} id='form8' type='text' value={address} onChange={handleAddressChange}/>
+                  <input
+                    className={`form-control form-control-lg ${addressError ? 'is-invalid' : ''}`}
+                    id='form8'
+                    type='text'
+                    value={address}
+                    onChange={handleAddressChange}
+                    placeholder='Enter your address'
+                  />
                   {addressError && <div className="invalid-feedback">{addressError}</div>}
                 </div>
                 {/* Agreement checkbox */}
