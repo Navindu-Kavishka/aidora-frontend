@@ -223,6 +223,7 @@ function RegisterPage() {
                     value={password}
                     onChange={handlePasswordChange}
                     placeholder='Enter your password'
+                    
                   />
                   {passwordError && <div className="invalid-feedback">{passwordError}</div>}
                 </div>
