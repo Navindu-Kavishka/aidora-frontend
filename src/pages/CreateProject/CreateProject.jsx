@@ -123,7 +123,7 @@ const progressBarContainerStyle = {
   display: 'flex',
   justifyContent: 'center',
 
-  marginTop:'-10rem'
+  marginTop:'-10rem',
 
   padding: '20px 0',
 
