@@ -73,6 +73,7 @@ const ProgressBar = () => {
   ];
 
   return (
+
     <div className="progress-bar-container" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', width: '100vw' }}>
       <div className="progress-bar-inner" style={{ width: '90%', maxWidth: '500px', textAlign: 'center', padding: '0', marginTop: '30px', marginBottom: '20px' }}>
         <div className="progress-bar-form-wrapper" style={{ padding: '0 0 20px 0', marginTop: '30px', marginBottom: '30px' }}>
@@ -145,7 +146,9 @@ const ProgressBar = () => {
           </form>
         </div>
       </div>
+
     </div>
+
   );
 };
 

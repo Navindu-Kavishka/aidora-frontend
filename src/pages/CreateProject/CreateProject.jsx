@@ -58,6 +58,7 @@ function CreateProject() {
           <ProgressBar />
         </div>
 
+
         <div id="create-project-form-container" style={{ ...formContainerStyle, marginBottom: '0' }}>
           <Form />
           <Link to="/frdashboard" className="btn btn-primary mt-3" style={{ backgroundColor: '#037149' }}>
@@ -65,6 +66,7 @@ function CreateProject() {
           </Link>
         </div>
         
+
       </div>
       
 
@@ -120,8 +122,11 @@ const progressBarContainerStyle = {
   maxWidth: '800px',
   display: 'flex',
   justifyContent: 'center',
+
   marginTop:'-10rem'
-  
+
+  padding: '20px 0',
+
 };
 
 const formContainerStyle = {
@@ -129,6 +134,7 @@ const formContainerStyle = {
   maxWidth: '800px',
   textAlign: 'center',
   marginTop:'-15rem'
+
 };
 
 export default CreateProject;
