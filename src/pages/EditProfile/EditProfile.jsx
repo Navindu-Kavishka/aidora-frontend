@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Link } from 'react-router-dom';
 
 function EditProfile() {
   const [formData, setFormData] = useState({
@@ -261,6 +262,10 @@ function EditProfile() {
                       <button className="btn btn-primary profile-button" type="button" style={{backgroundColor:'#037149'}}>Cancel</button>
                       <button className="btn btn-primary profile-button" type="button" style={{backgroundColor:'#037149'}} onClick={handleSubmit}>Save</button>
                     </div>
+                    <div style={{ bottom: '20px', left: '20px', zIndex: '1000' }}>
+  <Link to="/frdashboard" className="btn btn-primary" style={{ backgroundColor: '#037149', marginLeft: '-25rem' }}>Back</Link>
+</div>
+
                   </div>
                 </div>
               </div>
