@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import $ from 'jquery';
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 const ProgressBar = () => {
   const [currentStep, setCurrentStep] = useState(1);

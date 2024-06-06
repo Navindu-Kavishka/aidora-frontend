@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function EditProfile() {
   const [formData, setFormData] = useState({
@@ -22,11 +23,9 @@ function EditProfile() {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
 
-  
     const lettersOnly = /^[A-Za-z]+$/;
     const phoneNumberRegex = /^[0-9]{0,9}$/;
 
-   
     if (name === 'firstName' || name === 'lastName') {
       if (value === '' || lettersOnly.test(value)) {
         setFormData({ ...formData, [name]: value });
@@ -39,7 +38,6 @@ function EditProfile() {
       setFormData({ ...formData, [name]: value });
     }
 
-  
     if (name === 'newPassword' || name === 'retypePassword') {
       let error = '';
       if (name === 'newPassword' && value.length < 6) {
@@ -53,7 +51,6 @@ function EditProfile() {
 
   const handleSubmit = () => {
     if (!errors.newPassword && !errors.retypePassword) {
-     
       console.log('Form data:', formData);
     }
   };
@@ -69,7 +66,7 @@ function EditProfile() {
             <img
               src="src/assets/FundraiserImg/aidora img.png" 
               alt="Logo"
-              style={{ height: '80px', width: '80px', marginRight: '10px', marginLeft: '30px' }} // Adjust the height and margin as needed
+              style={{ height: '80px', width: '80px', marginRight: '10px', marginLeft: '30px' }}
             />
           </a>
          
@@ -100,8 +97,8 @@ function EditProfile() {
         
       </nav>
      
-      <div style={{ backgroundColor:'#037149', minHeight: '100vh' }}>
-        <div className="container rounded bg-white mt-5 mb-5" style={{minHeight:'100vh'}}>
+      <div style={{ backgroundColor:'#037149', minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+        <div className="container rounded bg-white mt-5 mb-5">
           <div className="row">
             <div className="col-md-3 border-right">
               <div className="d-flex flex-column align-items-center text-center p-3 py-5">
@@ -110,7 +107,7 @@ function EditProfile() {
                 <span className="text-black-50">edogaru@mail.com.my</span>
               </div>
             </div>
-            <div className="col-md-5 border-right" style={{marginTop:'3rem'}}>
+            <div className="col-md-5 border-right" style={{marginTop:'3rem',marginLeft:'70px'}}>
               <div className="p-3 py-5">
                 <h4 className="text-right">Edit Profile</h4>
                 <div className="row mt-2">
@@ -181,90 +178,97 @@ function EditProfile() {
                     <div style={{ display: 'flex', alignItems: 'center' }}>
                       <select
                         name="countryCode"
-                        value={formData.countryCode}
-                        onChange={handleInputChange}
-                        style={{ marginRight: '10px', borderColor: '#BA68C8' }}
-                      >
-                        <option value="+1">+1</option>
-                        <option value="+91">+91</option>
-                        <option value="+94">+94</option>
-                      </select>
-                      <input
-                        type="text"
-                        className="form-control"
-                        placeholder="Phone Number"
-                        name="phoneNumber"
-                        value={formData.phoneNumber}
-                        onChange={handleInputChange}
-                        style={{ boxShadow: 'none', borderColor: '#BA68C8' }}
-                      />
+                        value={formData.country}
+                         onChange={handleInputChange}
+                            style={{ marginRight: '10px', borderColor: '#BA68C8' }}
+                          >
+                            <option value="+1">+1</option>
+                            <option value="+91">+91</option>
+                            <option value="+94">+94</option>
+                          </select>
+                          <input
+                            type="text"
+                            className="form-control"
+                            placeholder="Phone Number"
+                            name="phoneNumber"
+                            value={formData.phoneNumber}
+                            onChange={handleInputChange}
+                            style={{ boxShadow: 'none', borderColor: '#BA68C8' }}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div className="d-flex justify-content-between mt-5 text-center">
+                      <button className="btn btn-primary profile-button" type="button" style={{backgroundColor:'#037149'}}>Cancel</button>
+                      <button className="btn btn-primary profile-button" type="button" style={{backgroundColor:'#037149'}} onClick={handleSubmit}>Save</button>
                     </div>
                   </div>
                 </div>
-                <div className="d-flex justify-content-between mt-5 text-center">
-                  <button className="btn btn-primary profile-button" type="button" style={{backgroundColor:'#037149'}}>Cancel</button>
-                  <button className="btn btn-primary profile-button" type="button" style={{backgroundColor:'#037149'}} onClick={handleSubmit}>Save</button>
-                </div>
               </div>
-            </div>
-            <div className="col-md-4" style={{marginTop:'3rem'}}>
-              <div className="p-3 py-5">
-                <div className="d-flex justify-content-between align-items-center experience" style={{fontSize:'24px'}}>
-                  <span>Security Information</span>
-                </div><br />
-                <div className="col-md-12">
-                  <label className="labels">Current Password</label>
-                  <input
-                    type="Password"
-                    className="form-control"
-                    placeholder="Current Password"
-                    name="currentPassword"
-                    value={formData.currentPassword}
-                    onChange={handleInputChange}
-                    style={{ boxShadow: 'none', borderColor: '#BA68C8' }}
-                  />
-                </div>
-                <div className="col-md-12" style={{marginTop:'1rem'}}>
-                  <label className="labels">New Password</label>
-                  <input
-                    type="password"
-                    className="form-control"
-                    placeholder="New Password"
-                    name="newPassword"
-                    value={formData.newPassword}
-                    onChange={handleInputChange}
-                    style={{ boxShadow: 'none', borderColor: '#BA68C8' }}
-                  />
-                  {errors.newPassword && (
-                    <div className="text-danger mt-1" style={{ fontSize: '0.875rem' }}>
-                      {errors.newPassword}
+              
+              {/* Security Information Section */}
+              <div className="col-md-4" style={{marginTop:'-2rem',marginLeft:'400px'}}>
+                <div className="p-3 py-5">
+                  <div className="d-flex justify-content-between align-items-center experience" style={{fontSize:'24px'}}>
+                    <span>Security Information</span>
+                  </div><br />
+                  <div className="col-md-12">
+                    <label className="labels">Current Password</label>
+                    <input
+                      type="Password"
+                      className="form-control"
+                      placeholder="Current Password"
+                      name="currentPassword"
+                      value={formData.currentPassword}
+                      onChange={handleInputChange}
+                      style={{ boxShadow: 'none', borderColor: '#BA68C8' }}
+                    />
+                  </div>
+                  <div className="col-md-12" style={{marginTop:'1rem'}}>
+                    <label className="labels">New Password</label>
+                    <input
+                      type="password"
+                      className="form-control"
+                      placeholder="New Password"
+                      name="newPassword"
+                      value={formData.newPassword}
+                      onChange={handleInputChange}
+                      style={{ boxShadow: 'none', borderColor: '#BA68C8' }}
+                    />
+                    {errors.newPassword && (
+                      <div className="text-danger mt-1" style={{ fontSize: '0.875rem' }}>
+                        {errors.newPassword}
+                      </div>
+                    )}
+                  </div>
+                  <div className="col-md-12" style={{marginTop:'1rem'}}>
+                    <label className="labels">Retype Password</label>
+                    <input
+                      type="password"
+                      className="form-control"
+                      placeholder="Retype Password"
+                      name="retypePassword"
+                      value={formData.retypePassword}
+                      onChange={handleInputChange}
+                      style={{ boxShadow: 'none', borderColor: '#BA68C8' }}
+                    />
+                    {errors.retypePassword && (
+                      <div className="text-danger mt-1" style={{ fontSize: '0.875rem' }}>
+                        {errors.retypePassword}
+                      </div>
+                    )}
+                     <div className="d-flex justify-content-between mt-5 text-center">
+                      <button className="btn btn-primary profile-button" type="button" style={{backgroundColor:'#037149'}}>Cancel</button>
+                      <button className="btn btn-primary profile-button" type="button" style={{backgroundColor:'#037149'}} onClick={handleSubmit}>Save</button>
                     </div>
-                  )}
-                </div>
-                <div className="col-md-12" style={{marginTop:'1rem'}}>
-                  <label className="labels">Retype Password</label>
-                  <input
-                    type="password"
-                    className="form-control"
-                    placeholder="Retype Password"
-                    name="retypePassword"
-                    value={formData.retypePassword}
-                    onChange={handleInputChange}
-                    style={{ boxShadow: 'none', borderColor: '#BA68C8' }}
-                  />
-                  {errors.retypePassword && (
-                    <div className="text-danger mt-1" style={{ fontSize: '0.875rem' }}>
-                      {errors.retypePassword}
-                    </div>
-                  )}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  );
-}
+      );
+    }
+    
+    export default EditProfile;
 
-export default EditProfile;

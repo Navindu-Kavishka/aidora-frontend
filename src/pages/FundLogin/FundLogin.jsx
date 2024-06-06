@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 const FundLogin = () => {
   const [buttonWidth, setButtonWidth] = useState('320px');

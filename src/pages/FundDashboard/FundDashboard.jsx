@@ -1,6 +1,7 @@
 import React from 'react';
 import SideBar from '../../layouts/SideBar/SideBar';
 import { useNavigate } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 const FundDashboard = () => {
     const navigate = useNavigate();

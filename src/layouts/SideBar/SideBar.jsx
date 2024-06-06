@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 const SideBar = () => {
   const [activeItem, setActiveItem] = useState('Inquiries');

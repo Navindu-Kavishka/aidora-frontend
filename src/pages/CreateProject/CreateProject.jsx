@@ -1,6 +1,7 @@
 import React from 'react';
 import ProgressBar from '../../layouts/ProgressBar/ProgressBar';
 import Form from '../../components/Form/Form';
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 function CreateProject() {
   return (
