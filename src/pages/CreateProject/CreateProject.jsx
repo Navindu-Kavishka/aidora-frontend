@@ -1,6 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import ProgressBar from '../../layouts/ProgressBar/ProgressBar';
 import Form from '../../components/Form/Form';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function CreateProject() {
   return (
@@ -56,11 +58,20 @@ function CreateProject() {
           <ProgressBar />
         </div>
 
-        <div id="create-project-form-container" style={formContainerStyle}>
+
+        <div id="create-project-form-container" style={{ ...formContainerStyle, marginBottom: '0' }}>
           <Form />
+          <Link to="/frdashboard" className="btn btn-primary mt-3" style={{ backgroundColor: '#037149' }}>
+            Go to Dashboard
+          </Link>
         </div>
+        
+
       </div>
+      
+
     </div>
+    
   );
 }
 
@@ -111,14 +122,19 @@ const progressBarContainerStyle = {
   maxWidth: '800px',
   display: 'flex',
   justifyContent: 'center',
+
+  marginTop:'-10rem'
+
   padding: '20px 0',
+
 };
 
 const formContainerStyle = {
   width: '100%',
   maxWidth: '800px',
   textAlign: 'center',
-  
+  marginTop:'-15rem'
+
 };
 
 export default CreateProject;
