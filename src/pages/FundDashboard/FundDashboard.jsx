@@ -32,14 +32,17 @@ const FundDashboard = () => {
                                     data-mdb-toggle="dropdown"
                                     aria-expanded="false"
                                 >
-                                    <img
-                                        src="src/assets/FundraiserImg/b.jpg"
-                                        className="rounded-circle"
-                                        height="40px"
-                                        alt="Avatar"
-                                        loading="lazy"
-                                        width="40px"
-                                    />
+                                 <a href="/fredit">
+    <img
+        src="src/assets/FundraiserImg/b.jpg"
+        className="rounded-circle"
+        height="40px"
+        alt="Avatar"
+        loading="lazy"
+        width="40px"
+    />
+</a>
+
                                 </a>
                               
                             </li>
