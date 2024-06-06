@@ -59,12 +59,19 @@ const FundDashboard = () => {
         </div>
     </div>
     <div className="row mt-3" id="buttonSection" style={{ marginLeft: '30px', marginTop: '20px' }}>
-        <div className="col" style={{marginTop:'60px',marginLeft:'0px'}}>
-            <button className="btn btn-success" style={{ backgroundColor: '#037149', marginRight: '10px', whiteSpace: 'nowrap'}}>Ongoing Projects</button>
-            <button className="btn btn-success mx-2" style={{ backgroundColor: '#037149', marginRight: '10px', whiteSpace: 'nowrap' }}>Completed Projects</button>
-            <button className="btn btn-success" style={{ backgroundColor: '#037149', whiteSpace: 'nowrap' }}>Cancelled Projects</button>
-        </div>
+    <div className="row mt-3" id="buttonSection" style={{ marginLeft: '30px', marginTop: '20px' }}>
+    <div className="col-md-12">
+    <div className="btn-group" role="group">
+    <button className="btn btn-success" style={{ backgroundColor: '#037149', margin: '0 5px', whiteSpace: 'nowrap' }}>Ongoing Projects</button>
+    <button className="btn btn-success mx-2" style={{ backgroundColor: '#037149', margin: '0 5px', whiteSpace: 'nowrap' }}>Completed Projects</button>
+    <button className="btn btn-success" style={{ backgroundColor: '#037149', margin: '0 5px', whiteSpace: 'nowrap' }}>Cancelled Projects</button>
+</div>
+
     </div>
+</div>
+
+</div>
+
 </div>
 
                     </div>
@@ -74,55 +81,42 @@ const FundDashboard = () => {
 </div>
 
                     </div>
-                    <div className="row mt-3" style={{marginRight:'30px'}}>
-    <div className="col" style={{ marginLeft: '30px' }}>
-        <div className="card">
+                    <div className="row mt-3" style={{ marginRight: '30px', marginLeft: '30px' }}>
+    <div className="col-lg-4 col-md-6 mb-4">
         <div className="card h-100">
             <img src="src/assets/FundraiserImg/J.jpg" className="card-img-top" alt="Card 1" />
             <div className="card-body text-center">
-                
-                <p className="card-text">Status : Inpection Pending
-Project No. 123556
-Site Location : 15A, ABC Street, SomeCity</p>
-                <button className="btn btn-success" style={{backgroundColor:'#037149'}}>View Project</button>
+                <p className="card-text">Status: Inspection Pending <br /> Project No. 123556 <br /> Site Location: 15A, ABC Street, SomeCity</p>
+                <button className="btn btn-success" style={{ backgroundColor: '#037149' }}>View Project</button>
             </div>
         </div>
     </div>
-    </div>
-    <div className="col">
-        <div className="card">
+    <div className="col-lg-4 col-md-6 mb-4">
         <div className="card h-100">
             <img src="src/assets/FundraiserImg/J.jpg" className="card-img-top" alt="Card 2" />
             <div className="card-body text-center">
-                
-                <p className="card-text">Status : Inpection Pending
-Project No. 123556
-Site Location : 15A, ABC Street, SomeCity</p>
-                <button className="btn btn-success" style={{backgroundColor:'#037149'}}>View Project</button>
+                <p className="card-text">Status: Inspection Pending <br /> Project No. 123556 <br /> Site Location: 15A, ABC Street, SomeCity</p>
+                <button className="btn btn-success" style={{ backgroundColor: '#037149' }}>View Project</button>
             </div>
         </div>
     </div>
-    </div>
-    <div className="col">
-        <div className="card">
+    <div className="col-lg-4 col-md-6 mb-4">
         <div className="card h-100">
             <img src="src/assets/FundraiserImg/OIP (1).jpg" className="card-img-top" alt="Card 3" />
             <div className="card-body text-center">
-                
-                <p className="card-text">Status : Inpection Pending
-Project No. 123556
-Site Location : 15A, ABC Street, SomeCity</p>
-                <button className="btn btn-success" style={{backgroundColor:'#037149'}}>View Project</button>
+                <p className="card-text">Status: Inspection Pending <br /> Project No. 123556 <br /> Site Location: 15A, ABC Street, SomeCity</p>
+                <button className="btn btn-success" style={{ backgroundColor: '#037149' }}>View Project</button>
             </div>
         </div>
     </div>
 </div>
 
+
                     </div>
                 </div>
                 
         
-           </div>
+           
       
     );
 };
