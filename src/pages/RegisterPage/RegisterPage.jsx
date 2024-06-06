@@ -24,7 +24,7 @@ function RegisterPage() {
     setEmail(emailValue);
     const isValidEmail = /\S+@\S+\.\S+/.test(emailValue);
     if (!isValidEmail) {
-      setEmailError('Please enter a valid email address');
+      setEmailError('Please enter a valid Email address');
     } else {
       setEmailError('');
     }
@@ -223,7 +223,7 @@ function RegisterPage() {
                     value={password}
                     onChange={handlePasswordChange}
                     placeholder='Enter your password'
-                    
+
                   />
                   {passwordError && <div className="invalid-feedback">{passwordError}</div>}
                 </div>
