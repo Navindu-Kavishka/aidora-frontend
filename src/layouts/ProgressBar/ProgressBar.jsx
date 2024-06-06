@@ -4,66 +4,11 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 
 const ProgressBar = () => {
   const [currentStep, setCurrentStep] = useState(1);
-  const steps = 4;
+  const steps = 3;
   const fieldsetsRef = useRef([]);
   const progressBarRef = useRef(null);
 
-  useEffect(() => {
-    setProgressBar(currentStep);
-  }, [currentStep]);
-
-  const setProgressBar = (current) => {
-    const percent = (current / steps) * 100;
-    $(progressBarRef.current).css("width", percent + "%");
-  };
-
-  const nextStep = () => {
-    if (currentStep < steps) {
-      const currentGfgStep = $(fieldsetsRef.current[currentStep - 1]);
-      const nextGfgStep = $(fieldsetsRef.current[currentStep]);
-
-      $(`#progressbar-step-${currentStep}`).addClass("active");
-
-      nextGfgStep.show();
-      currentGfgStep.animate({ opacity: 0 }, {
-        step: function (now) {
-          const opacity = 1 - now;
-          currentGfgStep.css({
-            display: 'none',
-            position: 'relative'
-          });
-          nextGfgStep.css({ opacity: opacity });
-        },
-        duration: 500
-      });
-
-      setCurrentStep(currentStep + 1);
-    }
-  };
-
-  const previousStep = () => {
-    if (currentStep > 1) {
-      const currentGfgStep = $(fieldsetsRef.current[currentStep - 1]);
-      const previousGfgStep = $(fieldsetsRef.current[currentStep - 2]);
-
-      $(`#progressbar-step-${currentStep - 1}`).removeClass("active");
-
-      previousGfgStep.show();
-      currentGfgStep.animate({ opacity: 0 }, {
-        step: function (now) {
-          const opacity = 1 - now;
-          currentGfgStep.css({
-            display: 'none',
-            position: 'relative'
-          });
-          previousGfgStep.css({ opacity: opacity });
-        },
-        duration: 500
-      });
-
-      setCurrentStep(currentStep - 1);
-    }
-  };
+ 
 
   const stepNames = [
     "Create",
