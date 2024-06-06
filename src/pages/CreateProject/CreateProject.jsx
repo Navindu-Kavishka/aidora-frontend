@@ -1,7 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import ProgressBar from '../../layouts/ProgressBar/ProgressBar';
 import Form from '../../components/Form/Form';
-import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function CreateProject() {
   return (
@@ -59,9 +60,16 @@ function CreateProject() {
 
         <div id="create-project-form-container" style={formContainerStyle}>
           <Form />
+          <Link to="/frdashboard" className="btn btn-primary mt-3" style={{backgroundColor: '#037149'}}>
+            Go to Dashboard
+          </Link>
         </div>
+        
       </div>
+      
+
     </div>
+    
   );
 }
 
