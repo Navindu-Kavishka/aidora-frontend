@@ -66,15 +66,15 @@ const ProgressBar = () => {
   // Define custom step names
   const stepNames = [
     "Create",
-    "Submit for Aproval",
+    "Submit for Approval",
     "Waiting",
-    "verified"
+    "Verified"
   ];
 
   return (
     <div style={{ margin: 0, padding: 0, height: '100%', fontFamily: 'Arial, sans-serif', marginTop: '10px' }}>
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
-        <div style={{ width: '90%', maxWidth: '500px', textAlign: 'center', padding: '0', marginTop: '30px', marginBottom: '20px' }}>
+        <div style={{ width: '100%', textAlign: 'center', padding: '0', marginTop: '30px', marginBottom: '20px' }}>
           <div style={{ padding: '0 0 20px 0', marginTop: '30px', marginBottom: '30px' }}>
             <form id="form">
               <ul id="progressbar" style={{ display: 'flex', justifyContent: 'space-between', listStyleType: 'none', color: 'lightgrey', marginBottom: '30px', padding: 0 }}>
@@ -82,12 +82,12 @@ const ProgressBar = () => {
                   <li key={s} style={{ textAlign: 'center', width: '25%', position: 'relative', color: currentStep >= s ? '#2F8D46' : 'lightgrey' }}>
                     <div style={{ width: '50px', height: '50px', lineHeight: '45px', display: 'block', fontSize: '20px', color: '#ffffff', background: currentStep >= s ? '#2F8D46' : 'lightgray', borderRadius: '50%', margin: '0 auto 10px auto' }}>{s}</div>
                     <strong>{stepNames[s - 1]}</strong> {/* Rename the step names here */}
-                    {s < 4 && <div style={{ content: '', width: '100%', height: '2px', background: currentStep >= s ? '#2F8D46' : 'lightgray', position: 'absolute', left: 0, top: '25px', zIndex: -1 }}></div>}
+                    {s < 4 && <div style={{ content: '', width: '100%', height: '2px', background: currentStep >= s ? '#2F8D46' : 'lightgray', position: 'absolute', left: '50%', top: '25px', zIndex: -1, transform: 'translateX(-50%)' }}></div>}
                   </li>
                 ))}
               </ul>
               <div style={{ width: '100%', backgroundColor: '#e0e0e0', borderRadius: '13px', overflow: 'hidden', marginBottom: '20px' }}>
-                <div className="progress-bar" style={{ height: '20px', backgroundColor: '#2F8D46', borderRadius: '13px', width: `${((currentStep / steps) * 100) * 2}%` }}></div>
+                <div className="progress-bar" style={{ height: '20px', backgroundColor: '#2F8D46', borderRadius: '13px', width: `${(currentStep / steps) * 100}%` }}></div>
               </div>
               {[1, 2, 3, 4].map((s, index) => (
                 <fieldset
@@ -146,8 +146,8 @@ const ProgressBar = () => {
           </div>
         </div>
       </div>
-    );
-  };
-  
-  export default ProgressBar;
-  
+    
+  );
+};
+
+export default ProgressBar;
