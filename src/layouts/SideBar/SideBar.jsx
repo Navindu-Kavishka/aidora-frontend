@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css'
+import { Link } from 'react-router-dom';
 
 const SideBar = () => {
   const [activeItem, setActiveItem] = useState('Inquiries');
@@ -94,14 +95,16 @@ const SideBar = () => {
               <span>Troubleshoot</span>
             </a>
             <a
-              href="#"
-              className="list-group-item list-group-item-action py-2 ripple"
-              onClick={() => handleItemClick('Profile')}
-              style={{ marginTop: '220px', ...linkStyles('Profile') }}
-            >
-              <i className="fas fa-chart-bar fa-fw me-3"></i>
-              <span>Profile</span>
-            </a>
+  href="#"
+  className="list-group-item list-group-item-action py-2 ripple"
+  onClick={() => handleItemClick('Profile')}
+  style={{ marginTop: '220px', ...linkStyles('Profile') }}
+>
+  <Link to="/fredit" style={{ color: 'inherit', textDecoration: 'none' }}>
+    <i className="fas fa-chart-bar fa-fw me-3"></i>
+    <span>Profile</span>
+  </Link>
+</a>
             <a
               href="#"
               className="list-group-item list-group-item-action py-2 ripple"
