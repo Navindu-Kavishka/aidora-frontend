@@ -42,7 +42,7 @@ const App = () => {
   return (
     <>
     
-    <>
+    
     <BrowserRouter>
       <Routes>
         <Route path='/login' element={<UserLogin />} />
@@ -53,6 +53,7 @@ const App = () => {
         
         
         <Route path='adminlogin' element={<AdminLogin />} />
+        
         <Route path='/admin/*' element={<SideBar />}>
         
           <Route index element={<AdminDashboard />} />
@@ -86,7 +87,7 @@ const App = () => {
     
     
     </BrowserRouter>
-    </>
+    
 
 
 </>
