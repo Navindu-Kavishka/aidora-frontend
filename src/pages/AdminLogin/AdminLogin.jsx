@@ -9,7 +9,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import logo from '../../assets/Img/aidora.png'
 import { Avatar, ThemeProvider } from "@mui/material";
-import adminBg from "../../assets/Img/adminBg.jpg"
+import adminBg from "../../assets/Img/bg.jpg";
 import { createTheme, responsiveFontSizes } from '@mui/material/styles';
 
 let theme = createTheme();

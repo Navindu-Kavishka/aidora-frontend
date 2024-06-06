@@ -1,5 +1,5 @@
 import { useState } from "react";
-import PropTypes from 'prop-types';  // Import PropTypes
+import PropTypes from 'prop-types';
 import "./SideBar.css";
 import { RiDashboard3Fill } from "react-icons/ri";
 import { FaHandHoldingDollar } from "react-icons/fa6";
@@ -7,8 +7,8 @@ import { BsBank2 } from "react-icons/bs";
 import { AiFillProject } from "react-icons/ai";
 import { MdPayments } from "react-icons/md";
 import { FaBars } from "react-icons/fa";
-import { FiLogOut } from "react-icons/fi";  // Import logout icon
-import { NavLink } from 'react-router-dom';
+import { FiLogOut } from "react-icons/fi";
+import { NavLink, Outlet } from 'react-router-dom';
 
 const SideBar = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -16,27 +16,27 @@ const SideBar = ({ children }) => {
 
   const menuItem = [
     {
-      path: "/",
+      path: "/admin/admindashboard",
       name: "Dashboard",
       icon: <RiDashboard3Fill />,
     },
     {
-      path: "/admindonor",
+      path: "/admin/admindonor",
       name: "Donor",
       icon: <FaHandHoldingDollar />,
     },
     {
-      path: "/adminfundraiser",
+      path: "/admin/adminfundraiser",
       name: "FundRaiser",
       icon: <BsBank2 />,
     },
     {
-      path: "/adminproject",
+      path: "/admin/adminproject",
       name: "Project",
       icon: <AiFillProject />,
     },
     {
-      path: "/adminpayment",
+      path: "/admin/adminpayment",
       name: "Payments",
       icon: <MdPayments />,
     },
@@ -57,8 +57,7 @@ const SideBar = ({ children }) => {
           <NavLink
             to={item.path}
             key={index}
-            className="link"
-            activeClassName="active"
+            className={({ isActive }) => "link" + (isActive ? " active" : "")}
           >
             <div className="icon">{item.icon}</div>
             <div
@@ -71,8 +70,7 @@ const SideBar = ({ children }) => {
         ))}
         <NavLink
           to="/logout"
-          className="link logout"
-          activeClassName="active"
+          className={({ isActive }) => "link logout" + (isActive ? " active" : "")}
         >
           <div className="icon"><FiLogOut /></div>
           <div
@@ -83,13 +81,15 @@ const SideBar = ({ children }) => {
           </div>
         </NavLink>
       </div>
-      <main>{children}</main>
+      <main>
+        <Outlet />
+      </main>
     </div>
   );
 };
 
 SideBar.propTypes = {
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
 };
 
 export default SideBar;
