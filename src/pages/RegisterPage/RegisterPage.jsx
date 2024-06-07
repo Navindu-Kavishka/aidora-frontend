@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function RegisterPage() {
   const [firstName, setFirstName] = useState('');
@@ -18,7 +20,8 @@ function RegisterPage() {
   const [nicError, setNicError] = useState('');
   const [phoneNumberError, setPhoneNumberError] = useState('');
   const [addressError, setAddressError] = useState('');
-  
+  const navigate = useNavigate();
+
   const handleEmailChange = (e) => {
     const emailValue = e.target.value;
     setEmail(emailValue);
@@ -59,7 +62,7 @@ function RegisterPage() {
       setFirstNameError('First name should only contain letters');
     }
   };
-  
+
   const handleLastNameChange = (e) => {
     const lastNameValue = e.target.value;
     if (/^[a-zA-Z]*$/.test(lastNameValue)) {
@@ -69,12 +72,12 @@ function RegisterPage() {
       setLastNameError('Last name should only contain letters');
     }
   };
-  
+
   const handleNicChange = (e) => {
     const nicValue = e.target.value;
     const sanitizedValue = nicValue.replace(/[^0-9vV]/gi, '');
     setNic(sanitizedValue);
-  
+
     const nicRegex = /^(\d{9}[vV]|\d{12})$/;
     if (!nicRegex.test(sanitizedValue)) {
       setNicError('Please enter a valid NIC number (e.g., 123456789v or 123456789012)');
@@ -111,7 +114,7 @@ function RegisterPage() {
     setAddress(addressValue);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     
     if (
@@ -136,7 +139,7 @@ function RegisterPage() {
       console.log('Please fill all fields');
       return;
     }
-  
+
     if (
       !emailError &&
       !passwordError &&
@@ -147,7 +150,30 @@ function RegisterPage() {
       !phoneNumberError &&
       !addressError
     ) {
-      console.log('Form submitted');
+      const userData = {
+        firstName,
+        lastName,
+        nic,
+        email,
+        password,
+        phoneNumberCountryCode,
+        phoneNumberRest,
+        address
+      };
+
+      try {
+        const response = await axios.post('/api/users/register', userData);
+        const { token } = response.data;
+
+        // Store the token in local storage
+        localStorage.setItem('token', token);
+
+        // Redirect to the homepage or dashboard
+        navigate('/dashboard');
+      } catch (error) {
+        console.error('Error during registration:', error);
+        // Handle errors here (show error messages to the user)
+      }
     } else {
       console.log('Form has errors');
     }
@@ -193,7 +219,7 @@ function RegisterPage() {
                 <div className='mb-4'>
                   <label htmlFor='form3' className='form-label'>NIC</label>
                   <input
-                    className={`                form-control form-control-lg ${nicError ? 'is-invalid' : ''}`}
+                    className={`form-control form-control-lg ${nicError ? 'is-invalid' : ''}`}
                     id='form3'
                     type='text'
                     value={nic}
@@ -223,7 +249,6 @@ function RegisterPage() {
                     value={password}
                     onChange={handlePasswordChange}
                     placeholder='Enter your password'
-
                   />
                   {passwordError && <div className="invalid-feedback">{passwordError}</div>}
                 </div>
