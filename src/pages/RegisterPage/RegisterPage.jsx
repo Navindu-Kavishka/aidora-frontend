@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
@@ -162,14 +162,16 @@ function RegisterPage() {
       };
 
       try {
-        const response = await axios.post('/api/users/register', userData);
+        const response = await axios.post('http://localhost:5000/api/users/register', userData);
         const { token } = response.data;
 
         // Store the token in local storage
         localStorage.setItem('token', token);
 
-        // Redirect to the homepage or dashboard
-        navigate('/dashboard');
+        
+
+        // Redirect to the homepage 
+        navigate('/');
       } catch (error) {
         console.error('Error during registration:', error);
         // Handle errors here (show error messages to the user)
