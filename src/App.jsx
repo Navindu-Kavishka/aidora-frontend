@@ -34,6 +34,7 @@ import CreateProject from './pages/CreateProject/CreateProject'
 import EditProfile from './pages/EditProfile/EditProfile'
 
 import AdminLogin from './pages/AdminLogin/AdminLogin';
+import AdminProfile from './pages/AdminProfile/AdminProfile';
 
 
 
@@ -67,6 +68,8 @@ const App = () => {
           <Route path='adminpayment' element={<AdminPayment />} />
           
         </Route>
+
+        <Route path='adminprofile' element={<AdminProfile/>} />
       
     
     
