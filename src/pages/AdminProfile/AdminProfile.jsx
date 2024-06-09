@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import './AdminProfile.css'; // Import the CSS file for styling
+import  { useState } from 'react';
+import './AdminProfile.css'; 
 
 const AdminProfile = () => {
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
-    email: 'admin@example.com', // Example email
+    email: 'admin@example.com',
     password: '',
     currentPassword: '',
     newPassword: '',
@@ -23,7 +23,7 @@ const AdminProfile = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    // Validation for name fields
+    // Validation for name field
     if ((name === 'firstName' || name === 'lastName') && /[^a-zA-Z\s]/.test(value)) {
       return;
     }
