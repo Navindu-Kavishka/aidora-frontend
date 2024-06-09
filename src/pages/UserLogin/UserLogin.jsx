@@ -70,10 +70,6 @@ const UserLogin = () => {
     }
   };
 
-  const cardStyle = {
-    borderTopRightRadius: '0.3rem',
-    borderBottomRightRadius: '0.3rem',
-  };
 
   const backgroundImageStyle = {
     backgroundImage: 'url("/src/assets/donorImg/loginback.avif")',
@@ -83,9 +79,6 @@ const UserLogin = () => {
     width: '100vh',
   };
 
-  const gradientStyle = {
-    background: 'linear-gradient(to right, #083344, #064e3b, #065f46, #0d9488)',
-  };
 
   const containerStyle = {
     paddingTop: '5rem',

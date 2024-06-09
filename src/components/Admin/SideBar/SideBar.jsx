@@ -43,7 +43,7 @@ const SideBar = ({ children }) => {
   ];
 
   return (
-    <div className="container">
+    <div className="containerAd">
       <div style={{ width: isOpen ? "250px" : "50px" }} className="sidebar">
         <div className="topSection">
           <h1 style={{ display: isOpen ? "block" : "none" }} className="logo">
