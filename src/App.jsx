@@ -1,8 +1,8 @@
 
+import './components/Admin/SideBar/SideBar.css';
+import { BrowserRouter, Route ,Routes } from 'react-router-dom';
 
-//import './components/Admin/SideBar/SideBar.css';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-//import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 import UserLogin from "./pages/UserLogin/UserLogin";
 import HomePage from "./pages/HomePage/HomePage"
@@ -45,17 +45,18 @@ const App = () => {
     <>
 
     
-    <>
+    
     <BrowserRouter>
       <Routes>
         <Route path='/login' element={<UserLogin />} />
-        <Route path='/home' element={<HomePage />} />
+        <Route path='/' element={<HomePage />} />
         <Route path='/register' element={<RegisterPage />} />
         <Route path='/userprofile' element={<UserProfile />} />
         <Route path='/aboutus' element={<AboutUs />} />
         
         
         <Route path='adminlogin' element={<AdminLogin />} />
+        
         <Route path='/admin/*' element={<SideBar />}>
         
           <Route index element={<AdminDashboard />} />
@@ -89,7 +90,7 @@ const App = () => {
     
     
     </BrowserRouter>
-    </>
+    
 
 
 </>
