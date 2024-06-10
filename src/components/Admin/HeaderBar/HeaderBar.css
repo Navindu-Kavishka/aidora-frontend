@@ -1,0 +1,29 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background: #f4f4f4;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .header h2 {
+    margin: 0;
+  }
+  
+  .profile {
+    display: flex;
+    align-items: center;
+  }
+  
+  .profilePic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 1rem;
+  }
+  
+  .profileName {
+    font-weight: bold;
+  }
+  
