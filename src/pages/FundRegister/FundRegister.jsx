@@ -92,15 +92,17 @@ const FundRegister = () => {
                     },
                     body: JSON.stringify(formData),
                 });
-
+    
                 const data = await response.json();
-
+                console.log('Response data:', data);
+    
                 if (response.ok) {
                     navigate('/frlogin');
                 } else {
                     setErrors({ submit: data.message });
                 }
             } catch (error) {
+                console.error('Error during fetch:', error);
                 setErrors({ submit: 'Server error' });
             }
         }
