@@ -20,7 +20,6 @@ import AdminPayment from "./pages/AdminPayment/AdminPayment";
 import SideBar from "./components/Admin/SideBar/SideBar"
 
 import React from 'react';
-import { BrowserRouter,Route,Routes} from 'react-router-dom'; 
 import OngoingProject from './pages/OngoingProject';
 import CompletedProject from './pages/CompletedProject';
 import CanceledProject from './pages/CanceledProject';
@@ -68,7 +67,7 @@ const App = () => {
     </Routes>
     </BrowserRouter>
 </>
-
+ 
   );
 };
 export default App

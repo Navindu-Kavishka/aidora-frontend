@@ -1,27 +1,42 @@
 import React, { useState, useEffect, useRef } from "react";
+import axios from "axios";
 
 export default function ChatBox() {
-  const [messages, setMessages] = useState([
-    { sender: "user", text: "Hi", time: "23:58", profile: { name: "User", avatar: "user_avatar.png" } },
-    // Add more messages here...
-  ]);
-
+  const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
   const chatBodyRef = useRef(null);
 
-  const handleSendMessage = () => {
+  useEffect(() => {
+    const fetchMessages = async () => {
+      try {
+        const res = await axios.get("http://localhost:5000/api/messages");
+        setMessages(res.data);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    fetchMessages();
+  }, []);
+
+  const handleSendMessage = async () => {
     if (newMessage.trim() === "") return;
 
     const newMessageObject = {
       sender: "user",
       text: newMessage,
       time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-      profile: { name: "User", avatar: "user_avatar.png" } // Set appropriate user profile here
+      profile: { name: "User", avatar: "user_avatar.png" }
     };
 
-    setMessages([...messages, newMessageObject]);
-    setNewMessage("");
-    scrollToBottom();
+    try {
+      const res = await axios.post("http://localhost:5000/api/messages", newMessageObject);
+      setMessages([...messages, res.data]);
+      setNewMessage("");
+      scrollToBottom();
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   const scrollToBottom = () => {
