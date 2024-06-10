@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 export default function App() {
   const [openNav, setOpenNav] = useState(false);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const [openProjects, setOpenProjects] = useState(false);
+  const [hoveredLink, setHoveredLink] = useState(null);
 
   useEffect(() => {
     const handleResize = () => {
@@ -43,6 +45,7 @@ export default function App() {
     color: 'inherit',
     textDecoration: 'none',
     padding: '5px 10px',
+    position: 'relative',
   };
 
   const buttonStyle = {
@@ -61,6 +64,27 @@ export default function App() {
     borderRadius: '5px',
     marginLeft: '1rem', // Space between the links and the login button
     cursor: 'pointer',
+    textDecoration: 'none', // Ensure no underline on the link
+  };
+
+  const dropdownStyle = {
+    display: openProjects ? 'block' : 'none',
+    position: 'absolute',
+    backgroundColor: '#ffffff',
+    color: '#037149',
+    boxShadow: '0px 8px 16px 0px rgba(0,0,0,0.2)',
+    zIndex: 1,
+    minWidth: '160px',
+    borderRadius: '5px', // Rounded corners
+    overflow: 'hidden', // Hide overflow for rounded corners
+  };
+
+  const dropdownLinkStyle = {
+    color: '#037149',
+    padding: '12px 16px',
+    textDecoration: 'none',
+    display: 'block',
+    whiteSpace: 'nowrap',
   };
 
   return (
@@ -74,12 +98,47 @@ export default function App() {
           ☰
         </button>
         <div style={collapseStyle}>
-          <a href="/" style={linkStyle}>Home</a>
-          <a href="#" style={linkStyle}>Projects</a>
-          <a href="#" style={linkStyle}>Fundraiser</a>
-          <a href="#" style={linkStyle}>About Us</a>
+
+          <a href="/home" style={linkStyle}>Home</a>
+          <div
+            style={{ ...linkStyle, cursor: 'pointer' }}
+            onMouseEnter={() => setOpenProjects(true)}
+            onMouseLeave={() => setOpenProjects(false)}
+          >
+            Projects
+            <div style={dropdownStyle}>
+              <a
+                href="#"
+                style={{ ...dropdownLinkStyle, backgroundColor: hoveredLink === 'Completed' ? '#f1f1f1' : 'transparent' }}
+                onMouseEnter={() => setHoveredLink('Completed')}
+                onMouseLeave={() => setHoveredLink(null)}
+              >
+                Completed Projects
+              </a>
+              <a
+                href="#"
+                style={{ ...dropdownLinkStyle, backgroundColor: hoveredLink === 'Ongoing' ? '#f1f1f1' : 'transparent' }}
+                onMouseEnter={() => setHoveredLink('Ongoing')}
+                onMouseLeave={() => setHoveredLink(null)}
+              >
+                Ongoing Projects
+              </a>
+              <a
+                href="#"
+                style={{ ...dropdownLinkStyle, backgroundColor: hoveredLink === 'Canceled' ? '#f1f1f1' : 'transparent' }}
+                onMouseEnter={() => setHoveredLink('Canceled')}
+                onMouseLeave={() => setHoveredLink(null)}
+              >
+                Canceled Projects
+              </a>
+            </div>
+          </div>
+          
+          <a href="/frlogin" style={linkStyle}>Fundraiser</a>
+          <a href="/AboutUs" style={linkStyle}>About Us</a>
+
           <a href="#" style={linkStyle}>Donate</a>
-          <button style={loginButtonStyle}><b>Log In</b></button>
+          <a href="/login" style={loginButtonStyle}><b>Log In</b></a>
         </div>
       </div>
 
