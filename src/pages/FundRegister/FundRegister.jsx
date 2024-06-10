@@ -81,13 +81,31 @@ const FundRegister = () => {
         return Object.keys(newErrors).length === 0;
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if (validateForm()) {
-           
-            navigate('/login');
+            try {
+                const response = await fetch('/api/fundregister/frregister', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData),
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    navigate('/frlogin');
+                } else {
+                    setErrors({ submit: data.message });
+                }
+            } catch (error) {
+                setErrors({ submit: 'Server error' });
+            }
         }
     };
+    
 
     return (
         <div>
