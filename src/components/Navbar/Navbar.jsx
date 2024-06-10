@@ -98,6 +98,7 @@ export default function App() {
           ☰
         </button>
         <div style={collapseStyle}>
+
           <a href="/home" style={linkStyle}>Home</a>
           <div
             style={{ ...linkStyle, cursor: 'pointer' }}
@@ -135,6 +136,7 @@ export default function App() {
           
           <a href="/frlogin" style={linkStyle}>Fundraiser</a>
           <a href="/AboutUs" style={linkStyle}>About Us</a>
+
           <a href="#" style={linkStyle}>Donate</a>
           <a href="/login" style={loginButtonStyle}><b>Log In</b></a>
         </div>

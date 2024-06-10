@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import { Link, useNavigate } from 'react-router-dom';
 
 const UserLogin = () => {
   const [buttonWidth, setButtonWidth] = useState('320px');
@@ -8,6 +9,7 @@ const UserLogin = () => {
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [formError, setFormError] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
     const updateButtonWidth = () => {
@@ -44,7 +46,7 @@ const UserLogin = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!email || !password) {
       setFormError('All fields are mandatory');
@@ -52,8 +54,19 @@ const UserLogin = () => {
       setFormError('Please fix the errors before submitting');
     } else {
       setFormError('');
-      // Proceed with form submission logic
-      // You can send the form data to the server here
+      try {
+        const response = await axios.post('http://localhost:5000/api/users/login', { email, password });
+        const { token } = response.data;
+
+        // Store the token in local storage
+        localStorage.setItem('token', token);
+
+        // Redirect to the homepage
+        navigate('/');
+      } catch (error) {
+        console.error('Error during login:', error);
+        setFormError('Invalid email or password');
+      }
     }
   };
 
@@ -179,7 +192,6 @@ const UserLogin = () => {
                 <div className="col-lg-6 d-flex align-items-center">
                   <div className="text-white px-3 py-4 p-md-5 mx-md-4" style={backgroundImageStyle}>
                     <h4 className="mb-4" style={{ fontSize: '24px', fontFamily: 'Arial, sans-serif' }}>
-                     
                     </h4>
                   </div>
                 </div>
