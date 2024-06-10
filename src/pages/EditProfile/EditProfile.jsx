@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'; 
 
-function UserProfile() {
+function EditProfile() {
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -62,12 +62,12 @@ function UserProfile() {
         <div className="container-fluid d-flex justify-content-between align-items-center">
           <a href="#">
             <img
-              src="src/assets/donorImg/logo.png"
+              src="src/assets/FundraiserImg/aidora img.png"
               alt="Logo"
               style={{ height: '80px', width: '80px', marginRight: '10px', marginLeft: '30px' }}
             />
           </a>
-          <h1 className="navbar-brand mb-0 mx-auto text-center" style={{ fontSize: '28px', fontWeight: 'bold' }}>User Profile</h1>
+          <h1 className="navbar-brand mb-0 mx-auto text-center" style={{ fontSize: '28px', fontWeight: 'bold' }}>FundRaiser Profile</h1>
           <ul className="navbar-nav ms-auto d-flex flex-row" style={{ marginBottom: '0' }}>
             <li className="nav-item dropdown">
               <a
@@ -78,9 +78,8 @@ function UserProfile() {
                 data-mdb-toggle="dropdown"
                 aria-expanded="false"
               >
-                
                 <img
-                  src="src/assets/donorImg/editprofile.png"
+                  src="src/assets/FundraiserImg/b.jpg"
                   className="rounded-circle"
                   height="50px"
                   alt="Avatar"
@@ -93,7 +92,7 @@ function UserProfile() {
         </div>
       </nav>
 
-      <div style={{ minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+      <div style={{ backgroundColor: '#037149', minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
         <div className="container rounded bg-white mt-5 mb-5">
           <div className="row">
             <div className="col-md-3 border-right">
@@ -103,7 +102,7 @@ function UserProfile() {
                 <span className="text-black-50">edogaru@mail.com.my</span>
               </div>
             </div>
-            <div className="col-md-8">
+            <div className="col-md-5 border-right" style={{ marginTop: '3rem', marginLeft: '70px' }}>
               <div className="p-3 py-5">
                 <h4 className="text-right">Edit Profile</h4>
                 <div className="row mt-2">
@@ -133,6 +132,18 @@ function UserProfile() {
                   </div>
                 </div>
                 <div className="row mt-3">
+                  <div className="col-md-12">
+                    <label className="labels">Company Name</label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder="Company Name"
+                      name="companyName"
+                      value={formData.companyName}
+                      disabled
+                      style={{ boxShadow: 'none', borderColor: '#BA68C8' }}
+                    />
+                  </div>
                   <div className="col-md-12" style={{ marginTop: '1rem' }}>
                     <label className="labels">Email Address</label>
                     <input
@@ -188,7 +199,8 @@ function UserProfile() {
                 </div>
               </div>
             </div>
-            <div className="col-md-4">
+
+            <div className="col-md-4" style={{ marginTop: '-2rem', marginLeft: '400px' }}>
               <div className="p-3 py-5">
                 <div className="d-flex justify-content-between align-items-center experience" style={{ fontSize: '24px' }}>
                   <span>Security Information</span>
@@ -196,7 +208,7 @@ function UserProfile() {
                 <div className="col-md-12">
                   <label className="labels">Current Password</label>
                   <input
-                    type="password"
+                    type="Password"
                     className="form-control"
                     placeholder="Current Password"
                     name="currentPassword"
@@ -238,17 +250,21 @@ function UserProfile() {
                       {errors.retypePassword}
                     </div>
                   )}
+                   <div className="d-flex justify-content-between mt-5 text-center">
+                  <button className="btn btn-primary profile-button" type="button" style={{ backgroundColor: '#037149' }}>Cancel</button>
+                  <button className="btn btn-primary profile-button" type="button" style={{ backgroundColor: '#037149' }} onClick={handleSubmit}>Save</button>
+                </div>
                 </div>
               </div>
             </div>
           </div>
-          <div style={{ position: 'absolute', bottom: '20px', left: '20px' }}>
-            <Link to="/home" className="btn btn-primary" style={{ backgroundColor: '#037149' }}>Back</Link>
-          </div>
+        </div>
+        <div style={{ position: 'fixed', bottom: '20px', left: '20px', zIndex: '1000',marginLeft:'70px' }}>
+          <Link to="/frdashboard" className="btn btn-primary" style={{ backgroundColor: '#037149' }}>Back</Link>
         </div>
       </div>
     </div>
   );
 }
 
-export default UserProfile;
+export default EditProfile;

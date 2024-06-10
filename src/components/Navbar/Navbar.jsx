@@ -74,7 +74,7 @@ export default function App() {
           ☰
         </button>
         <div style={collapseStyle}>
-          <a href="#" style={linkStyle}>Home</a>
+          <a href="/" style={linkStyle}>Home</a>
           <a href="#" style={linkStyle}>Projects</a>
           <a href="#" style={linkStyle}>Fundraiser</a>
           <a href="#" style={linkStyle}>About Us</a>
