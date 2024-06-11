@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css'
+import axios from 'axios';
 
 const FundLogin = () => {
   const [buttonWidth, setButtonWidth] = useState('320px');
@@ -45,17 +46,24 @@ const FundLogin = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!email || !password) {
-      setFormError('All fields are mandatory');
+        setFormError('All fields are mandatory');
     } else if (emailError || passwordError) {
-      setFormError('Please fix the errors before submitting');
+        setFormError('Please fix the errors before submitting');
     } else {
-      setFormError('');
-     
+        try {
+            const response = await axios.post('http://localhost:5000/api/fundlogins', { email, password });
+            console.log(response.data); // Log the response from the backend
+            // Handle success or redirect the user
+        } catch (error) {
+            console.error(error); // Log any errors
+            // Handle error or display an error message to the user
+            setFormError('Login failed. Please check your credentials and try again.');
+        }
     }
-  };
+};
 
   const cardStyle = {
     borderTopRightRadius: '0.3rem',
@@ -133,7 +141,7 @@ const FundLogin = () => {
                           type="email"
                           id="form2Example11"
                           className="form-control"
-                          placeholder="Phone number or email address"
+                          placeholder=" email address"
                           value={email}
                           onChange={handleEmailChange}
                           style={formOutlineStyle}

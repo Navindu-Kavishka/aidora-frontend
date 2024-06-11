@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import axios from 'axios';
 
 const FundRegister = () => {
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
-        userno: '',
         firstname: '',
         lastname: '',
         email: '',
@@ -18,96 +18,25 @@ const FundRegister = () => {
         confirmPassword: '',
     });
 
-    const [errors, setErrors] = useState({});
-
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
     };
 
-    const handleKeyPress = (e) => {
-        const { name } = e.target;
-
-        // Allow only letters for firstname, lastname, and companyName
-        if ((name === 'firstname' || name === 'lastname' || name === 'companyName') && !/^[A-Za-z]*$/.test(e.key)) {
-            e.preventDefault();
-        }
-
-        // Allow only numbers for phone number
-        if (name === 'number' && !/^\d*$/.test(e.key)) {
-            e.preventDefault();
-        }
-    };
-
-    const validateForm = () => {
-        const newErrors = {};
-        if (!formData.userno) newErrors.userno = 'Registration number is required';
-        if (!formData.firstname) {
-            newErrors.firstname = 'First name is required';
-        } else if (!/^[A-Za-z]+$/.test(formData.firstname)) {
-            newErrors.firstname = 'Only letters are allowed';
-        }
-        if (!formData.lastname) {
-            newErrors.lastname = 'Last name is required';
-        } else if (!/^[A-Za-z]+$/.test(formData.lastname)) {
-            newErrors.lastname = 'Only letters are allowed';
-        }
-        if (!formData.email) {
-            newErrors.email = 'Email is required';
-        } else if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(formData.email)) {
-            newErrors.email = 'Invalid email format';
-        }
-        if (!formData.companyName) {
-            newErrors.companyName = 'Company name is required';
-        } else if (!/^[A-Za-z]+$/.test(formData.companyName)) {
-            newErrors.companyName = 'Only letters are allowed';
-        }
-        if (!formData.address) newErrors.address = 'Address is required';
-        if (!formData.number) {
-            newErrors.number = 'Phone number is required';
-        } else if (!/^\d{9}$/.test(formData.number)) { 
-            newErrors.number = 'Phone number must be exactly 9 digits';
-        }
-        if (!formData.password) {
-            newErrors.password = 'Password is required';
-        } else if (formData.password.length < 6) {
-            newErrors.password = 'Password must be at least 6 characters';
-        }
-        if (formData.password !== formData.confirmPassword) {
-            newErrors.confirmPassword = 'Passwords do not match';
-        }
-
-        setErrors(newErrors);
-        return Object.keys(newErrors).length === 0;
-    };
-
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (validateForm()) {
-            try {
-                const response = await fetch('/api/fundregister/frregister', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(formData),
-                });
-    
-                const data = await response.json();
-                console.log('Response data:', data);
-    
-                if (response.ok) {
-                    navigate('/frlogin');
-                } else {
-                    setErrors({ submit: data.message });
-                }
-            } catch (error) {
-                console.error('Error during fetch:', error);
-                setErrors({ submit: 'Server error' });
+        console.log(formData);
+        try {
+            const response = await axios.post('http://localhost:5000/api/fundregisters', formData);
+            if (response.status === 201) {
+                navigate('/frlogin');
+            } else {
+                console.error(response.data.message);
             }
+        } catch (error) {
+            console.error('Server error', error);
         }
     };
-    
 
     return (
         <div>
@@ -125,13 +54,10 @@ const FundRegister = () => {
                                 id="firstname"
                                 name="firstname"
                                 placeholder="Enter your first name"
-                                required
                                 className="form-control"
                                 value={formData.firstname}
                                 onChange={handleChange}
-                                onKeyPress={handleKeyPress}
                             />
-                            {errors.firstname && <div style={{ color: 'red' }}>{errors.firstname}</div>}
                         </div>
                         <div className="mb-3 text-left" style={{ fontWeight: 'bold' }}>
                             <label htmlFor="lastname" className="form-label">Last Name:</label>
@@ -140,13 +66,10 @@ const FundRegister = () => {
                                 id="lastname"
                                 name="lastname"
                                 placeholder="Enter your last name"
-                                required
                                 className="form-control"
                                 value={formData.lastname}
                                 onChange={handleChange}
-                                onKeyPress={handleKeyPress}
                             />
-                            {errors.lastname && <div style={{ color: 'red' }}>{errors.lastname}</div>}
                         </div>
                         <div className="mb-3 text-left" style={{ fontWeight: 'bold' }}>
                             <label htmlFor="email" className="form-label">Email Address:</label>
@@ -155,12 +78,10 @@ const FundRegister = () => {
                                 id="email"
                                 name="email"
                                 placeholder="Enter your email"
-                                required
                                 className="form-control"
                                 value={formData.email}
                                 onChange={handleChange}
                             />
-                            {errors.email && <div style={{ color: 'red' }}>{errors.email}</div>}
                         </div>
                         <div className="mb-3 text-left" style={{ fontWeight: 'bold' }}>
                             <label htmlFor="companyName" className="form-label">Company Name:</label>
@@ -169,13 +90,10 @@ const FundRegister = () => {
                                 id="companyName"
                                 name="companyName"
                                 placeholder="Enter your company name"
-                                required
                                 className="form-control"
                                 value={formData.companyName}
                                 onChange={handleChange}
-                                onKeyPress={handleKeyPress}
                             />
-                            {errors.companyName && <div style={{ color: 'red' }}>{errors.companyName}</div>}
                         </div>
                         <div className="mb-3 text-left" style={{ fontWeight: 'bold' }}>
                             <label htmlFor="address" className="form-label">Address:</label>
@@ -184,12 +102,10 @@ const FundRegister = () => {
                                 id="address"
                                 name="address"
                                 placeholder="Enter your address"
-                                required
                                 className="form-control"
                                 value={formData.address}
                                 onChange={handleChange}
                             />
-                            {errors.address && <div style={{ color: 'red' }}>{errors.address}</div>}
                         </div>
                         <div className="mb-3 text-left" style={{ fontWeight: 'bold' }}>
                             <label htmlFor="phone" className="form-label">Phone Number:</label>
@@ -197,7 +113,6 @@ const FundRegister = () => {
                                 <select
                                     id="countryCode"
                                     name="countryCode"
-                                    required
                                     className="form-control"
                                     value={formData.countryCode}
                                     onChange={handleChange}
@@ -206,22 +121,17 @@ const FundRegister = () => {
                                     <option value="+94">+94</option>
                                     <option value="+1">+1</option>
                                     <option value="+44">+44</option>
-                                
                                 </select>
                                 <input
                                     type="text"
                                     id="number"
                                     name="number"
                                     placeholder="Enter your phone number"
-                                    required
                                     className="form-control"
                                     value={formData.number}
                                     onChange={handleChange}
-                                    onKeyPress={handleKeyPress}
-                                    maxLength="9"
                                 />
                             </div>
-                            {errors.number && <div style={{ color: 'red' }}>{errors.number}</div>}
                         </div>
                         <div className="mb-3 text-left" style={{ fontWeight: 'bold' }}>
                             <label htmlFor="password" className="form-label">Password:</label>
@@ -230,12 +140,10 @@ const FundRegister = () => {
                                 id="password"
                                 name="password"
                                 placeholder="Enter your password"
-                                required
                                 className="form-control"
                                 value={formData.password}
                                 onChange={handleChange}
                             />
-                            {errors.password && <div style={{ color: 'red' }}>{errors.password}</div>}
                         </div>
                         <div className="mb-3 text-left" style={{ fontWeight: 'bold' }}>
                             <label htmlFor="confirmPassword" className="form-label">Confirm Password:</label>
@@ -244,12 +152,10 @@ const FundRegister = () => {
                                 id="confirmPassword"
                                 name="confirmPassword"
                                 placeholder="Confirm your password"
-                                required
                                 className="form-control"
                                 value={formData.confirmPassword}
                                 onChange={handleChange}
                             />
-                            {errors.confirmPassword && <div style={{ color: 'red' }}>{errors.confirmPassword}</div>}
                         </div>
                         <Button type="submit" className="btn btn-light text-success w-100 mt-4" style={{ fontWeight: 'bold' }}>Register</Button>
                     </form>
