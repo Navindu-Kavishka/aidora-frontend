@@ -55,11 +55,11 @@ const FundLogin = () => {
     } else {
         try {
             const response = await axios.post('http://localhost:5000/api/fundlogins', { email, password });
-            console.log(response.data); // Log the response from the backend
-            // Handle success or redirect the user
+            console.log(response.data); 
+           
         } catch (error) {
-            console.error(error); // Log any errors
-            // Handle error or display an error message to the user
+            console.error(error); 
+            
             setFormError('Login failed. Please check your credentials and try again.');
         }
     }
@@ -169,7 +169,7 @@ const FundLogin = () => {
                           type="submit"
                           style={{ fontSize: '16px', alignSelf: 'center', width: buttonWidth, backgroundColor: '#037149' }}
                         >
-                          Log In
+                           <Link to="/frdashboard" style={{ textDecoration: 'none', color: 'white' }}>Login</Link>
                         </button>
                         <div style={forgotPasswordStyle}>
                           <a className="text-muted" href="#!">Forgot password?</a>

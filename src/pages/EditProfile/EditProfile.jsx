@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Link } from 'react-router-dom'; 
+import { Link, useParams } from 'react-router-dom';
+import axios from 'axios';
 
 function EditProfile() {
+  const { id } = useParams();
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
-    companyName: 'Existing Company',
-    email: 'user@example.com',
+    companyName: '',
+    email: '',
     address: '',
     phoneNumber: '',
     countryCode: '+1',
@@ -20,6 +22,16 @@ function EditProfile() {
     newPassword: '',
     retypePassword: ''
   });
+
+  useEffect(() => {
+    axios.get(`http://localhost:5000/api/fundprofiles/${id}`)
+      .then(response => {
+        setFormData(response.data);
+      })
+      .catch(error => {
+        console.error('There was an error fetching the user data!', error);
+      });
+  }, [id]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -52,7 +64,13 @@ function EditProfile() {
 
   const handleSubmit = () => {
     if (!errors.newPassword && !errors.retypePassword) {
-      console.log('Form data:', formData);
+      axios.put(`http://localhost:5000/api/fundprofiles/${id}`, formData)
+        .then(response => {
+          console.log('Profile updated successfully:', response.data);
+        })
+        .catch(error => {
+          console.error('There was an error updating the profile!', error);
+        });
     }
   };
 
@@ -250,7 +268,7 @@ function EditProfile() {
                       {errors.retypePassword}
                     </div>
                   )}
-                   <div className="d-flex justify-content-between mt-5 text-center">
+                    <div className="d-flex justify-content-between mt-5 text-center">
                   <button className="btn btn-primary profile-button" type="button" style={{ backgroundColor: '#037149' }}>Cancel</button>
                   <button className="btn btn-primary profile-button" type="button" style={{ backgroundColor: '#037149' }} onClick={handleSubmit}>Save</button>
                 </div>

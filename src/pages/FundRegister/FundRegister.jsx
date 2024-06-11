@@ -17,24 +17,78 @@ const FundRegister = () => {
         password: '',
         confirmPassword: '',
     });
+    const [errors, setErrors] = useState({});
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
+
+        // Validation for names to contain only letters
+        const nameRegex = /^[A-Za-z]*$/;
+
+        if (['firstname', 'lastname', 'companyName'].includes(name) && !nameRegex.test(value)) {
+            setErrors(prevErrors => ({
+                ...prevErrors,
+                [name]: 'Only letters are allowed'
+            }));
+        } else if (name === 'number' && value.length > 9) {
+            setErrors(prevErrors => ({
+                ...prevErrors,
+                number: 'Phone number must be exactly 9 digits'
+            }));
+        } else {
+            setErrors(prevErrors => ({
+                ...prevErrors,
+                [name]: ''
+            }));
+            setFormData({ ...formData, [name]: value });
+        }
+    };
+
+    const validateForm = () => {
+        const newErrors = {};
+        const nameRegex = /^[A-Za-z]+$/;
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const phoneRegex = /^\d{9}$/;
+
+        if (!nameRegex.test(formData.firstname)) {
+            newErrors.firstname = 'First name can only contain letters';
+        }
+        if (!nameRegex.test(formData.lastname)) {
+            newErrors.lastname = 'Last name can only contain letters';
+        }
+        if (!nameRegex.test(formData.companyName)) {
+            newErrors.companyName = 'Company name can only contain letters';
+        }
+        if (!emailRegex.test(formData.email)) {
+            newErrors.email = 'Invalid email format';
+        }
+        if (!phoneRegex.test(formData.number)) {
+            newErrors.number = 'Phone number must be exactly 9 digits';
+        }
+        if (formData.password.length < 6) {
+            newErrors.password = 'Password must be at least 6 characters long';
+        }
+        if (formData.password !== formData.confirmPassword) {
+            newErrors.confirmPassword = 'Passwords do not match';
+        }
+
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(formData);
-        try {
-            const response = await axios.post('http://localhost:5000/api/fundregisters', formData);
-            if (response.status === 201) {
-                navigate('/frlogin');
-            } else {
-                console.error(response.data.message);
+        if (validateForm()) {
+            try {
+                const response = await axios.post('http://localhost:5000/api/fundregisters', formData);
+                if (response.status === 201) {
+                    navigate('/frlogin');
+                } else {
+                    console.error(response.data.message);
+                }
+            } catch (error) {
+                console.error('Server error', error);
             }
-        } catch (error) {
-            console.error('Server error', error);
         }
     };
 
@@ -58,6 +112,7 @@ const FundRegister = () => {
                                 value={formData.firstname}
                                 onChange={handleChange}
                             />
+                            {errors.firstname && <small className="text-danger">{errors.firstname}</small>}
                         </div>
                         <div className="mb-3 text-left" style={{ fontWeight: 'bold' }}>
                             <label htmlFor="lastname" className="form-label">Last Name:</label>
@@ -70,6 +125,7 @@ const FundRegister = () => {
                                 value={formData.lastname}
                                 onChange={handleChange}
                             />
+                            {errors.lastname && <small className="text-danger">{errors.lastname}</small>}
                         </div>
                         <div className="mb-3 text-left" style={{ fontWeight: 'bold' }}>
                             <label htmlFor="email" className="form-label">Email Address:</label>
@@ -82,6 +138,7 @@ const FundRegister = () => {
                                 value={formData.email}
                                 onChange={handleChange}
                             />
+                            {errors.email && <small className="text-danger">{errors.email}</small>}
                         </div>
                         <div className="mb-3 text-left" style={{ fontWeight: 'bold' }}>
                             <label htmlFor="companyName" className="form-label">Company Name:</label>
@@ -94,6 +151,7 @@ const FundRegister = () => {
                                 value={formData.companyName}
                                 onChange={handleChange}
                             />
+                            {errors.companyName && <small className="text-danger">{errors.companyName}</small>}
                         </div>
                         <div className="mb-3 text-left" style={{ fontWeight: 'bold' }}>
                             <label htmlFor="address" className="form-label">Address:</label>
@@ -130,8 +188,10 @@ const FundRegister = () => {
                                     className="form-control"
                                     value={formData.number}
                                     onChange={handleChange}
+                                    maxLength="9" // Restrict input to 9 characters
                                 />
                             </div>
+                            {errors.number && <small className="text-danger">{errors.number}</small>}
                         </div>
                         <div className="mb-3 text-left" style={{ fontWeight: 'bold' }}>
                             <label htmlFor="password" className="form-label">Password:</label>
@@ -144,6 +204,7 @@ const FundRegister = () => {
                                 value={formData.password}
                                 onChange={handleChange}
                             />
+                            {errors.password && <small className="text-danger">{errors.password}</small>}
                         </div>
                         <div className="mb-3 text-left" style={{ fontWeight: 'bold' }}>
                             <label htmlFor="confirmPassword" className="form-label">Confirm Password:</label>
@@ -156,6 +217,7 @@ const FundRegister = () => {
                                 value={formData.confirmPassword}
                                 onChange={handleChange}
                             />
+                            {errors.confirmPassword && <small className="text-danger">{errors.confirmPassword}</small>}
                         </div>
                         <Button type="submit" className="btn btn-light text-success w-100 mt-4" style={{ fontWeight: 'bold' }}>Register</Button>
                     </form>
@@ -166,3 +228,4 @@ const FundRegister = () => {
 }
 
 export default FundRegister;
+
