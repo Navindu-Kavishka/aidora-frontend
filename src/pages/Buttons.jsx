@@ -5,7 +5,7 @@ const Buttons = ({ selectedCategory, onSelectCategory }) => {
     padding: '10px 20px',
     border: 'none',
     borderRadius: '5px',
-    backgroundColor: '#f0f0f0',
+    backgroundColor: '#CCCCCC ',
     cursor: 'pointer',
     transition: 'background-color 0.3s',
     margin: '5px',
@@ -16,7 +16,7 @@ const Buttons = ({ selectedCategory, onSelectCategory }) => {
 
   const activeButtonStyle = {
     ...buttonStyle,
-    backgroundColor: '#ff6b6b',
+    backgroundColor: '#037149',
     color: 'white'
   };
 

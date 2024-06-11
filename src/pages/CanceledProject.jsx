@@ -52,6 +52,10 @@ const CanceledProject = () => {
   const containerStyle = {
     padding: '20px',
     textAlign: 'center',
+    backgroundColor: 'FFFFFF', // Add background color here
+    borderRadius: '10px',
+    margin: '20px auto',
+    maxWidth: '1200px',
   };
 
   const headingStyle = {

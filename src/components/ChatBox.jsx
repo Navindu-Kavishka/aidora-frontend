@@ -1,15 +1,18 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
+import { FaTrash, FaEdit } from 'react-icons/fa';
 
 export default function ChatBox() {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
+  const [editMessageId, setEditMessageId] = useState(null);
+  const [editMessageText, setEditMessageText] = useState("");
   const chatBodyRef = useRef(null);
 
   useEffect(() => {
     const fetchMessages = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/messages");
+        const res = await axios.get("http://localhost:5000/api/message");
         setMessages(res.data);
       } catch (err) {
         console.error(err);
@@ -30,10 +33,37 @@ export default function ChatBox() {
     };
 
     try {
-      const res = await axios.post("http://localhost:5000/api/messages", newMessageObject);
+      const res = await axios.post("http://localhost:5000/api/message", newMessageObject);
       setMessages([...messages, res.data]);
       setNewMessage("");
       scrollToBottom();
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const handleDeleteMessage = async (id) => {
+    try {
+      await axios.delete(`http://localhost:5000/api/message/${id}`);
+      setMessages(messages.filter(message => message._id !== id));
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const handleEditMessage = (message) => {
+    setEditMessageId(message._id);
+    setEditMessageText(message.text);
+  };
+
+  const handleUpdateMessage = async () => {
+    if (editMessageText.trim() === "") return;
+
+    try {
+      const res = await axios.put(`http://localhost:5000/api/message/${editMessageId}`, { text: editMessageText });
+      setMessages(messages.map(message => message._id === editMessageId ? res.data : message));
+      setEditMessageId(null);
+      setEditMessageText("");
     } catch (err) {
       console.error(err);
     }
@@ -98,9 +128,9 @@ export default function ChatBox() {
         overflowY: 'auto',
         padding: '15px'
       }}>
-        {messages.map((message, index) => (
+        {messages.map((message) => (
           <div
-            key={index}
+            key={message._id}
             style={{
               marginBottom: '15px',
               padding: '10px',
@@ -109,9 +139,10 @@ export default function ChatBox() {
               boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
               backgroundColor: message.sender === "user" ? '#c8e6c9' : '#f08a5d',
               color: '#2e7d32',
-              alignSelf: message.sender === "user" ? 'flex-start' : 'flex-end'
+              alignSelf: message.sender === "user" ? 'flex-start' : 'flex-end',
+              position: 'relative', // Position relative for positioning delete icon
             }}>
-            <div style={{ display: 'flex', alignItems: 'center' }}>
+            <div style={{ display: 'flex', alignItems: 'center', position: 'relative' }}>
               {message.sender === "admin" && (
                 <img
                   src={message.profile.avatar}
@@ -119,12 +150,64 @@ export default function ChatBox() {
                   style={{ width: '30px', height: '30px', borderRadius: '50%', marginRight: '10px' }}
                 />
               )}
-              <div>
-                <p style={{ marginBottom: '5px' }}>
-                  {message.text}
-                </p>
+              <div style={{ position: 'relative', flexGrow: 1 }}>
+                {editMessageId === message._id ? (
+                  <div>
+                    <input
+                      type="text"
+                      value={editMessageText}
+                      onChange={(e) => setEditMessageText(e.target.value)}
+                      style={{
+                        width: 'calc(100% - 30px)',
+                        padding: '5px',
+                        borderRadius: '5px',
+                        marginRight: '10px'
+                      }}
+                    />
+                    <button onClick={handleUpdateMessage} style={{
+                      backgroundColor: '#0d6efd',
+                      color: '#fff',
+                      border: 'none',
+                      padding: '5px 10px',
+                      borderRadius: '5px',
+                      cursor: 'pointer'
+                    }}>Update</button>
+                  </div>
+                ) : (
+                  <p style={{ marginBottom: '5px' }}>
+                    {message.text}
+                  </p>
+                )}
                 <p style={{ fontSize: '0.75em', color: 'black' }}>{message.time}</p>
               </div>
+              {message.sender === 'user' && (
+                <div style={{ position: 'absolute', top: '5px', right: '5px', display: 'flex', gap: '5px' }}>
+                  <button
+                    onClick={() => handleEditMessage(message)}
+                    style={{
+                      background: 'none',
+                      border: 'none',
+                      padding: '0',
+                      cursor: 'pointer',
+                      outline: 'none'
+                    }}
+                  >
+                    <FaEdit />
+                  </button>
+                  <button
+                    onClick={() => handleDeleteMessage(message._id)}
+                    style={{
+                      background: 'none',
+                      border: 'none',
+                      padding: '0',
+                      cursor: 'pointer',
+                      outline: 'none'
+                    }}
+                  >
+                    <FaTrash />
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         ))}

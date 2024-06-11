@@ -19,11 +19,17 @@ const ProjectCard = ({ image, title, onViewProject }) => {
     borderRadius: '8px 8px 0 0',
   };
 
+  const titleStyle = {
+    fontSize: '18px', // Change the font size here
+    margin: '10px 0',
+  };
+
   const buttonStyle = {
     padding: '10px 20px',
     border: 'none',
     borderRadius: '5px',
-    backgroundColor: '#90EE90',
+    backgroundColor: '#037149',
+    color: '#fff', // Change the text color
     cursor: 'pointer',
     marginTop: '10px',
   };
@@ -31,7 +37,7 @@ const ProjectCard = ({ image, title, onViewProject }) => {
   return (
     <div style={cardStyle}>
       <img src={image} alt={title} style={imageStyle} />
-      <h3>{title}</h3>
+      <h3 style={titleStyle}>{title}</h3>
       <button style={buttonStyle} onClick={onViewProject}>View Project</button>
     </div>
   );
