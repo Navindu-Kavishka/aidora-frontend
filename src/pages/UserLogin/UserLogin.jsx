@@ -56,12 +56,13 @@ const UserLogin = () => {
       setFormError('');
       try {
         const token = localStorage.getItem('token');
+        const headers = token ? { Authorization: `Bearer ${token}` } : {};
+        
         const response = await axios.post(
-          'http://localhost:5000/api/users/login', 
+          'http://localhost:5000/api/users/login',
           { email, password },
-          { headers: { Authorization: `Bearer ${token}` } }
+          { headers }
         );
-
         navigate('/userprofile');
       } catch (error) {
         console.error('Error during login:', error);

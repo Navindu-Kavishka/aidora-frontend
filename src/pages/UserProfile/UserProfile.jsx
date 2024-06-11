@@ -26,9 +26,14 @@ function UserProfile() {
   useEffect(() => {
     async function fetchUserData() {
       try {
+        const token = localStorage.getItem('token');
+        if (!token) {
+          throw new Error('Token not found in local storage');
+        }
+  
         const response = await fetch('http://localhost:5000/api/users/profile', {
           headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}`
+            'Authorization': `Bearer ${token}`
           }
         });
         if (!response.ok) {
@@ -92,15 +97,20 @@ function UserProfile() {
   const handleSubmit = async () => {
     if (validateForm()) {
       try {
+        const token = localStorage.getItem('token');
+        if (!token) {
+          throw new Error('Token not found in local storage');
+        }
+  
         const response = await fetch('http://localhost:5000/api/users/update', {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${localStorage.getItem('token')}`
+            'Authorization': `Bearer ${token}`
           },
           body: JSON.stringify(formData),
         });
-
+        
         if (!response.ok) {
           throw new Error('Failed to update user profile');
         }
