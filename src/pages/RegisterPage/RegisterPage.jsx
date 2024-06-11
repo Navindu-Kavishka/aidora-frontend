@@ -166,6 +166,7 @@ function RegisterPage() {
       try {
         const response = await axios.post('http://localhost:5000/api/users/register', userData);
         const { token } = response.data;
+        console.log(userData)
 
         // Store the token in local storage
         localStorage.setItem('token', token);
@@ -342,3 +343,4 @@ function RegisterPage() {
 }
 
 export default RegisterPage;
+
