@@ -99,7 +99,7 @@ export default function App() {
         </button>
         <div style={collapseStyle}>
 
-          <a href="/home" style={linkStyle}>Home</a>
+          <a href="/" style={linkStyle}>Home</a>
           <div
             style={{ ...linkStyle, cursor: 'pointer' }}
             onMouseEnter={() => setOpenProjects(true)}
@@ -108,7 +108,7 @@ export default function App() {
             Projects
             <div style={dropdownStyle}>
               <a
-                href="#"
+                href="CompletedProject"
                 style={{ ...dropdownLinkStyle, backgroundColor: hoveredLink === 'Completed' ? '#f1f1f1' : 'transparent' }}
                 onMouseEnter={() => setHoveredLink('Completed')}
                 onMouseLeave={() => setHoveredLink(null)}
@@ -116,7 +116,7 @@ export default function App() {
                 Completed Projects
               </a>
               <a
-                href="#"
+                href="OngoingProject"
                 style={{ ...dropdownLinkStyle, backgroundColor: hoveredLink === 'Ongoing' ? '#f1f1f1' : 'transparent' }}
                 onMouseEnter={() => setHoveredLink('Ongoing')}
                 onMouseLeave={() => setHoveredLink(null)}
@@ -124,7 +124,7 @@ export default function App() {
                 Ongoing Projects
               </a>
               <a
-                href="#"
+                href="CanceledProject"
                 style={{ ...dropdownLinkStyle, backgroundColor: hoveredLink === 'Canceled' ? '#f1f1f1' : 'transparent' }}
                 onMouseEnter={() => setHoveredLink('Canceled')}
                 onMouseLeave={() => setHoveredLink(null)}

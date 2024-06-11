@@ -116,7 +116,8 @@ function RegisterPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
+    // Check for empty fields and set errors
     if (
       !firstName ||
       !lastName ||
@@ -140,6 +141,7 @@ function RegisterPage() {
       return;
     }
 
+    // Check for errors before making the API call
     if (
       !emailError &&
       !passwordError &&
@@ -158,7 +160,7 @@ function RegisterPage() {
         password,
         phoneNumberCountryCode,
         phoneNumberRest,
-        address
+        address,
       };
 
       try {
@@ -168,9 +170,7 @@ function RegisterPage() {
         // Store the token in local storage
         localStorage.setItem('token', token);
 
-        
-
-        // Redirect to the homepage 
+        // Redirect to the homepage
         navigate('/');
       } catch (error) {
         console.error('Error during registration:', error);
@@ -182,139 +182,159 @@ function RegisterPage() {
   };
 
   return (
-    <div className='d-flex align-items-center justify-content-center bg-image' style={{backgroundImage: 'url(src/assets/donorImg/backgroundreg.jpg)', minHeight: '100vh'}}>
-      <div className='mask gradient-custom-3'></div>
-      <div className='container'>
-        <div className='row justify-content-center'>
-          <div className='col-12 col-md-8 col-lg-6'>
-            <div className='text-center mb-5'>
-              <img src='/src/assets/donorImg/logo.png' alt='Logo' style={{ width: '150px', padding: '10px' }} />
+    <div style={{
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundImage: 'url(src/assets/donorImg/backgroundreg.jpg)',
+      minHeight: '100vh',
+      position: 'relative'
+    }}>
+      <div style={{
+        position: 'absolute',
+        width: '100%',
+        height: '100%',
+        background: 'linear-gradient(to right, rgba(0,0,0,0.7), rgba(0,0,0,0.1))'
+      }}></div>
+      <div style={{ zIndex: 1, width: '100%', maxWidth: '600px', padding: '20px' }}>
+        <div style={{ textAlign: 'center', marginBottom: '20px' }}>
+          <img src='/src/assets/donorImg/logo.png' alt='Logo' style={{ width: '150px', padding: '10px' }} />
+        </div>
+        <div style={{
+          backgroundColor: 'white',
+          padding: '20px',
+          borderRadius: '8px',
+          boxShadow: '0 0 10px rgba(0,0,0,0.1)'
+        }}>
+          <h2 style={{ textAlign: 'center', marginBottom: '20px' }}>Create an account</h2>
+          <form onSubmit={handleSubmit}>
+            <div style={{ marginBottom: '15px' }}>
+              <label htmlFor='form1' style={{ display: 'block', marginBottom: '5px' }}>First Name</label>
+              <input
+                style={{ width: '100%', padding: '10px', border: firstNameError ? '1px solid red' : '1px solid #ccc', borderRadius: '4px' }}
+                id='form1'
+                type='text'
+                value={firstName}
+                onChange={handleFirstNameChange}
+                placeholder='Enter your first name'
+              />
+              {firstNameError && <div style={{ color: 'red', fontSize: '12px' }}>{firstNameError}</div>}
             </div>
-
-            <div className='bg-white p-4 rounded shadow-sm'>
-              <h2 className="text-uppercase text-center mb-5">Create an account</h2> 
-              <form onSubmit={handleSubmit} className="row g-3">
-                <div className='mb-4'>
-                  <label htmlFor='form1' className='form-label'>First Name</label>
-                  <input
-                    className={`form-control form-control-lg ${firstNameError ? 'is-invalid' : ''}`}
-                    id='form1'
-                    type='text'
-                    value={firstName}
-                    onChange={handleFirstNameChange}
-                    placeholder='Enter your first name'
-                  />
-                  {firstNameError && <div className="invalid-feedback">{firstNameError}</div>}
-                </div>
-                <div className='mb-4'>
-                  <label htmlFor='form2' className='form-label'>Last Name</label>
-                  <input
-                    className={`form-control form-control-lg ${lastNameError ? 'is-invalid' : ''}`}
-                    id='form2'
-                    type='text'
-                    value={lastName}
-                    onChange={handleLastNameChange}
-                    placeholder='Enter your last name'
-                  />
-                  {lastNameError && <div className="invalid-feedback">{lastNameError}</div>}
-                </div>
-                <div className='mb-4'>
-                  <label htmlFor='form3' className='form-label'>NIC</label>
-                  <input
-                    className={`form-control form-control-lg ${nicError ? 'is-invalid' : ''}`}
-                    id='form3'
-                    type='text'
-                    value={nic}
-                    onChange={handleNicChange}
-                    placeholder='Enter your NIC number'
-                  />
-                  {nicError && <div className="invalid-feedback">{nicError}</div>}
-                </div>
-                <div className='mb-4'>
-                  <label htmlFor='form4' className='form-label'>Email</label>
-                  <input
-                    className={`form-control form-control-lg ${emailError ? 'is-invalid' : ''}`}
-                    id='form4'
-                    type='email'
-                    value={email}
-                    onChange={handleEmailChange}
-                    placeholder='Enter your email address'
-                  />
-                  {emailError && <div className="invalid-feedback">{emailError}</div>}
-                </div>
-                <div className='mb-4'>
-                  <label htmlFor='form5' className='form-label'>Password</label>
-                  <input
-                    className={`form-control form-control-lg ${passwordError ? 'is-invalid' : ''}`}
-                    id='form5'
-                    type='password'
-                    value={password}
-                    onChange={handlePasswordChange}
-                    placeholder='Enter your password'
-                  />
-                  {passwordError && <div className="invalid-feedback">{passwordError}</div>}
-                </div>
-                <div className='mb-4'>
-                  <label htmlFor='form6' className='form-label'>Repeat your password</label>
-                  <input
-                    className={`form-control form-control-lg ${repeatPasswordError ? 'is-invalid' : ''}`}
-                    id='form6'
-                    type='password'
-                    value={repeatPassword}
-                    onChange={handleRepeatPasswordChange}
-                    placeholder='Repeat your password'
-                  />
-                  {repeatPasswordError && <div className="invalid-feedback">{repeatPasswordError}</div>}
-                </div>
-                <div className="mb-4">
-                  <label htmlFor="form7" className="form-label">Phone Number</label>
-                  <div className="input-group">
-                    <select
-                      className={`form-select form-select-lg ${phoneNumberError ? "is-invalid" : ""}`}
-                      value={phoneNumberCountryCode}
-                      onChange={(e) => setPhoneNumberCountryCode(e.target.value)}
-                      style={{ maxWidth: "100px" }}
-                    >
-                      <option value="+94">+94</option>
-                      {/* Add more options if needed */}
-                    </select>
-                    <input
-                      className={`form-control form-control-lg ${phoneNumberError ? "is-invalid" : ""}`}
-                      id="form7"
-                      type="tel"
-                      value={phoneNumberRest}
-                      onChange={handlePhoneNumberChange}
-                      placeholder="Enter your phone number"
-                      style={{ maxWidth: "calc(100% - 80px)" }}
-                    />
-                    {phoneNumberError && <div className="invalid-feedback">{phoneNumberError}</div>}
-                  </div>
-                </div>
-                <div className='mb-4'>
-                  <label htmlFor='form8' className='form-label'>Address</label>
-                  <input
-                    className={`form-control form-control-lg ${addressError ? 'is-invalid' : ''}`}
-                    id='form8'
-                    type='text'
-                    value={address}
-                    onChange={handleAddressChange}
-                    placeholder='Enter your address'
-                  />
-                  {addressError && <div className="invalid-feedback">{addressError}</div>}
-                </div>
-                {/* Agreement checkbox */}
-                <div className='mb-4'>
-                  <div className='form-check'>
-                    <input className='form-check-input' type='checkbox' id='flexCheckDefault'/>
-                    <label className='form-check-label' htmlFor='flexCheckDefault'>
-                      I agree to all statements in the Terms of Service
-                    </label>
-                  </div>
-                </div>
-                <button style={{ backgroundColor: '#15803d', borderColor: '#15803d' }} className="btn btn-lg btn-primary mb-4 w-100">Register</button>
-              </form>
+            <div style={{ marginBottom: '15px' }}>
+              <label htmlFor='form2' style={{ display: 'block', marginBottom: '5px' }}>Last Name</label>
+              <input
+                style={{ width: '100%', padding: '10px', border: lastNameError ? '1px solid red' : '1px solid #ccc', borderRadius: '4px' }}
+                id='form2'
+                type='text'
+                value={lastName}
+                onChange={handleLastNameChange}
+                placeholder='Enter your last name'
+              />
+              {lastNameError && <div style={{ color: 'red', fontSize: '12px' }}>{lastNameError}</div>}
             </div>
-          </div>
+            <div style={{ marginBottom: '15px' }}>
+              <label htmlFor='form3' style={{ display: 'block', marginBottom: '5px' }}>NIC</label>
+              <input
+                style={{ width: '100%', padding: '10px', border: nicError ? '1px solid red' : '1px solid #ccc', borderRadius: '4px' }}
+                id='form3'
+                type='text'
+                value={nic}
+                onChange={handleNicChange}
+                placeholder='Enter your NIC number'
+              />
+              {nicError && <div style={{ color: 'red', fontSize: '12px' }}>{nicError}</div>}
+            </div>
+            <div style={{ marginBottom: '15px' }}>
+              <label htmlFor='form4' style={{ display: 'block', marginBottom: '5px' }}>Email</label>
+              <input
+                style={{ width: '100%', padding: '10px', border: emailError ? '1px solid red' : '1px solid #ccc', borderRadius: '4px' }}
+                id='form4'
+                type='email'
+                value={email}
+                onChange={handleEmailChange}
+                placeholder='Enter your email address'
+              />
+              {emailError && <div style={{ color: 'red', fontSize: '12px' }}>{emailError}</div>}
+            </div>
+            <div style={{ marginBottom: '15px' }}>
+              <label htmlFor='form5' style={{ display: 'block', marginBottom: '5px' }}>Password</label>
+              <input
+                style={{ width: '100%', padding: '10px', border: passwordError ? '1px solid red' : '1px solid #ccc', borderRadius: '4px' }}
+                id='form5'
+                type='password'
+                value={password}
+                onChange={handlePasswordChange}
+                placeholder='Enter your password'
+              />
+              {passwordError && <div style={{ color: 'red', fontSize: '12px' }}>{passwordError}</div>}
+            </div>
+            <div style={{ marginBottom: '15px' }}>
+              <label htmlFor='form6' style={{ display: 'block', marginBottom: '5px' }}>Repeat your password</label>
+              <input
+                style={{ width: '100%', padding: '10px', border: repeatPasswordError ? '1px solid red' : '1px solid #ccc', borderRadius: '4px' }}
+                id='form6'
+                type='password'
+                value={repeatPassword}
+                onChange={handleRepeatPasswordChange}
+                placeholder='Repeat your password'
+              />
+              {repeatPasswordError && <div style={{ color: 'red', fontSize: '12px' }}>{repeatPasswordError}</div>}
+            </div>
+            <div style={{ marginBottom: '15px' }}>
+              <label htmlFor='form7' style={{ display: 'block', marginBottom: '5px' }}>Phone Number</label>
+              <div style={{ display: 'flex' }}>
+                <select
+                  style={{ padding: '10px', border: phoneNumberError ? '1px solid red' : '1px solid #ccc', borderRadius: '4px', marginRight: '10px', width: '100px' }}
+                  value={phoneNumberCountryCode}
+                  onChange={(e) => setPhoneNumberCountryCode(e.target.value)}
+                >
+                  <option value="+94">+94</option>
+                  {/* Add more options if needed */}
+                </select>
+                <input
+                  style={{ width: '100%', padding: '10px', border: phoneNumberError ? '1px solid red' : '1px solid #ccc', borderRadius: '4px' }}
+                  id='form7'
+                  type='tel'
+                  value={phoneNumberRest}
+                  onChange={handlePhoneNumberChange}
+                  placeholder='Enter your phone number'
+                />
+              </div>
+              {phoneNumberError && <div style={{ color: 'red', fontSize: '12px' }}>{phoneNumberError}</div>}
+            </div>
+            <div style={{ marginBottom: '15px' }}>
+              <label htmlFor='form8' style={{ display: 'block', marginBottom: '5px' }}>Address</label>
+              <input
+                style={{ width: '100%', padding: '10px', border: addressError ? '1px solid red' : '1px solid #ccc', borderRadius: '4px' }}
+                id='form8'
+                type='text'
+                value={address}
+                onChange={handleAddressChange}
+                placeholder='Enter your address'
+              />
+              {addressError && <div style={{ color: 'red', fontSize: '12px' }}>{addressError}</div>}
+            </div>
+            <div style={{ marginBottom: '15px' }}>
+              <div style={{ display: 'flex', alignItems: 'center' }}>
+                <input
+                  style={{ marginRight: '10px' }}
+                  className='form-check-input'
+                  type='checkbox'
+                  id='flexCheckDefault'
+                />
+                <label htmlFor='flexCheckDefault'>I agree to all statements in the Terms of Service</label>
+              </div>
+            </div>
+            <button style={{
+              backgroundColor: '#15803d',
+              borderColor: '#15803d',
+              padding: '10px 20px',
+              color: 'white',
+              borderRadius: '4px',
+              width: '100%',
+              cursor: 'pointer'
+            }} type="submit">Register</button>
+          </form>
         </div>
       </div>
     </div>

@@ -152,7 +152,8 @@ function HomePage() {
             Join us on our journey of compassion and empowerment as we work together to rebuild lives, restore hope, and
             create lasting positive change in Sri Lanka.
           </p>
-          <a href="nextPage.jsx" style={linkStyle}>Completed Projects &rarr;</a>
+          <div></div>
+          <a href="CompletedProject.jsx" style={linkStyle}>Completed Projects &rarr;</a>
           <div style={{ position: 'relative', width: '100%' }}>
             <img src='src/assets/donorImg/HomePic.jpg' alt='Top Centered' style={imgStyle} />
             <div style={centeredTextStyle}>
