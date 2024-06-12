@@ -10,33 +10,34 @@ import { FaBars } from "react-icons/fa";
 import { FiLogOut } from "react-icons/fi";
 import { NavLink, Outlet } from 'react-router-dom';
 
+// eslint-disable-next-line no-unused-vars
 const SideBar = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
 
   const menuItem = [
     {
-      path: "/admin/admindashboard",
+      path: "/admin/dashboard",
       name: "Dashboard",
       icon: <RiDashboard3Fill />,
     },
     {
-      path: "/admin/admindonor",
+      path: "/admin/donor",
       name: "Donor",
       icon: <FaHandHoldingDollar />,
     },
     {
-      path: "/admin/adminfundraiser",
+      path: "/admin/fundraiser",
       name: "FundRaiser",
       icon: <BsBank2 />,
     },
     {
-      path: "/admin/adminproject",
+      path: "/admin/project",
       name: "Project",
       icon: <AiFillProject />,
     },
     {
-      path: "/admin/adminpayment",
+      path: "/admin/payment",
       name: "Payments",
       icon: <MdPayments />,
     },

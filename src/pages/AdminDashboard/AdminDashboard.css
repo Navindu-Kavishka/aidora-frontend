@@ -1,0 +1,83 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+  
+  .dashboard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .header {
+    width: 100%;
+    background-color: #4CAF50;
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px;
+    box-sizing: border-box;
+  }
+  
+  .profile-icon {
+    width: 40px;
+    height: 40px;
+    background-color: white;
+    border-radius: 50%;
+  }
+  
+  .content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 20px;
+  }
+  
+  .card {
+    background-color: #E0F2E9;
+    border-radius: 5px;
+    width: 200px;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card-icon {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 10px;
+  }
+  
+  .card-icon-donors {
+    background: url('/icons/donors.png') no-repeat center center;
+    background-size: contain;
+  }
+  
+  .card-icon-fundraisers {
+    background: url('/icons/fundraisers.png') no-repeat center center;
+    background-size: contain;
+  }
+  
+  .card-icon-projects {
+    background: url('/icons/projects.png') no-repeat center center;
+    background-size: contain;
+  }
+  
+  .card-icon-funds {
+    background: url('/icons/funds.png') no-repeat center center;
+    background-size: contain;
+  }
+  
+  .card-title {
+    font-size: 16px;
+    margin-bottom: 5px;
+  }
+  
+  .card-value {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  

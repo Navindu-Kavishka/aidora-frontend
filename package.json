@@ -24,7 +24,6 @@
     "dotenv": "^16.4.5",
     "install": "^0.13.0",
     "jquery": "^3.7.1",
-    "lru-cache": "^10.2.2",
     "mdb-react-ui-kit": "^8.0.0",
     "mdbreact": "^4.6.1",
     "moment": "^2.30.1",
