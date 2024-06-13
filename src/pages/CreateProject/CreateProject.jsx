@@ -54,10 +54,7 @@ function CreateProject() {
       
       <div className="create-project-content" style={contentSectionStyle}>
         
-        <div style={progressBarContainerStyle}>
-          <ProgressBar />
-        </div>
-
+       
 
         <div id="create-project-form-container" style={{ ...formContainerStyle, marginBottom: '0' }}>
           <Form />

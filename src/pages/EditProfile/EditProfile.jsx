@@ -86,8 +86,8 @@ function EditProfile() {
   };
 
   return (
-    <div style={{ margin: 0, padding: 0, height: '100%', fontFamily: 'Arial, sans-serif' }}>
-      <nav style={{ width: '100%', zIndex: 2 }} id="main-navbar" className="navbar navbar-expand-lg navbar-light bg-white fixed-top">
+    <div style={{ fontFamily: 'Arial, sans-serif' }}>
+      <nav id="main-navbar" className="navbar navbar-expand-lg navbar-light bg-white fixed-top">
         <div className="container-fluid d-flex justify-content-between align-items-center">
           <a href="#">
             <img
@@ -131,7 +131,7 @@ function EditProfile() {
                 <span className="text-black-50">edogaru@mail.com.my</span>
               </div>
             </div>
-            <div className="col-md-5 border-right" style={{ marginTop: '3rem', marginLeft: '70px' }}>
+            <div className="col-md-5 border-right" style={{ marginTop: '3rem' }}>
               <div className="p-3 py-5">
                 <h4 className="text-right">Edit Profile</h4>
                 <div className="row mt-2">
@@ -144,7 +144,6 @@ function EditProfile() {
                       name="firstName"
                       value={formData.firstName}
                       onChange={handleInputChange}
-                      style={{ boxShadow: 'none', borderColor: '#BA68C8' }}
                     />
                   </div>
                   <div className="col-md-6" style={{ marginTop: '1rem' }}>
@@ -156,7 +155,6 @@ function EditProfile() {
                       name="lastName"
                       value={formData.lastName}
                       onChange={handleInputChange}
-                      style={{ boxShadow: 'none', borderColor: '#BA68C8' }}
                     />
                   </div>
                 </div>
@@ -169,7 +167,6 @@ function EditProfile() {
                       placeholder="Company Name"
                       name="companyName"
                       value={formData.companyName}
-                      style={{ boxShadow: 'none', borderColor: '#BA68C8' }}
                     />
                   </div>
                   <div className="col-md-12" style={{ marginTop: '1rem' }}>
@@ -180,7 +177,6 @@ function EditProfile() {
                       placeholder="Email-Address"
                       name="email"
                       value={formData.email}
-                      style={{ boxShadow: 'none', borderColor: '#BA68C8' }}
                     />
                   </div>
                   <div className="col-md-12" style={{ marginTop: '1rem' }}>
@@ -192,7 +188,6 @@ function EditProfile() {
                       name="address"
                       value={formData.address}
                       onChange={handleInputChange}
-                      style={{ boxShadow: 'none', borderColor: '#BA68C8' }}
                     />
                   </div>
                   <div className="col-md-12" style={{ marginTop: '1rem' }}>
@@ -202,12 +197,12 @@ function EditProfile() {
                         name="countryCode"
                         value={formData.countryCode}
                         onChange={handleInputChange}
-                        style={{ marginRight: '10px', borderColor: '#BA68C8' }}
+                        className="form-select"
+                        style={{ marginRight: '10px' }}
                       >
                         <option value="+94">+94</option>
                         <option value="+1">+1</option>
                         <option value="+91">+91</option>
-                       
                       </select>
                       <input
                         type="text"
@@ -216,7 +211,6 @@ function EditProfile() {
                         name="phoneNumber"
                         value={formData.phoneNumber}
                         onChange={handleInputChange}
-                        style={{ boxShadow: 'none', borderColor: '#BA68C8' }}
                       />
                     </div>
                   </div>
@@ -228,17 +222,13 @@ function EditProfile() {
               </div>
             </div>
 
-            <div className="col-md-4" style={{ marginTop: '-2rem', marginLeft: '400px' }}>
+            <div className="col-md-4" style={{ marginTop: '3rem' }}>
               <div className="p-3 py-5">
-                <div className="d-flex justify-content-between align-items-center experience" style={{ fontSize: '24px' }}>
-                <div className="d-flex justify-content-between align-items-center experience" style={{ fontSize: '24px' }}>
-                <div className="d-flex justify-content-between align-items-center experience" style={{ fontSize: '24px' }}>
-  <div>
-    <a href="#" onClick={() => setShowModal(true)} style={{ color: 'black', textDecoration: 'underline' }}>Security Information</a>
-    <h6>(Click here to change current password)</h6>
-  </div>
-</div>
-
+                <div className="d-flex flex-column align-items-center experience" style={{ fontSize: '24px' }}>
+                  <div>
+                    <a href="#" onClick={() => setShowModal(true)} style={{ color: 'black', textDecoration: 'underline' }}>Security Information</a>
+                    <h6>(Click here to change current password                    </h6>
+                  </div>
                 </div><br />
                 <Modal show={showModal} onHide={() => setShowModal(false)}>
                   <Modal.Header closeButton>
@@ -254,7 +244,6 @@ function EditProfile() {
                         name="currentPassword"
                         value={formData.currentPassword}
                         onChange={handleInputChange}
-                        style={{ boxShadow: 'none', borderColor: '#BA68C8' }}
                       />
                     </div>
                     <div className="col-md-12" style={{ marginTop: '1rem' }}>
@@ -266,7 +255,6 @@ function EditProfile() {
                         name="newPassword"
                         value={formData.newPassword}
                         onChange={handleInputChange}
-                        style={{ boxShadow: 'none', borderColor: '#BA68C8' }}
                       />
                       {errors.newPassword && (
                         <div className="text-danger mt-1" style={{ fontSize: '0.875rem' }}>
@@ -283,7 +271,6 @@ function EditProfile() {
                         name="retypePassword"
                         value={formData.retypePassword}
                         onChange={handleInputChange}
-                        style={{ boxShadow: 'none', borderColor: '#BA68C8' }}
                       />
                       {errors.retypePassword && (
                         <div className="text-danger mt-1" style={{ fontSize: '0.875rem' }}>
@@ -301,13 +288,13 @@ function EditProfile() {
             </div>
           </div>
         </div>
-        <div style={{ position: 'fixed', bottom: '20px', left: '20px', zIndex: '1000', marginLeft: '70px' }}>
+        <div style={{ position: 'fixed', bottom: '20px', left: '20px', zIndex: '1000', marginLeft: '70px', marginBottom:'40px'}}>
           <Link to="/frdashboard" className="btn btn-primary" style={{ backgroundColor: '#037149' }}>Back</Link>
         </div>
       </div>
-    </div>
     </div>
   );
 }
 
 export default EditProfile;
+
