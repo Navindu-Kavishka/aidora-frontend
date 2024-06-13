@@ -54,7 +54,7 @@ const FundLogin = () => {
         setFormError('Please fix the errors before submitting');
     } else {
         try {
-            const response = await axios.post('http://localhost:5000/api/fundlogins', { email, password });
+            const response = await axios.post('http://localhost:5000/api/fundregisters', { email, password });
             console.log(response.data); 
            
         } catch (error) {

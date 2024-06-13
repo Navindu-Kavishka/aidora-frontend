@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
+import { Modal, Button } from 'react-bootstrap';
 
 function EditProfile() {
   const { id } = useParams();
@@ -23,8 +24,10 @@ function EditProfile() {
     retypePassword: ''
   });
 
+  const [showModal, setShowModal] = useState(false);
+
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/fundprofiles/${id}`)
+    axios.get(`http://localhost:5000/api/fundregisters/${id}`)
       .then(response => {
         setFormData(response.data);
       })
@@ -64,13 +67,21 @@ function EditProfile() {
 
   const handleSubmit = () => {
     if (!errors.newPassword && !errors.retypePassword) {
-      axios.put(`http://localhost:5000/api/fundprofiles/${id}`, formData)
+      axios.put(`http://localhost:5000/api/fundregisters/${id}`, formData)
         .then(response => {
           console.log('Profile updated successfully:', response.data);
         })
         .catch(error => {
           console.error('There was an error updating the profile!', error);
         });
+    }
+  };
+
+  const handlePasswordSubmit = () => {
+    if (!errors.newPassword && !errors.retypePassword) {
+      // Handle password update logic here
+      setShowModal(false);
+      console.log('Password updated successfully');
     }
   };
 
@@ -158,7 +169,6 @@ function EditProfile() {
                       placeholder="Company Name"
                       name="companyName"
                       value={formData.companyName}
-                      disabled
                       style={{ boxShadow: 'none', borderColor: '#BA68C8' }}
                     />
                   </div>
@@ -170,7 +180,6 @@ function EditProfile() {
                       placeholder="Email-Address"
                       name="email"
                       value={formData.email}
-                      disabled
                       style={{ boxShadow: 'none', borderColor: '#BA68C8' }}
                     />
                   </div>
@@ -195,9 +204,10 @@ function EditProfile() {
                         onChange={handleInputChange}
                         style={{ marginRight: '10px', borderColor: '#BA68C8' }}
                       >
+                        <option value="+94">+94</option>
                         <option value="+1">+1</option>
                         <option value="+91">+91</option>
-                        <option value="+94">+94</option>
+                       
                       </select>
                       <input
                         type="text"
@@ -221,66 +231,81 @@ function EditProfile() {
             <div className="col-md-4" style={{ marginTop: '-2rem', marginLeft: '400px' }}>
               <div className="p-3 py-5">
                 <div className="d-flex justify-content-between align-items-center experience" style={{ fontSize: '24px' }}>
-                  <span>Security Information</span>
+                <div className="d-flex justify-content-between align-items-center experience" style={{ fontSize: '24px' }}>
+                <div className="d-flex justify-content-between align-items-center experience" style={{ fontSize: '24px' }}>
+  <div>
+    <a href="#" onClick={() => setShowModal(true)} style={{ color: 'black', textDecoration: 'underline' }}>Security Information</a>
+    <h6>(Click here to change current password)</h6>
+  </div>
+</div>
+
                 </div><br />
-                <div className="col-md-12">
-                  <label className="labels">Current Password</label>
-                  <input
-                    type="Password"
-                    className="form-control"
-                    placeholder="Current Password"
-                    name="currentPassword"
-                    value={formData.currentPassword}
-                    onChange={handleInputChange}
-                    style={{ boxShadow: 'none', borderColor: '#BA68C8' }}
-                  />
-                </div>
-                <div className="col-md-12" style={{ marginTop: '1rem' }}>
-                  <label className="labels">New Password</label>
-                  <input
-                    type="password"
-                    className="form-control"
-                    placeholder="New Password"
-                    name="newPassword"
-                    value={formData.newPassword}
-                    onChange={handleInputChange}
-                    style={{ boxShadow: 'none', borderColor: '#BA68C8' }}
-                  />
-                  {errors.newPassword && (
-                    <div className="text-danger mt-1" style={{ fontSize: '0.875rem' }}>
-                      {errors.newPassword}
+                <Modal show={showModal} onHide={() => setShowModal(false)}>
+                  <Modal.Header closeButton>
+                    <Modal.Title>Change Password</Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body>
+                    <div className="col-md-12">
+                      <label className="labels">Current Password</label>
+                      <input
+                        type="password"
+                        className="form-control"
+                        placeholder="Current Password"
+                        name="currentPassword"
+                        value={formData.currentPassword}
+                        onChange={handleInputChange}
+                        style={{ boxShadow: 'none', borderColor: '#BA68C8' }}
+                      />
                     </div>
-                  )}
-                </div>
-                <div className="col-md-12" style={{ marginTop: '1rem' }}>
-                  <label className="labels">Retype Password</label>
-                  <input
-                    type="password"
-                    className="form-control"
-                    placeholder="Retype Password"
-                    name="retypePassword"
-                    value={formData.retypePassword}
-                    onChange={handleInputChange}
-                    style={{ boxShadow: 'none', borderColor: '#BA68C8' }}
-                  />
-                  {errors.retypePassword && (
-                    <div className="text-danger mt-1" style={{ fontSize: '0.875rem' }}>
-                      {errors.retypePassword}
+                    <div className="col-md-12" style={{ marginTop: '1rem' }}>
+                      <label className="labels">New Password</label>
+                      <input
+                        type="password"
+                        className="form-control"
+                        placeholder="New Password"
+                        name="newPassword"
+                        value={formData.newPassword}
+                        onChange={handleInputChange}
+                        style={{ boxShadow: 'none', borderColor: '#BA68C8' }}
+                      />
+                      {errors.newPassword && (
+                        <div className="text-danger mt-1" style={{ fontSize: '0.875rem' }}>
+                          {errors.newPassword}
+                        </div>
+                      )}
                     </div>
-                  )}
-                    <div className="d-flex justify-content-between mt-5 text-center">
-                  <button className="btn btn-primary profile-button" type="button" style={{ backgroundColor: '#037149' }}>Cancel</button>
-                  <button className="btn btn-primary profile-button" type="button" style={{ backgroundColor: '#037149' }} onClick={handleSubmit}>Save</button>
-                </div>
-                </div>
+                    <div className="col-md-12" style={{ marginTop: '1rem' }}>
+                      <label className="labels">Retype Password</label>
+                      <input
+                        type="password"
+                        className="form-control"
+                        placeholder="Retype Password"
+                        name="retypePassword"
+                        value={formData.retypePassword}
+                        onChange={handleInputChange}
+                        style={{ boxShadow: 'none', borderColor: '#BA68C8' }}
+                      />
+                      {errors.retypePassword && (
+                        <div className="text-danger mt-1" style={{ fontSize: '0.875rem' }}>
+                          {errors.retypePassword}
+                        </div>
+                      )}
+                    </div>
+                  </Modal.Body>
+                  <Modal.Footer>
+                    <Button variant="secondary" onClick={() => setShowModal(false)}>Cancel</Button>
+                    <Button variant="primary" onClick={handlePasswordSubmit} style={{ backgroundColor: '#037149' }}>Save</Button>
+                  </Modal.Footer>
+                </Modal>
               </div>
             </div>
           </div>
         </div>
-        <div style={{ position: 'fixed', bottom: '20px', left: '20px', zIndex: '1000',marginLeft:'70px' }}>
+        <div style={{ position: 'fixed', bottom: '20px', left: '20px', zIndex: '1000', marginLeft: '70px' }}>
           <Link to="/frdashboard" className="btn btn-primary" style={{ backgroundColor: '#037149' }}>Back</Link>
         </div>
       </div>
+    </div>
     </div>
   );
 }
