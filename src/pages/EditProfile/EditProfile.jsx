@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link, useParams } from 'react-router-dom';
-import axios from 'axios';
 import { Modal, Button } from 'react-bootstrap';
+import axios from 'axios';
 
 function EditProfile() {
   const { id } = useParams();
+
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -27,14 +28,31 @@ function EditProfile() {
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/fundregisters/${id}`)
-      .then(response => {
-        setFormData(response.data);
-      })
-      .catch(error => {
-        console.error('There was an error fetching the user data!', error);
+    // Fetch user data based on ID when component mounts
+    fetchUserData();
+  }, []);
+
+  const fetchUserData = async () => {
+    try {
+      const response = await axios.get(`http://localhost:5000/api/fundregisters`); // Adjust endpoint based on your backend
+      const userData = response.data.user; // Assuming backend returns user data
+      setFormData({
+        firstName: userData.firstname,
+        lastName: userData.lastname,
+        companyName: userData.companyName || '',
+        email: userData.email,
+        address: userData.address || '',
+        phoneNumber: userData.number || '',
+        countryCode: userData.countryCode || '+1',
+        currentPassword: '',
+        newPassword: '',
+        retypePassword: ''
       });
-  }, [id]);
+    } catch (error) {
+      console.error('Error fetching user data:', error);
+      // Handle error fetching user data
+    }
+  };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -65,23 +83,34 @@ function EditProfile() {
     }
   };
 
-  const handleSubmit = () => {
-    if (!errors.newPassword && !errors.retypePassword) {
-      axios.put(`http://localhost:5000/api/fundregisters/${id}`, formData)
-        .then(response => {
-          console.log('Profile updated successfully:', response.data);
-        })
-        .catch(error => {
-          console.error('There was an error updating the profile!', error);
-        });
+  const handleSubmit = async () => {
+    try {
+      const response = await axios.put(`http://localhost:5000/api/fundregisters`, formData); // Adjust endpoint based on your backend
+      console.log('Profile updated successfully:', response.data);
+      // Handle success
+    } catch (error) {
+      console.error('Error updating profile:', error);
+      // Handle error updating profile
     }
   };
 
-  const handlePasswordSubmit = () => {
+  const handlePasswordSubmit = async () => {
     if (!errors.newPassword && !errors.retypePassword) {
-      // Handle password update logic here
-      setShowModal(false);
-      console.log('Password updated successfully');
+      // Prepare data to send for password update (optional based on your backend implementation)
+      const passwordData = {
+        currentPassword: formData.currentPassword,
+        newPassword: formData.newPassword,
+        retypePassword: formData.retypePassword
+      };
+
+      try {
+        const response = await axios.put(`http://localhost:5000/api/fundregisters`, passwordData); // Adjust endpoint based on your backend
+        console.log('Password updated successfully:', response.data);
+        setShowModal(false);
+      } catch (error) {
+        console.error('Error updating password:', error);
+        // Handle error updating password
+      }
     }
   };
 
@@ -127,8 +156,8 @@ function EditProfile() {
             <div className="col-md-3 border-right">
               <div className="d-flex flex-column align-items-center text-center p-3 py-5">
                 <img className="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg" alt="Profile" />
-                <span className="font-weight-bold">Edogaru</span>
-                <span className="text-black-50">edogaru@mail.com.my</span>
+                <span className="font-weight-bold">{formData.firstName} {formData.lastName}</span>
+                <span className="text-black-50">{formData.email}</span>
               </div>
             </div>
             <div className="col-md-5 border-right" style={{ marginTop: '3rem' }}>
@@ -167,6 +196,7 @@ function EditProfile() {
                       placeholder="Company Name"
                       name="companyName"
                       value={formData.companyName}
+                      onChange={handleInputChange}
                     />
                   </div>
                   <div className="col-md-12" style={{ marginTop: '1rem' }}>
@@ -177,6 +207,7 @@ function EditProfile() {
                       placeholder="Email-Address"
                       name="email"
                       value={formData.email}
+                      disabled
                     />
                   </div>
                   <div className="col-md-12" style={{ marginTop: '1rem' }}>
@@ -217,7 +248,7 @@ function EditProfile() {
                 </div>
                 <div className="d-flex justify-content-between mt-5 text-center">
                   <button className="btn btn-primary profile-button" type="button" style={{ backgroundColor: '#037149' }}>Cancel</button>
-                  <button className="btn btn-primary profile-button" type="button" style={{ backgroundColor: '#037149' }} onClick={handleSubmit}>Save</button>
+                  <button className="btn btn-primary profile-button" type="button"                  style={{ backgroundColor: '#037149' }} onClick={handleSubmit}>Save</button>
                 </div>
               </div>
             </div>
@@ -227,7 +258,7 @@ function EditProfile() {
                 <div className="d-flex flex-column align-items-center experience" style={{ fontSize: '24px' }}>
                   <div>
                     <a href="#" onClick={() => setShowModal(true)} style={{ color: 'black', textDecoration: 'underline' }}>Security Information</a>
-                    <h6>(Click here to change current password                    </h6>
+                    <h6>(Click here to change current password)</h6>
                   </div>
                 </div><br />
                 <Modal show={showModal} onHide={() => setShowModal(false)}>
@@ -288,9 +319,9 @@ function EditProfile() {
             </div>
           </div>
         </div>
-        <div style={{ position: 'fixed', bottom: '20px', left: '20px', zIndex: '1000', marginLeft: '70px', marginBottom:'40px'}}>
-          <Link to="/frdashboard" className="btn btn-primary" style={{ backgroundColor: '#037149' }}>Back</Link>
-        </div>
+      </div>
+      <div style={{ position: 'fixed', bottom: '20px', left: '20px', zIndex: '1000', marginLeft: '70px', marginBottom: '40px' }}>
+        <Link to="/frdashboard" className="btn btn-primary" style={{ backgroundColor: '#037149' }}>Back</Link>
       </div>
     </div>
   );
