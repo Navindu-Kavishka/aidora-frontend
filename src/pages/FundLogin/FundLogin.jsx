@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css'
+import { Link, useNavigate } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 
 const FundLogin = () => {
@@ -10,6 +10,8 @@ const FundLogin = () => {
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [formError, setFormError] = useState('');
+  const [isLoading, setIsLoading] = useState(false); // Loading state
+  const navigate = useNavigate();
 
   useEffect(() => {
     const updateButtonWidth = () => {
@@ -49,22 +51,32 @@ const FundLogin = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!email || !password) {
-        setFormError('All fields are mandatory');
+      setFormError('All fields are mandatory');
     } else if (emailError || passwordError) {
-        setFormError('Please fix the errors before submitting');
+      setFormError('Please fix the errors before submitting');
     } else {
-        try {
-            const response = await axios.post('http://localhost:5000/api/fundregisters', { email, password });
-            console.log(response.data); 
-           
-        } catch (error) {
-            console.error(error); 
-            
-            setFormError('Login failed. Please check your credentials and try again.');
+      try {
+        setIsLoading(true);
+        const response = await axios.post('http://localhost:5000/api/fundregisters', {
+          email,
+          password,
+        });
+        setIsLoading(false);
+        if (response.data.success) {
+          localStorage.setItem('token', response.data.token);
+          localStorage.setItem('userId', response.data.user._id);
+          navigate('/frdashboard'); // Redirect to dashboard on success
+        } else {
+          setFormError(response.data.message || 'Login failed. Please check your credentials and try again.');
         }
+      } catch (error) {
+        setIsLoading(false);
+        console.error('Error logging in:', error);
+        setFormError('Login failed. Please check your credentials and try again.');
+      }
     }
-};
-
+  };
+  
   const cardStyle = {
     borderTopRightRadius: '0.3rem',
     borderBottomRightRadius: '0.3rem',
@@ -169,7 +181,7 @@ const FundLogin = () => {
                           type="submit"
                           style={{ fontSize: '16px', alignSelf: 'center', width: buttonWidth, backgroundColor: '#037149' }}
                         >
-                           <Link to="/frdashboard" style={{ textDecoration: 'none', color: 'white' }}>Login</Link>
+                          Login
                         </button>
                         <div style={forgotPasswordStyle}>
                           <a className="text-muted" href="#!">Forgot password?</a>

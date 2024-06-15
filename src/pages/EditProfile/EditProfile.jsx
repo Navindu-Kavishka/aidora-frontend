@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Modal, Button } from 'react-bootstrap';
 import axios from 'axios';
 
 function EditProfile() {
-  const { id } = useParams();
-
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -28,14 +26,20 @@ function EditProfile() {
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
-    // Fetch user data based on ID when component mounts
     fetchUserData();
   }, []);
 
   const fetchUserData = async () => {
+    const userId = localStorage.getItem('userId');
+    const token = localStorage.getItem('token');
+
     try {
-      const response = await axios.get(`http://localhost:5000/api/fundregisters`); // Adjust endpoint based on your backend
-      const userData = response.data.user; // Assuming backend returns user data
+      const response = await axios.get(`http://localhost:5000/api/fundregisters/profile/${userId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+      const userData = response.data.user;
       setFormData({
         firstName: userData.firstname,
         lastName: userData.lastname,
@@ -50,13 +54,11 @@ function EditProfile() {
       });
     } catch (error) {
       console.error('Error fetching user data:', error);
-      // Handle error fetching user data
     }
   };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-
     const lettersOnly = /^[A-Za-z]+$/;
     const phoneNumberRegex = /^[0-9]{0,9}$/;
 
@@ -84,35 +86,52 @@ function EditProfile() {
   };
 
   const handleSubmit = async () => {
+    const userId = localStorage.getItem('userId');
+    const token = localStorage.getItem('token');
+
     try {
-      const response = await axios.put(`http://localhost:5000/api/fundregisters`, formData); // Adjust endpoint based on your backend
+      const response = await axios.put(`http://localhost:5000/api/fundregisters/profile/${userId}`, {
+        firstname: formData.firstName,
+        lastname: formData.lastName,
+        companyName: formData.companyName,
+        address: formData.address,
+        countryCode: formData.countryCode,
+        number: formData.phoneNumber
+      }, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
       console.log('Profile updated successfully:', response.data);
-      // Handle success
     } catch (error) {
       console.error('Error updating profile:', error);
-      // Handle error updating profile
     }
   };
 
   const handlePasswordSubmit = async () => {
+    const userId = localStorage.getItem('userId');
+    const token = localStorage.getItem('token');
+
     if (!errors.newPassword && !errors.retypePassword) {
-      // Prepare data to send for password update (optional based on your backend implementation)
       const passwordData = {
         currentPassword: formData.currentPassword,
-        newPassword: formData.newPassword,
-        retypePassword: formData.retypePassword
+        newPassword: formData.newPassword
       };
 
       try {
-        const response = await axios.put(`http://localhost:5000/api/fundregisters`, passwordData); // Adjust endpoint based on your backend
+        const response = await axios.put(`http://localhost:5000/api/fundregisters/profile/${userId}/password`, passwordData, {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        });
         console.log('Password updated successfully:', response.data);
         setShowModal(false);
       } catch (error) {
         console.error('Error updating password:', error);
-        // Handle error updating password
       }
     }
-  };
+  
+};
 
   return (
     <div style={{ fontFamily: 'Arial, sans-serif' }}>
@@ -248,7 +267,7 @@ function EditProfile() {
                 </div>
                 <div className="d-flex justify-content-between mt-5 text-center">
                   <button className="btn btn-primary profile-button" type="button" style={{ backgroundColor: '#037149' }}>Cancel</button>
-                  <button className="btn btn-primary profile-button" type="button"                  style={{ backgroundColor: '#037149' }} onClick={handleSubmit}>Save</button>
+                  <button className="btn btn-primary profile-button" type="button" style={{ backgroundColor: '#037149' }} onClick={handleSubmit}>Save</button>
                 </div>
               </div>
             </div>
@@ -328,4 +347,3 @@ function EditProfile() {
 }
 
 export default EditProfile;
-
