@@ -55,14 +55,15 @@ const UserLogin = () => {
     } else {
       setFormError('');
       try {
-        const response = await axios.post('http://localhost:5000/api/users/login', { email, password });
-        const { token } = response.data;
-
-        // Store the token in local storage
-        localStorage.setItem('token', token);
-
-        // Redirect to the homepage
-        navigate('/');
+        const token = localStorage.getItem('token');
+        const headers = token ? { Authorization: `Bearer ${token}` } : {};
+        
+        const response = await axios.post(
+          'http://localhost:5000/api/users/login',
+          { email, password },
+          { headers }
+        );
+        navigate('/userprofile');
       } catch (error) {
         console.error('Error during login:', error);
         setFormError('Invalid email or password');
@@ -79,8 +80,8 @@ const UserLogin = () => {
     backgroundImage: 'url("/src/assets/donorImg/loginback.avif")',
     backgroundSize: 'cover',
     backgroundPosition: 'center',
-    height: '100vh',
-    width: '100vh',
+    height: '100%',
+    width: '100%',
   };
 
   const gradientStyle = {
@@ -133,7 +134,7 @@ const UserLogin = () => {
                   <div style={cardBodyStyle}>
                     <div className="text-center">
                       <img
-                        src="src/assets/donorImg/logo.png"
+                        src="/src/assets/donorImg/logo.png"
                         style={{ width: '185px', margin: '0 auto', alignSelf: 'center', marginBottom: '2rem' }}
                         alt="logo"
                       />

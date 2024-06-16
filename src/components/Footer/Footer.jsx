@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 function Footer() {
   return (
@@ -7,19 +8,18 @@ function Footer() {
         <div style={{ flex: '1', padding: '15px', maxWidth: '33%', boxSizing: 'border-box' }}>
           <h5 style={{ fontWeight: 'bold', marginBottom: '15px', color:'#FFFFFF'}}>Keep in touch</h5>
           <p style={{ color: '#FFFFFF', paddingTop: '50px' }}> Meth boo sewana, Thiththagalle, Ahangama, Galle.</p>
-
-
           <p style={{color:'#FFFFFF'}}> 0915546283</p>
           <p style={{color:'#FFFFFF'}}> aidora01@gmail.com</p>
         </div>
         <div style={{ flex: '1', padding: '15px', maxWidth: '33%', boxSizing: 'border-box' }}>
           <h5 style={{ fontWeight: 'bold', marginBottom: '15px', color:'#FFFFFF'}}>Useful Links</h5>
           <ul style={{ listStyleType: 'none', padding: 0, margin: 0 }}>
-            <li style={{ marginBottom: '10px' }}><a href="#!" style={{ color: '#FFFFFF', textDecoration: 'none' }}>Home</a></li>
-            <li style={{ marginBottom: '10px' }}><a href="#!" style={{ color: '#FFFFFF', textDecoration: 'none' }}>Projects</a></li>
-            <li style={{ marginBottom: '10px' }}><a href="#!" style={{ color: '#FFFFFF', textDecoration: 'none' }}>Fundraiser</a></li>
-            <li style={{ marginBottom: '10px' }}><a href="#!" style={{ color: '#FFFFFF', textDecoration: 'none' }}>About us</a></li>
-            <li style={{ marginBottom: '10px' }}><a href="#!" style={{ color: '#FFFFFF', textDecoration: 'none' }}>Donate</a></li>
+            {/* Use Link instead of anchor tags */}
+            <li style={{ marginBottom: '10px' }}><Link to="/" style={{ color: '#FFFFFF', textDecoration: 'none' }}>Home</Link></li>
+            <li style={{ marginBottom: '10px' }}><Link to="/CompletedProject" style={{ color: '#FFFFFF', textDecoration: 'none' }}>Projects</Link></li>
+            <li style={{ marginBottom: '10px' }}><Link to="/frlogin" style={{ color: '#FFFFFF', textDecoration: 'none' }}>Fundraiser</Link></li>
+            <li style={{ marginBottom: '10px' }}><Link to="/AboutUs" style={{ color: '#FFFFFF', textDecoration: 'none' }}>About us</Link></li>
+            <li style={{ marginBottom: '10px' }}><Link to="/donate" style={{ color: '#FFFFFF', textDecoration: 'none' }}>Donate</Link></li>
           </ul>
         </div>
         <div style={{ flex: '1', padding: '15px', maxWidth: '33%', boxSizing: 'border-box', textAlign: 'center' }}>
@@ -33,7 +33,7 @@ function Footer() {
       </div>
       <div style={{ textAlign: 'center', marginTop: '20px', color:'#FFFFFF' }}>
         <p>© 2024 Aidora All Rights Reserved by Group 20</p>
-        <a href="#!" style={{  textDecoration: 'none', color:'#FFFFFF' }}>Privacy Policy</a>
+        <Link to="/privacy-policy" style={{  textDecoration: 'none', color:'#FFFFFF' }}>Privacy Policy</Link>
       </div>
     </footer>
   );
