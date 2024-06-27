@@ -84,14 +84,13 @@ const FundRegister = () => {
                 if (response.status === 201) {
                     navigate('/frlogin');
                 } else {
-                    console.error(response.data.message);
+                    console.error(response.data.message);  // Make sure 'message' exists in response data
                 }
             } catch (error) {
-                console.error('Server error', error);
+                console.error('Server error', error);  // Log Axios error for debugging
             }
         }
     };
-
     return (
         <div>
             <header style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '20px 0', backgroundColor: 'white' }}>

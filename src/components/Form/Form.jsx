@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import axios from 'axios';
+import axios from 'axios'; // Uncomment this line to import axios
 import ProgressBar from '../../layouts/ProgressBar/ProgressBar'; // Import ProgressBar component
 import { Margin } from '@mui/icons-material';
 
@@ -20,13 +20,23 @@ const Form = () => {
   const handleSubmit = async () => {
     try {
       const response = await axios.post('http://localhost:5000/api/createprojects', formData);
-      alert('Project created successfully!');
-      setProjectStatus(response.data.project.status);
+      if (response.status === 200) {
+        alert('Project created successfully!');
+        setProjectStatus(response.data.project.status);
+      } else {
+        alert('Failed to create project. Please try again.');
+      }
     } catch (error) {
       console.error('Error creating project:', error);
-      alert('Error creating project. Please try again.');
+      if (error.response) {
+        console.error('Response data:', error.response.data);
+        alert('Error creating project: ' + error.response.data.message);
+      } else {
+        alert('Error creating project. Please try again.');
+      }
     }
   };
+  
 
   return (
     <div className="form-fullscreen" style={fullscreenStyle}>
@@ -108,8 +118,7 @@ const fullscreenStyle = {
   alignItems: 'center',
   background: '#f8f9fa',
   padding: '50px -50px',
-  width:'1000px'
-  
+  width: '1000px'
 };
 
 const formStyle = {
@@ -154,5 +163,4 @@ const buttonStyle = {
   borderRadius: '4px',
   color: '#ffffff',
   cursor: 'pointer',
-  background: '#037149',
 };

@@ -7,10 +7,7 @@ const FundLogin = () => {
   const [buttonWidth, setButtonWidth] = useState('320px');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [emailError, setEmailError] = useState('');
-  const [passwordError, setPasswordError] = useState('');
   const [formError, setFormError] = useState('');
-  const [isLoading, setIsLoading] = useState(false); // Loading state
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -32,51 +29,23 @@ const FundLogin = () => {
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
-    if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(e.target.value)) {
-      setEmailError('Invalid email format');
-    } else {
-      setEmailError('');
-    }
   };
 
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
-    if (e.target.value.length < 6) {
-      setPasswordError('Password must be at least 6 characters');
-    } else {
-      setPasswordError('');
-    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!email || !password) {
-      setFormError('All fields are mandatory');
-    } else if (emailError || passwordError) {
-      setFormError('Please fix the errors before submitting');
-    } else {
-      try {
-        setIsLoading(true);
-        const response = await axios.post('http://localhost:5000/api/fundregisters', {
-          email,
-          password,
-        });
-        setIsLoading(false);
-        if (response.data.success) {
-          localStorage.setItem('token', response.data.token);
-          localStorage.setItem('userId', response.data.user._id);
-          navigate('/frdashboard'); // Redirect to dashboard on success
-        } else {
-          setFormError(response.data.message || 'Login failed. Please check your credentials and try again.');
-        }
-      } catch (error) {
-        setIsLoading(false);
-        console.error('Error logging in:', error);
-        setFormError('Login failed. Please check your credentials and try again.');
-      }
+    try {
+      // Directly navigate to dashboard or protected route
+      navigate('/frdashboard');
+    } catch (error) {
+      console.error('Error during login:', error);
+      setFormError('Login failed');
     }
   };
-  
+
   const cardStyle = {
     borderTopRightRadius: '0.3rem',
     borderBottomRightRadius: '0.3rem',
@@ -158,7 +127,6 @@ const FundLogin = () => {
                           onChange={handleEmailChange}
                           style={formOutlineStyle}
                         />
-                        {emailError && <div style={{ color: 'red' }}>{emailError}</div>}
                       </div>
                       <div className="form-outline mb-4">
                         <input
@@ -170,7 +138,6 @@ const FundLogin = () => {
                           onChange={handlePasswordChange}
                           style={labelStyle}
                         />
-                        {passwordError && <div style={{ color: 'red' }}>{passwordError}</div>}
                       </div>
                       <div className="text-center pt-1 mb-5 pb-1">
                         {formError && <div style={{ color: 'red', marginBottom: '1rem' }}>{formError}</div>}

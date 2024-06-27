@@ -1,7 +1,6 @@
-
 import './components/Admin/SideBar/SideBar.css';
 import { BrowserRouter, Route ,Routes } from 'react-router-dom';
-
+import React from 'react';
 
 
 import UserLogin from "./pages/UserLogin/UserLogin";
@@ -46,28 +45,28 @@ const App = () => {
 
     
     
-    <BrowserRouter>
-      <Routes>
-        <Route path='/login' element={<UserLogin />} />
-        <Route path='/' element={<HomePage />} />
-        <Route path='/register' element={<RegisterPage />} />
-        <Route path='/userprofile' element={<UserProfile />} />
-        <Route path='/aboutus' element={<AboutUs />} />
-        
+      <BrowserRouter>
+        <Routes>
+          <Route path='/login' element={<UserLogin />} />
+          <Route path='/' element={<HomePage />} />
+          <Route path='/register' element={<RegisterPage />} />
+          <Route path='/userprofile' element={<UserProfile />} />
+          <Route path='/aboutus' element={<AboutUs />} />
+
         
         <Route path='adminlogin' element={<AdminLogin />} />
+
+          <Route path='/admin/*' element={<SideBar />}>
         
-        <Route path='/admin/*' element={<SideBar />}>
-        
-          <Route index element={<AdminDashboard />} />
-          <Route path='admindashboard' element={<AdminDashboard />} />
-          <Route path='admindonor' element={<AdminDonor />} />
-          <Route path='adminfundraiser' element={<AdminFundraiser />} />
-          <Route path='adminproject' element={<AdminProject />} />
-          <Route path='adminpayment' element={<AdminPayment />} />
+            <Route index element={<AdminDashboard />} />
+            <Route path='admindashboard' element={<AdminDashboard />} />
+            <Route path='admindonor' element={<AdminDonor />} />
+            <Route path='adminfundraiser' element={<AdminFundraiser />} />
+            <Route path='adminproject' element={<AdminProject />} />
+            <Route path='adminpayment' element={<AdminPayment />} />
           
-        </Route>
-      
+          </Route>
+
     
     
       <Route path='/OngoingProject' element={<OngoingProject/>}/>
@@ -86,18 +85,15 @@ const App = () => {
       
 
       
-    </Routes>
+        </Routes>
     
     
-    </BrowserRouter>
+      </BrowserRouter>
     
 
 
-</>
+    </>
 
   );
 };
 export default App;
-
-
-
