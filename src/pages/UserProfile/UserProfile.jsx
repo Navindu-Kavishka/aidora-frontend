@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
+import '@fortawesome/fontawesome-free/css/all.min.css';
 
 function UserProfile() {
   const [formData, setFormData] = useState({
@@ -22,6 +23,11 @@ function UserProfile() {
 
   const [message, setMessage] = useState('');
   const [messageType, setMessageType] = useState(''); // 'success' or 'danger'
+  const [showPasswords, setShowPasswords] = useState({
+    currentPassword: false,
+    newPassword: false,
+    retypePassword: false
+  });
 
   useEffect(() => {
     async function fetchUserData() {
@@ -110,7 +116,7 @@ function UserProfile() {
           },
           body: JSON.stringify(formData),
         });
-        
+
         if (!response.ok) {
           throw new Error('Failed to update user profile');
         }
@@ -124,6 +130,13 @@ function UserProfile() {
         setMessageType('danger');
       }
     }
+  };
+
+  const togglePasswordVisibility = (field) => {
+    setShowPasswords(prevState => ({
+      ...prevState,
+      [field]: !prevState[field]
+    }));
   };
 
   return (
@@ -214,7 +227,7 @@ function UserProfile() {
                       style={{ boxShadow: 'none', borderColor: '#BA68C8' }}
                     />
                   </div>
-                  <div className="col-md-12" style={{ marginTop: '1rem' }}>
+                 <div className="col-md-12" style={{ marginTop: '1rem' }}>
                     <label className="labels">Address</label>
                     <input
                       type="text"
@@ -252,7 +265,7 @@ function UserProfile() {
                   </div>
                 </div>
                 <div className="mt-5 text-center">
-                  <button className="btn btn-primary profile-button" type="button" style={{ backgroundColor: '#037149' }}>Cancel</button>
+                  <button className="btn btn-primary profile-button" type="button" style={{ backgroundColor: '#037149', marginRight: '20px' }}>Cancel</button>
                   <button className="btn btn-primary profile-button" type="button" style={{ backgroundColor: '#037149' }} onClick={handleSubmit}>Save</button>
                 </div>
                 {message && (
@@ -269,27 +282,49 @@ function UserProfile() {
                 </div><br />
                 <div className="col-md-12">
                   <label className="labels">Current Password</label>
-                  <input
-                    type="password"
-                    className="form-control"
-                    placeholder="Current Password"
-                    name="currentPassword"
-                    value={formData.currentPassword}
-                    onChange={handleInputChange}
-                    style={{ boxShadow: 'none', borderColor: '#BA68C8' }}
-                  />
+                  <div className="input-group">
+                    <input
+                      type={showPasswords.currentPassword ? "text" : "password"}
+                      className="form-control"
+                      placeholder="Current Password"
+                      name="currentPassword"
+                      value={formData.currentPassword}
+                      onChange={handleInputChange}
+                      style={{ boxShadow: 'none', borderColor: '#BA68C8' }}
+                    />
+                    <div className="input-group-append">
+                      <span
+                        className="input-group-text"
+                        onClick={() => togglePasswordVisibility('currentPassword')}
+                        style={{ cursor: 'pointer' }}
+                      >
+                        <i className={showPasswords.currentPassword ? "fa fa-eye-slash" : "fa fa-eye"}></i>
+                      </span>
+                    </div>
+                  </div>
                 </div>
                 <div className="col-md-12" style={{ marginTop: '1rem' }}>
                   <label className="labels">New Password</label>
-                  <input
-                    type="password"
-                    className="form-control"
-                    placeholder="New Password"
-                    name="newPassword"
-                    value={formData.newPassword}
-                    onChange={handleInputChange}
-                    style={{ boxShadow: 'none', borderColor: '#BA68C8' }}
-                  />
+                  <div className="input-group">
+                    <input
+                      type={showPasswords.newPassword ? "text" : "password"}
+                      className="form-control"
+                      placeholder="New Password"
+                      name="newPassword"
+                      value={formData.newPassword}
+                      onChange={handleInputChange}
+                      style={{ boxShadow: 'none', borderColor: '#BA68C8' }}
+                    />
+                    <div className="input-group-append">
+                      <span
+                        className="input-group-text"
+                        onClick={() => togglePasswordVisibility('newPassword')}
+                        style={{ cursor: 'pointer' }}
+                      >
+                        <i className={showPasswords.newPassword ? "fa fa-eye-slash" : "fa fa-eye"}></i>
+                      </span>
+                    </div>
+                  </div>
                   {errors.newPassword && (
                     <div className="text-danger mt-1" style={{ fontSize: '0.875rem' }}>
                       {errors.newPassword}
@@ -298,15 +333,26 @@ function UserProfile() {
                 </div>
                 <div className="col-md-12" style={{ marginTop: '1rem' }}>
                   <label className="labels">Retype Password</label>
-                  <input
-                    type="password"
-                    className="form-control"
-                    placeholder="Retype Password"
-                    name="retypePassword"
-                    value={formData.retypePassword}
-                    onChange={handleInputChange}
-                    style={{ boxShadow: 'none', borderColor: '#BA68C8' }}
-                  />
+                  <div className="input-group">
+                    <input
+                      type={showPasswords.retypePassword ? "text" : "password"}
+                      className="form-control"
+                      placeholder="Retype Password"
+                      name="retypePassword"
+                      value={formData.retypePassword}
+                      onChange={handleInputChange}
+                      style={{ boxShadow: 'none', borderColor: '#BA68C8' }}
+                    />
+                    <div className="input-group-append">
+                      <span
+                        className="input-group-text"
+                        onClick={() => togglePasswordVisibility('retypePassword')}
+                        style={{ cursor: 'pointer' }}
+                      >
+                        <i className={showPasswords.retypePassword ? "fa fa-eye-slash" : "fa fa-eye"}></i>
+                      </span>
+                    </div>
+                  </div>
                   {errors.retypePassword && (
                     <div className="text-danger mt-1" style={{ fontSize: '0.875rem' }}>
                       {errors.retypePassword}
@@ -316,13 +362,14 @@ function UserProfile() {
               </div>
             </div>
           </div>
-          <div style={{ position: 'absolute', bottom: '20px', left: '20px' }}>
+        </div>
+        <div style={{ position: 'absolute', bottom: '100px', left: '20px' }}>
             <Link to="/" className="btn btn-primary" style={{ backgroundColor: '#037149' }}>Back</Link>
           </div>
-        </div>
       </div>
     </div>
   );
 }
 
 export default UserProfile;
+
