@@ -61,7 +61,7 @@ function EditDonorModal({ show, onHide, donor, onChange, onSave }) {
               <Form.Label>Phone Country Code</Form.Label>
               <Form.Control
                 type="text"
-                value={donor.phoneNumber.countryCode}
+                value={donor.phoneNumber ? donor.phoneNumber.countryCode : ''}
                 readOnly
               />
             </Form.Group>
@@ -69,7 +69,7 @@ function EditDonorModal({ show, onHide, donor, onChange, onSave }) {
               <Form.Label>Phone Number</Form.Label>
               <Form.Control
                 type="text"
-                value={donor.phoneNumber.number}
+                value={donor.phoneNumber ? donor.phoneNumber.number : ''}
                 onChange={(e) => handlePhoneChange('number', e.target.value)}
               />
             </Form.Group>

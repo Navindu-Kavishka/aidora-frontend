@@ -59,16 +59,16 @@ const App = () => {
         <Route path='/aboutus' element={<AboutUs />} />
         
         
-        <Route path='/admin/login' element={<AdminLogin />} />
+        <Route path="/admin/login" element={<AdminLogin />} />
         
-        <Route path='/admin/*' element={<SideBar />}>
+        <Route path='/adminPanel/*' element={<SideBar />}>
         
           <Route index element={<AdminDashboard />} />
           <Route path='dashboard' element={<AdminDashboard />} />
 
           <Route path="donor" element={<AdminDonor/>} />
           <Route path="add-donor" element={<AddDonor/>} />
-        <Route path="donors/:id" element={<ViewDonor/>} />
+          <Route path="donors/:id" element={<ViewDonor/>} />
 
           <Route path='fundraiser' element={<AdminFundraiser />} />
           <Route path='project' element={<AdminProject />} />

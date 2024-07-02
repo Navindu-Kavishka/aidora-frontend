@@ -4,6 +4,8 @@ import React from 'react';
 import { Modal, Button } from 'react-bootstrap';
 
 function ViewDonorModal({ show, onHide, donor }) {
+
+  
   return (
     <Modal show={show} onHide={onHide} centered>
       <Modal.Header closeButton>

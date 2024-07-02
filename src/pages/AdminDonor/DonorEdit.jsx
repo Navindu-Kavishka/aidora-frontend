@@ -16,14 +16,14 @@ function DonorEdit({ donor, onSave }) {
     <div>
       <h2>Edit Donor</h2>
       <form>
-        <babel>
+        <label>
           Name:
           <input type="text" value={name} onChange={(e) => setName(e.target.value)} />
-        </babel>
-        <babel>
+        </label>
+        <label>
           Email:
           <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-        </babel>
+        </label>
         <label>
           Phone Number:
           <input type="tel" value={phoneNumber.countryCode} onChange={(e) => setPhoneNumber({ countryCode: e.target.value, number: phoneNumber.number })} />

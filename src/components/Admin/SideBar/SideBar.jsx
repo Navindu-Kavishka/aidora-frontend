@@ -17,27 +17,27 @@ const SideBar = ({ children }) => {
 
   const menuItem = [
     {
-      path: "/admin/dashboard",
+      path: "/adminPanel/dashboard",
       name: "Dashboard",
       icon: <RiDashboard3Fill />,
     },
     {
-      path: "/admin/donor",
+      path: "/adminPanel/donor",
       name: "Donor",
       icon: <FaHandHoldingDollar />,
     },
     {
-      path: "/admin/fundraiser",
+      path: "/adminPanel/fundraiser",
       name: "FundRaiser",
       icon: <BsBank2 />,
     },
     {
-      path: "/admin/project",
+      path: "/adminPanel/project",
       name: "Project",
       icon: <AiFillProject />,
     },
     {
-      path: "/admin/payment",
+      path: "/adminPanel/payment",
       name: "Payments",
       icon: <MdPayments />,
     },
