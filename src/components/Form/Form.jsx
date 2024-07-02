@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import axios from 'axios'; // Uncomment this line to import axios
-import ProgressBar from '../../layouts/ProgressBar/ProgressBar'; // Import ProgressBar component
-import { Margin } from '@mui/icons-material';
+import axios from 'axios';
+import ProgressBar from '../../layouts/ProgressBar/ProgressBar';
 
 const Form = () => {
   const [formData, setFormData] = useState({
@@ -12,12 +11,15 @@ const Form = () => {
   });
 
   const [projectStatus, setProjectStatus] = useState('Create');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
 
+  
   const handleSubmit = async () => {
+    setIsSubmitting(true);
     try {
       const response = await axios.post('http://localhost:5000/api/createprojects', formData);
       if (response.status === 200) {
@@ -34,13 +36,14 @@ const Form = () => {
       } else {
         alert('Error creating project. Please try again.');
       }
+    } finally {
+      setIsSubmitting(false);
     }
   };
-  
 
   return (
     <div className="form-fullscreen" style={fullscreenStyle}>
-      <ProgressBar currentStep={projectStatus} /> {/* Pass the status to ProgressBar */}
+      <ProgressBar currentStep={projectStatus} />
       <form className="form-container" style={formStyle}>
         <div className="form-input-container" style={inputContainerStyle}>
           <input
@@ -48,16 +51,11 @@ const Form = () => {
             id="projectName"
             className="form-input"
             style={inputStyle}
+            placeholder="Project name"
             value={formData.projectName}
             onChange={handleChange}
+            disabled={isSubmitting}
           />
-          <label
-            htmlFor="projectName"
-            className={`form-label ${formData.projectName && 'filled'}`}
-            style={labelStyle}
-          >
-            Project name
-          </label>
         </div>
 
         <div className="form-input-container" style={inputContainerStyle}>
@@ -66,16 +64,11 @@ const Form = () => {
             rows="4"
             className="form-textarea"
             style={{ ...inputStyle, ...textareaStyle }}
+            placeholder="Project information"
             value={formData.projectInfo}
             onChange={handleChange}
+            disabled={isSubmitting}
           ></textarea>
-          <label
-            htmlFor="projectInfo"
-            className={`form-label ${formData.projectInfo && 'filled'}`}
-            style={{ ...labelStyle, top: '1.5rem' }}
-          >
-            Project information
-          </label>
         </div>
 
         <div className="form-input-container" style={inputContainerStyle}>
@@ -84,25 +77,21 @@ const Form = () => {
             id="estimatedValue"
             className="form-input"
             style={inputStyle}
+            placeholder="Estimated Value: Rs.0"
             value={formData.estimatedValue}
             onChange={handleChange}
+            disabled={isSubmitting}
           />
-          <label
-            htmlFor="estimatedValue"
-            className={`form-label ${formData.estimatedValue && 'filled'}`}
-            style={labelStyle}
-          >
-            Estimated Value: Rs.0
-          </label>
         </div>
 
         <button
           type="button"
-          className="form-button"
+          className="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3"
           style={buttonStyle}
           onClick={handleSubmit}
+          disabled={isSubmitting}
         >
-          Submit
+          {isSubmitting ? 'Submitting...' : 'Submit'}
         </button>
       </form>
     </div>
@@ -140,25 +129,17 @@ const inputStyle = {
   padding: '10px',
   border: '1px solid #ced4da',
   borderRadius: '4px',
+  transition: 'border-color 0.2s',
 };
 
 const textareaStyle = {
   resize: 'none',
 };
 
-const labelStyle = {
-  position: 'absolute',
-  top: '10px',
-  left: '10px',
-  transition: '0.2s',
-  pointerEvents: 'none',
-  color: '#495057',
-};
-
 const buttonStyle = {
   width: '100%',
   padding: '10px',
-  background: '#007bff',
+  background: '#037149',
   border: 'none',
   borderRadius: '4px',
   color: '#ffffff',
