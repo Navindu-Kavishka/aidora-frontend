@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Link } from 'react-router-dom';
+import '@fortawesome/fontawesome-free/css/all.min.css';
 
 function UserProfile() {
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
-    companyName: 'Existing Company',
-    email: 'user@example.com',
+    email: '',
     address: '',
     phoneNumber: '',
     countryCode: '+1',
@@ -20,6 +20,52 @@ function UserProfile() {
     newPassword: '',
     retypePassword: ''
   });
+
+  const [message, setMessage] = useState('');
+  const [messageType, setMessageType] = useState(''); // 'success' or 'danger'
+  const [showPasswords, setShowPasswords] = useState({
+    currentPassword: false,
+    newPassword: false,
+    retypePassword: false
+  });
+
+  useEffect(() => {
+    async function fetchUserData() {
+      try {
+        const token = localStorage.getItem('token');
+        if (!token) {
+          throw new Error('Token not found in local storage');
+        }
+  
+        const response = await fetch('http://localhost:5000/api/users/profile', {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+        if (!response.ok) {
+          throw new Error('Failed to fetch user data');
+        }
+
+        const result = await response.json();
+        const userData = result.user;
+        setFormData({
+          firstName: userData.firstName,
+          lastName: userData.lastName,
+          email: userData.email,
+          address: userData.address,
+          phoneNumber: userData.phoneNumber.number,
+          countryCode: userData.phoneNumber.countryCode,
+          currentPassword: '',
+          newPassword: '',
+          retypePassword: ''
+        });
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+      }
+    }
+
+    fetchUserData();
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -50,10 +96,47 @@ function UserProfile() {
     }
   };
 
-  const handleSubmit = () => {
-    if (!errors.newPassword && !errors.retypePassword) {
-      console.log('Form data:', formData);
+  const validateForm = () => {
+    return !errors.newPassword && !errors.retypePassword;
+  };
+
+  const handleSubmit = async () => {
+    if (validateForm()) {
+      try {
+        const token = localStorage.getItem('token');
+        if (!token) {
+          throw new Error('Token not found in local storage');
+        }
+  
+        const response = await fetch('http://localhost:5000/api/users/update', {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify(formData),
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to update user profile');
+        }
+
+        const result = await response.json();
+        setMessage('User profile updated successfully');
+        setMessageType('success');
+      } catch (error) {
+        console.error('Error updating user profile:', error);
+        setMessage('Failed to update user profile');
+        setMessageType('danger');
+      }
     }
+  };
+
+  const togglePasswordVisibility = (field) => {
+    setShowPasswords(prevState => ({
+      ...prevState,
+      [field]: !prevState[field]
+    }));
   };
 
   return (
@@ -78,7 +161,6 @@ function UserProfile() {
                 data-mdb-toggle="dropdown"
                 aria-expanded="false"
               >
-                
                 <img
                   src="src/assets/donorImg/editprofile.png"
                   className="rounded-circle"
@@ -99,8 +181,8 @@ function UserProfile() {
             <div className="col-md-3 border-right">
               <div className="d-flex flex-column align-items-center text-center p-3 py-5">
                 <img className="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg" alt="Profile" />
-                <span className="font-weight-bold">Edogaru</span>
-                <span className="text-black-50">edogaru@mail.com.my</span>
+                <span className="font-weight-bold">{formData.firstName}</span>
+                <span className="text-black-50">{formData.email}</span>
               </div>
             </div>
             <div className="col-md-8">
@@ -145,7 +227,7 @@ function UserProfile() {
                       style={{ boxShadow: 'none', borderColor: '#BA68C8' }}
                     />
                   </div>
-                  <div className="col-md-12" style={{ marginTop: '1rem' }}>
+                 <div className="col-md-12" style={{ marginTop: '1rem' }}>
                     <label className="labels">Address</label>
                     <input
                       type="text"
@@ -182,10 +264,15 @@ function UserProfile() {
                     </div>
                   </div>
                 </div>
-                <div className="d-flex justify-content-between mt-5 text-center">
-                  <button className="btn btn-primary profile-button" type="button" style={{ backgroundColor: '#037149' }}>Cancel</button>
+                <div className="mt-5 text-center">
+                  <button className="btn btn-primary profile-button" type="button" style={{ backgroundColor: '#037149', marginRight: '20px' }}>Cancel</button>
                   <button className="btn btn-primary profile-button" type="button" style={{ backgroundColor: '#037149' }} onClick={handleSubmit}>Save</button>
                 </div>
+                {message && (
+                  <div className={`mt-3 alert alert-${messageType}`} role="alert">
+                    {message}
+                  </div>
+                )}
               </div>
             </div>
             <div className="col-md-4">
@@ -195,27 +282,49 @@ function UserProfile() {
                 </div><br />
                 <div className="col-md-12">
                   <label className="labels">Current Password</label>
-                  <input
-                    type="password"
-                    className="form-control"
-                    placeholder="Current Password"
-                    name="currentPassword"
-                    value={formData.currentPassword}
-                    onChange={handleInputChange}
-                    style={{ boxShadow: 'none', borderColor: '#BA68C8' }}
-                  />
+                  <div className="input-group">
+                    <input
+                      type={showPasswords.currentPassword ? "text" : "password"}
+                      className="form-control"
+                      placeholder="Current Password"
+                      name="currentPassword"
+                      value={formData.currentPassword}
+                      onChange={handleInputChange}
+                      style={{ boxShadow: 'none', borderColor: '#BA68C8' }}
+                    />
+                    <div className="input-group-append">
+                      <span
+                        className="input-group-text"
+                        onClick={() => togglePasswordVisibility('currentPassword')}
+                        style={{ cursor: 'pointer' }}
+                      >
+                        <i className={showPasswords.currentPassword ? "fa fa-eye-slash" : "fa fa-eye"}></i>
+                      </span>
+                    </div>
+                  </div>
                 </div>
                 <div className="col-md-12" style={{ marginTop: '1rem' }}>
                   <label className="labels">New Password</label>
-                  <input
-                    type="password"
-                    className="form-control"
-                    placeholder="New Password"
-                    name="newPassword"
-                    value={formData.newPassword}
-                    onChange={handleInputChange}
-                    style={{ boxShadow: 'none', borderColor: '#BA68C8' }}
-                  />
+                  <div className="input-group">
+                    <input
+                      type={showPasswords.newPassword ? "text" : "password"}
+                      className="form-control"
+                      placeholder="New Password"
+                      name="newPassword"
+                      value={formData.newPassword}
+                      onChange={handleInputChange}
+                      style={{ boxShadow: 'none', borderColor: '#BA68C8' }}
+                    />
+                    <div className="input-group-append">
+                      <span
+                        className="input-group-text"
+                        onClick={() => togglePasswordVisibility('newPassword')}
+                        style={{ cursor: 'pointer' }}
+                      >
+                        <i className={showPasswords.newPassword ? "fa fa-eye-slash" : "fa fa-eye"}></i>
+                      </span>
+                    </div>
+                  </div>
                   {errors.newPassword && (
                     <div className="text-danger mt-1" style={{ fontSize: '0.875rem' }}>
                       {errors.newPassword}
@@ -224,15 +333,26 @@ function UserProfile() {
                 </div>
                 <div className="col-md-12" style={{ marginTop: '1rem' }}>
                   <label className="labels">Retype Password</label>
-                  <input
-                    type="password"
-                    className="form-control"
-                    placeholder="Retype Password"
-                    name="retypePassword"
-                    value={formData.retypePassword}
-                    onChange={handleInputChange}
-                    style={{ boxShadow: 'none', borderColor: '#BA68C8' }}
-                  />
+                  <div className="input-group">
+                    <input
+                      type={showPasswords.retypePassword ? "text" : "password"}
+                      className="form-control"
+                      placeholder="Retype Password"
+                      name="retypePassword"
+                      value={formData.retypePassword}
+                      onChange={handleInputChange}
+                      style={{ boxShadow: 'none', borderColor: '#BA68C8' }}
+                    />
+                    <div className="input-group-append">
+                      <span
+                        className="input-group-text"
+                        onClick={() => togglePasswordVisibility('retypePassword')}
+                        style={{ cursor: 'pointer' }}
+                      >
+                        <i className={showPasswords.retypePassword ? "fa fa-eye-slash" : "fa fa-eye"}></i>
+                      </span>
+                    </div>
+                  </div>
                   {errors.retypePassword && (
                     <div className="text-danger mt-1" style={{ fontSize: '0.875rem' }}>
                       {errors.retypePassword}
@@ -242,13 +362,14 @@ function UserProfile() {
               </div>
             </div>
           </div>
-          <div style={{ position: 'absolute', bottom: '20px', left: '20px' }}>
-            <Link to="/home" className="btn btn-primary" style={{ backgroundColor: '#037149' }}>Back</Link>
-          </div>
         </div>
+        <div style={{ position: 'absolute', bottom: '100px', left: '20px' }}>
+            <Link to="/" className="btn btn-primary" style={{ backgroundColor: '#037149' }}>Back</Link>
+          </div>
       </div>
     </div>
   );
 }
 
 export default UserProfile;
+

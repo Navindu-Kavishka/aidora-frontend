@@ -15,7 +15,7 @@ function HomePage() {
     padding: 0,
     border: 'none',
     outline: 'none',
-    boxSizing: 'border-box',
+    
   };
 
   const contentContainerStyle = {
@@ -23,9 +23,9 @@ function HomePage() {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    padding: '20px',
+    padding: '0',
     width: '100%',
-    margin: 0,
+    margin: '0',
     border: 'none',
     outline: 'none',
     boxSizing: 'border-box',
@@ -114,20 +114,32 @@ function HomePage() {
       <Navbar />
       <div style={contentContainerStyle}>
         <div style={carouselContainerStyle}>
-          <Carousel autoPlay interval={3000} infiniteLoop showThumbs={false} showStatus={false}>
-            <div style={imageContainerStyle}>
-              <img src="src/assets/donorImg/home01.Avif" alt="Image 1" style={imageStyle} />
-              <p className="legend">Change the world, one step at a time</p>
-            </div>
-            <div style={imageContainerStyle}>
-              <img src="src/assets/donorImg/home02.jpg" alt="Image 2" style={imageStyle} />
-              <p className="legend">Lend a hand! Support our cause.</p>
-            </div>
-            <div style={imageContainerStyle}>
-              <img src="src/assets/donorImg/home03.jpg" alt="Image 3" style={imageStyle} />
-              <p className="legend">Make your mark! Volunteer with us.</p>
-            </div>
-          </Carousel>
+        <Carousel 
+  autoPlay 
+  interval={3000} 
+  infiniteLoop 
+  showThumbs={false} 
+  showStatus={false} 
+  style={{ 
+    width: '100%', 
+    height: '100px' // Add this line to set the height
+  }}
+>
+  {/* Your carousel items remain the same */}
+  <div style={{ ...imageContainerStyle, width: '100%', height:'500px'}}>
+    <img src="src/assets/donorImg/home01.jpg" alt="Image 1" style={{ ...imageStyle, width: '100%' }} />
+    <p className="legend">Change the world, one step at a time</p>
+  </div>
+  <div style={{ ...imageContainerStyle, width: '100%', height:'500px' }}>
+    <img src="src/assets/donorImg/home02.jpg" alt="Image 2" style={{ ...imageStyle, width: '100%' }} />
+    <p className="legend">Lend a hand! Support our cause.</p>
+  </div>
+  <div style={{ ...imageContainerStyle, width: '100%', height:'500px' }}>
+    <img src="src/assets/donorImg/home03.jpg" alt="Image 3" style={{ ...imageStyle, width: '100%' }} />
+    <p className="legend">Make your mark! Volunteer with us.</p>
+  </div>
+</Carousel>
+
           <h2>Uniting Hearts Transforming Lives....</h2>
           <p>
             Welcome to AIDORA, a platform dedicated to extending compassion and support to the resilient
@@ -140,7 +152,8 @@ function HomePage() {
             Join us on our journey of compassion and empowerment as we work together to rebuild lives, restore hope, and
             create lasting positive change in Sri Lanka.
           </p>
-          <a href="nextPage.jsx" style={linkStyle}>Completed Projects &rarr;</a>
+          <div></div>
+          <a href="CompletedProject.jsx" style={linkStyle}>Completed Projects &rarr;</a>
           <div style={{ position: 'relative', width: '100%' }}>
             <img src='src/assets/donorImg/HomePic.jpg' alt='Top Centered' style={imgStyle} />
             <div style={centeredTextStyle}>
