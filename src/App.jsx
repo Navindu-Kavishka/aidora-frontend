@@ -1,5 +1,5 @@
 
-import './components/Admin/SideBar/SideBar.css';
+//import './components/Admin/SideBar/SideBar.css';
 import { BrowserRouter, Route ,Routes } from 'react-router-dom';
 
 
@@ -16,6 +16,9 @@ import AdminFundraiser from "./pages/AdminFundRaiser/AdminFundRaiser";
 import AdminProject from "./pages/AdminProject/AdminProject";
 import AdminPayment from "./pages/AdminPayment/AdminPayment";
 import SideBar from "./components/Admin/SideBar/SideBar"
+
+import AddDonor from './pages/AdminDonor/AddDonor';
+import ViewDonor from './pages/AdminDonor/ViewDonor';
 
 
 import OngoingProject from './pages/OngoingProject';
@@ -34,6 +37,7 @@ import CreateProject from './pages/CreateProject/CreateProject'
 import EditProfile from './pages/EditProfile/EditProfile'
 
 import AdminLogin from './pages/AdminLogin/AdminLogin';
+import AdminProfile from './pages/AdminProfile/AdminProfile';
 
 
 
@@ -55,18 +59,24 @@ const App = () => {
         <Route path='/aboutus' element={<AboutUs />} />
         
         
-        <Route path='adminlogin' element={<AdminLogin />} />
+        <Route path="/admin/login" element={<AdminLogin />} />
         
-        <Route path='/admin/*' element={<SideBar />}>
+        <Route path='/adminPanel/*' element={<SideBar />}>
         
           <Route index element={<AdminDashboard />} />
-          <Route path='admindashboard' element={<AdminDashboard />} />
-          <Route path='admindonor' element={<AdminDonor />} />
-          <Route path='adminfundraiser' element={<AdminFundraiser />} />
-          <Route path='adminproject' element={<AdminProject />} />
-          <Route path='adminpayment' element={<AdminPayment />} />
+          <Route path='dashboard' element={<AdminDashboard />} />
+
+          <Route path="donor" element={<AdminDonor/>} />
+          <Route path="add-donor" element={<AddDonor/>} />
+          <Route path="donors/:id" element={<ViewDonor/>} />
+
+          <Route path='fundraiser' element={<AdminFundraiser />} />
+          <Route path='project' element={<AdminProject />} />
+          <Route path='payment' element={<AdminPayment />} />
           
         </Route>
+
+        <Route path='adminprofile' element={<AdminProfile/>} />
       
     
     

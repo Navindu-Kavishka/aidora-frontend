@@ -4,13 +4,14 @@
     text-decoration: none;
 }
 
-.container {
+.containerAd {
     display: flex;
+    
 }
 
 main {
     width: 100%;
-    padding: 20px;
+    padding: 0px;
 }
 
 .sidebar {
